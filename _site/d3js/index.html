@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>D3.js による Data Visualization</title>
+  </head>
+  <body>
+
+    <header>
+      <div class="logo"></diV>
+      <nav>
+  <a href="/" >
+    Home
+  </a>
+  <a href="/about.html" >
+    About
+  </a>
+</nav>
+
+    </header>
+
+    <div class="wrapper">
+      
+      <div class="main">
+        <h1 id="d3js-による-data-visualization">D3.js による Data Visualization</h1>
+
+<h2 id="what-is-d3js-">What is D3.js ?</h2>
+
+<p>D3とは、<strong>Data Driven Document</strong>の略です。<strong>Data Driven</strong>とは「データ駆動」という意味です。これはデータ中心でプログラミングすることを意味します。D3.jsでは、しばしばデータとDOMを結びつけ、データを用いてDOMの属性やスタイルを変えるということをします。このような使い方のおかげで、D3.jsはデータ可視化に向いています。</p>
+
+<p>以下のチュートリアルはD3.js v5を想定しています。</p>
+
+<h2 id="index">Index</h2>
+
+<ol>
+  <li><a href="./Part01">Understanding Concept</a> - Circle Alignment.</li>
+  <li>A Little Complex Example - Maze Solver.</li>
+  <li>Line Chart - Function Visualizer.</li>
+  <li>Pie Chart - Queue Visualizer.</li>
+  <li>Tree - Parsing to Syntax Tree.</li>
+  <li>Force Simulation - Union Find Tree.</li>
+</ol>
+
+<h3 id="circle-alignment">Circle Alignment</h3>
+
+<p>「配列に入った数値データを円として可視化する」というケースを想定して、D3.jsの基本を学びましょう。</p>
+
+<p><img src="/d3js/img/circle_alignment.png" alt="center" /></p>
+
+<h3 id="maze-solver">Maze Solver</h3>
+
+<p><img src="/d3js/img/maze.png" alt="center w:500px" /></p>
+
+<h3 id="function-vizualizer">Function Vizualizer</h3>
+
+<p><img src="/d3js/img/sinc.svg" alt="center w:700px" /></p>
+
+<h3 id="queue-visualizer">Queue Visualizer</h3>
+
+<p><img src="/d3js/img/queue.svg" alt="center" /></p>
+
+<h3 id="parsing-to-syntax-tree">Parsing to Syntax Tree</h3>
+
+<p><img src="/d3js/img/parser.svg" alt="bg right:60% contain" /></p>
+
+<h3 id="union-find-tree">Union Find Tree</h3>
+
+<p><img src="/d3js/img/unionfind.png" alt="center w:700px" /></p>
+
+      </div>
+    </div>
+    <script>
+      const highlights = document.getElementsByClassName('highlighter-rouge');
+      const h = highlights[0];
+      for (const h of highlights) {
+        const langName = h.className
+          .split(' ')[0]
+          .split('-')[1];
+        const div = h.getElementsByTagName('div')[0];
+        const p = document.createElement('span');
+        const text = document.createTextNode(langName);
+        p.appendChild(text);
+        p.className = 'lang-name';
+        div.appendChild(p);
+      }
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>Case 4: 関数化</title>
+  </head>
+  <body>
+
+    <header>
+      <div class="logo"></diV>
+      <nav>
+  <a href="/" >
+    Home
+  </a>
+  <a href="/about.html" >
+    About
+  </a>
+</nav>
+
+    </header>
+
+    <div class="wrapper">
+      
+      <div class="main">
+        
+<h2 id="case-4-関数化">Case 4: 関数化</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;svg&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>update([4, 2, 3,…])と呼び出すと描画されるようにしたい</li>
+  <li>何度も呼び出しできるようにしたい
+⇒ update/enter/exit全てを考慮</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">svgWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+
+  <span class="kd">const</span> <span class="nx">circleEnter</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+  <span class="nx">circleEnter</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">circle</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+
+  <span class="nx">circle</span><span class="p">.</span><span class="nx">exit</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="good">Good</h3>
+
+<p><img src="/d3js/Part01/img/circle07.png" alt="bg contain right:50% vertical" />
+<img src="/d3js/Part01/img/circle08.png" alt="bg contain" />
+<img src="/d3js/Part01/img/circle09.png" alt="bg contain" /></p>
+
+<h2 id="case-5-テキストを入れる">Case 5: テキストを入れる</h2>
+
+<ul>
+  <li>円の中心に数字を描きたい</li>
+</ul>
+
+<p><img src="/d3js/Part01/img/circle10.svg" alt="bg contain right:40%" /></p>
+
+<ul>
+  <li>gタグで括るとtext，circleいっぺんに扱えて嬉しい</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">circleGroup</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+
+  <span class="kd">const</span> <span class="nx">circleGroupEnter</span> <span class="o">=</span> <span class="nx">circleGroup</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">);</span>
+  <span class="nx">circleGroupEnter</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+  <span class="nx">circleGroupEnter</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'text'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">circleGroupMerge</span> <span class="o">=</span> <span class="nx">circleGroupEnter</span>
+    <span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">circleGroup</span><span class="p">);</span>
+  <span class="nx">circleGroupMerge</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+  <span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="s1">'#fff'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'stroke'</span><span class="p">,</span> <span class="s1">'#000'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+  <span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'text-anchor'</span><span class="p">,</span> <span class="s1">'middle'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'dominant-baseline'</span><span class="p">,</span> <span class="s1">'central'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
+
+  <span class="nx">circleGroup</span><span class="p">.</span><span class="nx">exit</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><img src="/d3js/Part01/img/circle11.png" alt="bg contain" /></p>
+
+<h2 id="case-06-animation">Case 06: Animation</h2>
+
+<p>出現や消滅をカッコよく動かしたい</p>
+
+<h3 id="d3transition">d3.transition()</h3>
+
+<ul>
+  <li>DOMの属性/スタイル変更が滑らかに行われる</li>
+</ul>
+
+<h4 id="13">1/3</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 呼び出し500ms後，1000msかけて遷移</span>
+<span class="kd">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">transition</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">duration</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">circleGroupMerge</span> <span class="o">=</span> <span class="nx">circleGroupEnter</span>
+  <span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">circleGroup</span><span class="p">)</span> 
+  <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+<span class="nx">circleGroupMerge</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+<span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="s1">'#fff'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'stroke'</span><span class="p">,</span> <span class="s1">'#000'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+<span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'text-anchor'</span><span class="p">,</span> <span class="s1">'middle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'dominant-baseline'</span><span class="p">,</span> <span class="s1">'central'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">circleGroupExit</span> <span class="o">=</span> <span class="nx">circleGroup</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+<span class="nx">circleGroupExit</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nx">circleGroupExit</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><img src="/d3js/Part01/img/circle12.gif" alt="bg contain" /></p>
+
+<h2 id="case-07-relative-radius">Case 07: Relative Radius</h2>
+
+<p><img src="/d3js/Part01/img/circle13.svg" alt="center" /></p>
+
+<ul>
+  <li>小さくなりすぎ/大きくなりすぎ
+ ⇒ 半径の上限/下限を設定したい</li>
+</ul>
+
+<p><img src="/d3js/Part01/img/func.svg" alt="bg right:50% contain" /></p>
+
+<h3 id="どんな関数">どんな関数?</h3>
+
+<h4 id="高校数学">高校数学</h4>
+
+<script type="math/tex; mode=display">y = \frac{y_M - y_m}{x_M - x_m}(x - x_m) + y_m</script>
+
+<h4 id="関数を返す関数">関数を返す関数</h4>
+
+<p>domainとrangeを設定すると
+いい感じの一次関数を返してくれる関数</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scaleGenerator</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">ran</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">ran</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="nx">dom</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="動き">動き</h4>
+
+<p><img src="/d3js/Part01/img/scalegen.png" alt="center" /></p>
+
+<h4 id="modified-formatdata">Modified formatData</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">formatData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">rScale</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">ret</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">d</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="p">{</span> <span class="na">val</span><span class="p">:</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="na">r</span><span class="p">:</span> <span class="nx">rScale</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">]),</span> <span class="na">x</span><span class="p">:</span> <span class="nx">now</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">now</span> <span class="o">+=</span> <span class="nx">rScale</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">+</span> <span class="nx">space</span> <span class="o">+</span> <span class="nx">rScale</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]);</span> 
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">ret</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span> <span class="o">-=</span> <span class="nx">now</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span> <span class="p">});</span>
+  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="modified-update">Modified update</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scaleGenerator</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">ran</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">ran</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="nx">dom</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">rScale</span> <span class="o">=</span> <span class="nx">scaleGenerator</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">extent</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]);</span>
+  <span class="kd">const</span> <span class="nx">circleGroup</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">rScale</span><span class="p">));</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="成功">成功</h3>
+
+<p><img src="/d3js/Part01/img/circle14.svg" alt="center" /></p>
+
+<h3 id="実は車輪の再発明">実は車輪の再発明</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Before</span>
+<span class="kd">const</span> <span class="nx">scaleGenerator</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">ran</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">ran</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="nx">dom</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">rScale</span> <span class="o">=</span> <span class="nx">scaleGenerator</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">extent</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<h3 id="d3scalelinear">d3.scaleLinear</h3>
+
+<p>次からはこれを使いましょう</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// After</span>
+<span class="kd">const</span> <span class="nx">rScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">extent</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>scaleLinearは線形変換</li>
+  <li>scalePow/scaleLog/scaleSqrtなどもあります</li>
+</ul>
+
+<p><img src="/d3js/Part01/img/maxmin.png" alt="bg right:50% contain" /></p>
+
+<h4 id="補足-maxminextent">補足: max/min/extent</h4>
+
+<ul>
+  <li>
+    <p>d3.extent: データの範囲</p>
+  </li>
+  <li>
+    <p>要素がObject/Array
+⇒ アロー関数付ける</p>
+  </li>
+</ul>
+
+<p><img src="/d3js/Part01/img/maxmin2.png" alt="bg right:50% contain" /></p>
+
+<h2 id="case-8-1-random-color">Case 8-1: Random Color</h2>
+
+<ul>
+  <li>色を完全ランダムにしたい</li>
+</ul>
+
+<h3 id="d3randomuniform">d3.randomUniform</h3>
+
+<p>一様分布を生成する関数を作成する関数
+範囲は右半開区間</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// [0, 256)の範囲の一様分布乱数を生成</span>
+<span class="kd">const</span> <span class="nx">rand</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">randomUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+<span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="s2">`rgb(</span><span class="p">${</span><span class="nx">rand</span><span class="p">()}</span><span class="s2">, </span><span class="p">${</span><span class="nx">rand</span><span class="p">()}</span><span class="s2">, </span><span class="p">${</span><span class="nx">rand</span><span class="p">()}</span><span class="s2">)`</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'stroke'</span><span class="p">,</span> <span class="s1">'#000'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="若干汚いことがある">若干汚い(ことがある)</h3>
+
+<p><img src="/d3js/Part01/img/circle15.svg" alt="center" /></p>
+
+<ul>
+  <li>rgbランダムだと仕方ない
+⇒ hsvで考えるといいかも</li>
+</ul>
+
+<h2 id="case-8-2-built-in-color">Case 8-2: Built-in Color</h2>
+
+<ul>
+  <li>用意された色を使う</li>
+</ul>
+
+<p>https://github.com/d3/d3-scale-chromatic</p>
+
+<p><img src="/d3js/Part01/img/schemeset1.png" alt="center" /></p>
+
+<h3 id="modified-update-1">Modified update</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// [0, d3.schemeSet1.length)の範囲の一様分布乱数を生成</span>
+<span class="kd">const</span> <span class="nx">rand</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">randomUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">schemeSet1</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">schemeSet1</span><span class="p">[</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">rand</span><span class="p">())])</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'stroke'</span><span class="p">,</span> <span class="s1">'#000'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Math.floorしないと小数が出てしまうので注意</p>
+
+<p>それなりに良い
+色数が少ないので被る</p>
+
+<p><img src="/d3js/Part01/img/circle16.svg" alt="center" /></p>
+
+<h2 id="case-8-3-linear-color-scale">Case 8-3: Linear Color Scale</h2>
+
+<p>値: 小 ⇔ 中 ⇔ 大
+色: 水 ⇔ 白 ⇔ 橙
+に対応させよう</p>
+
+<h3 id="d3scalelinear再び">d3.scaleLinear再び</h3>
+
+<p>domain，rangeに中間の値を設定できる</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">colorScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="s1">'orangered'</span><span class="p">,</span> <span class="s1">'white'</span><span class="p">,</span> <span class="s1">'skyblue'</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<h3 id="modified-update-2">Modified update</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">rmin</span><span class="p">,</span> <span class="nx">rmax</span><span class="p">]</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">extent</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">colorScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="nx">rmin</span><span class="p">,</span> <span class="p">(</span><span class="nx">rmin</span> <span class="o">+</span> <span class="nx">rmax</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="nx">rmax</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="s1">'orangered'</span><span class="p">,</span> <span class="s1">'white'</span><span class="p">,</span> <span class="s1">'skyblue'</span><span class="p">]);</span>
+<span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">colorScale</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">val</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'stroke'</span><span class="p">,</span> <span class="s1">'#000'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="/d3js/Part01/img/circle17.svg" alt="center" /></p>
+
+
+      </div>
+    </div>
+    <script>
+      const highlights = document.getElementsByClassName('highlighter-rouge');
+      const h = highlights[0];
+      for (const h of highlights) {
+        const langName = h.className
+          .split(' ')[0]
+          .split('-')[1];
+        const div = h.getElementsByTagName('div')[0];
+        const p = document.createElement('span');
+        const text = document.createTextNode(langName);
+        p.appendChild(text);
+        p.className = 'lang-name';
+        div.appendChild(p);
+      }
+    </script>
+  </body>
+</html>
+

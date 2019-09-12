@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>Hello, World</title>
+  </head>
+  <body>
+
+    <header>
+      <div class="logo"></diV>
+      <nav>
+  <a href="/" style="color: red;">
+    Home
+  </a>
+  <a href="/about.html" >
+    About
+  </a>
+</nav>
+
+    </header>
+
+    <div class="wrapper">
+      
+      <div class="main">
+        <h1 id="hello">Hello</h1>
+
+<ul>
+  <li><a href="/d3js/">D3.js Lecture</a></li>
+</ul>
+
+      </div>
+    </div>
+    <script>
+      const highlights = document.getElementsByClassName('highlighter-rouge');
+      const h = highlights[0];
+      for (const h of highlights) {
+        const langName = h.className
+          .split(' ')[0]
+          .split('-')[1];
+        const div = h.getElementsByTagName('div')[0];
+        const p = document.createElement('span');
+        const text = document.createTextNode(langName);
+        p.appendChild(text);
+        p.className = 'lang-name';
+        div.appendChild(p);
+      }
+    </script>
+  </body>
+</html>
+

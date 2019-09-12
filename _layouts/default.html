@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>{{ page.title }}</title>
+  </head>
+  <body>
+
+    <header>
+      <div class="logo"></diV>
+      {% include navigation.html %}
+    </header>
+
+    <div class="wrapper">
+      {% if page.sidebarfile %}
+      <div class="sidebar">
+          {% include {{ page.sidebarfile }} %}
+      </div>
+      {% endif %}
+      <div class="main">
+        {{ content }}
+      </div>
+    </div>
+    <script>
+      const highlights = document.getElementsByClassName('highlighter-rouge');
+      const h = highlights[0];
+      for (const h of highlights) {
+        const langName = h.className
+          .split(' ')[0]
+          .split('-')[1];
+        const div = h.getElementsByTagName('div')[0];
+        const p = document.createElement('span');
+        const text = document.createTextNode(langName);
+        p.appendChild(text);
+        p.className = 'lang-name';
+        div.appendChild(p);
+      }
+    </script>
+  </body>
+</html>
+

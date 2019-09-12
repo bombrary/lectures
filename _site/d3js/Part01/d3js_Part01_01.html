@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title></title>
+  </head>
+  <body>
+
+    <header>
+      <div class="logo"></diV>
+      <nav>
+  <a href="/" >
+    Home
+  </a>
+  <a href="/about.html" >
+    About
+  </a>
+</nav>
+
+    </header>
+
+    <div class="wrapper">
+      
+      <div class="main">
+        <!-- theme: uncover -->
+<link rel="stylesheet" href="../theme/mytheme.css" />
+
+<h1 id="d3js-part1">D3js Part1</h1>
+<h1 id="understanding-concept">Understanding Concept</h1>
+
+<h2 id="お約束---indexhtml">お約束 - index.html</h2>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"ja"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"style.css"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;svg&gt;</span>
+    <span class="nt">&lt;/svg&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://d3js.org/d3.v5.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>HTMLをここに載せるときのお約束</p>
+<ul>
+  <li>基本的にはbody部のみ</li>
+  <li>場合によってはscriptタグ省略</li>
+</ul>
+
+<h2 id="case-1---タグ用意">Case 1 - タグ用意</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;svg&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>データ[4, 2, 10]とcircleを結びつけたい</li>
+  <li>circleの半径をデータの値にしたい</li>
+  <li>circleを横並びにしたい</li>
+</ul>
+
+<h2 id="scriptjs">script.js</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">svgWidth</span><span class="p">,</span> <span class="nx">svgHeight</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">800</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span> <span class="nx">svgWidth</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span> <span class="nx">svgHeight</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span>
+
+<span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> 
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">30</span><span class="o">*</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">40</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="実行結果">実行結果</h2>
+<p><img src="/d3js/Part01/img/circle02.png" alt="bg contain" /></p>
+
+<div class="two-column">
+
+- selectでタグ選択
+- attrで属性変更
+- dataでデータと
+  DOMを結ぶ
+  - data bind
+  - data join
+
+  と言ったりする
+
+```js
+const [svgWidth, svgHeight] = [600, 800];
+const svg = d3.select('svg')
+  .attr('width', svgWidth)
+  .attr('height', svgHeight);
+const data = [4, 2, 10];
+
+svg.selectAll('circle')
+  .data(data) 
+  .attr('cx', (d, i, node) =&gt; 30*i + 40)
+  .attr('cy', 10)
+  .attr('r', (d, i, node) =&gt; d);
+```
+
+</div>
+
+<div style="display:flex; flex-direction: row">
+
+- d:データ
+- i: index
+- node: DOM配列
+- いらなかったら省略可
+- 定数指定可
+
+<div>
+
+```js
+(d, i, node) =&gt; { 関数の中身 }
+```
+
+```js
+svg.selectAll('circle')
+  .data(data) 
+  .attr('cx', (d, i) =&gt; 30*i + 40)
+  .attr('cy', 10)
+  .attr('r', d =&gt; d);
+```
+
+</div>
+
+</div>
+
+<p><img src="/d3js/Part01/img/circle01.png" alt="bg right:40% contain" /></p>
+
+<h2 id="気持ち">気持ち</h2>
+
+<ul>
+  <li>小さい</li>
+  <li>真ん中によせたい</li>
+</ul>
+
+<h2 id="modified-html">Modified html</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;svg&gt;</span>
+  <span class="nt">&lt;g&gt;</span>
+    <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+    <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+    <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+  <span class="nt">&lt;/g&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</code></pre></div></div>
+
+<h2 id="modified-js">Modified js</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">svgWidth</span><span class="p">,</span> <span class="nx">svgHeight</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">800</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span> <span class="nx">svgWidth</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span> <span class="nx">svgHeight</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span>
+
+<span class="nx">svg</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">svgWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+<span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> 
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">30</span><span class="o">*</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">40</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="o">*</span><span class="nx">d</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="重なる-thinking">重なる :thinking:</h2>
+
+<p><img src="/d3js/Part01/img/circle03.png" alt="bg contain" /></p>
+
+<h2 id="why">Why</h2>
+
+<ul>
+  <li>cx, cyは「円の中心位置の指定」
+⇒ 半径は計算してくれない</li>
+</ul>
+
+<h2 id="exercise-11">Exercise 1.1</h2>
+
+<p>データを有らまほしき形に変換する関数を作ろう</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">formatData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">mag</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// ここを埋めてね</span>
+<span class="p">};</span>
+
+<span class="nx">svg</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">svgWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+<span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> 
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="/d3js/Part01/img/exercise01_01.svg" alt="bg right:50% contain" /></p>
+
+<h2 id="example">Example</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">formatData</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+ <span class="cm">/*
+ [
+   {val: 4, r: 20, x: 0, y: 0},
+   {val: 2, r: 10, x: 40, y: 0},
+   {val: 10, r: 50, x: 110, y: 0}
+ ]
+ */</span>
+</code></pre></div></div>
+
+<ul>
+  <li>x座標の計算:隣との関係を観察してfor回す</li>
+</ul>
+
+<h2 id="solution">Solution</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">formatData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">mag</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">ret</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ret</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="na">val</span><span class="p">:</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="na">r</span><span class="p">:</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">*</span> <span class="nx">mag</span><span class="p">,</span> <span class="na">x</span><span class="p">:</span> <span class="nx">now</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">});</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">now</span> <span class="o">+=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">*</span><span class="nx">mag</span> <span class="o">+</span> <span class="nx">space</span> <span class="o">+</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nx">mag</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="extended-solution">Extended Solution</h2>
+
+<p>完全に中央寄せになる</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">formatData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">mag</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">ret</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">d</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="p">{</span> <span class="na">val</span><span class="p">:</span> <span class="nx">d</span><span class="p">,</span> <span class="na">r</span><span class="p">:</span> <span class="nx">d</span> <span class="o">*</span> <span class="nx">mag</span><span class="p">,</span> <span class="na">x</span><span class="p">:</span> <span class="nx">now</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">now</span> <span class="o">+=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">*</span><span class="nx">mag</span> <span class="o">+</span> <span class="nx">space</span> <span class="o">+</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nx">mag</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">t</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="nx">ret</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span> <span class="o">-=</span> <span class="nx">now</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span> <span class="p">});</span>
+  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="めでたしめでたし">めでたしめでたし</h2>
+
+<p><img src="/d3js/Part01/img/circle04.png" alt="bg contain" /></p>
+
+<h1 id="-really"><!-- fit --> Really?</h1>
+
+<ul>
+  <li>データ数が多い時にcircleタグをいちいち追加しますか?</li>
+  <li>データ数が少ない時は?</li>
+</ul>
+
+<h2 id="case2-タグ少ない">Case2: タグ少ない</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;svg&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+</code></pre></div></div>
+
+<ul>
+  <li>circleタグに
+    <ul>
+      <li>結ばれたデータたち: さっきと同じように</li>
+      <li>結ばれなかったデータたち: <strong>新たに作ってあげる</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">svgWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+
+<span class="nx">circle</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">circleEnter</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+<span class="nx">circleEnter</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="two-column">
+
+- 結ばれたデータ:
+  circle
+- 結ばれぬデータ:
+  circle.enter()
+- 若干冗長ですね
+
+```js
+const circle = g.selectAll('circle')
+  .data(formatData(data, 10, 5));
+
+circle.attr('cx', d =&gt; d.x)
+  .attr('cy', d =&gt; d.y)
+  .attr('r', d =&gt; d.r);
+
+const circleEnter = circle.enter()
+  .append('circle');
+circleEnter.attr('cx', d =&gt; d.x)
+  .attr('cy', d =&gt; d.y)
+  .attr('r', d =&gt; d.r);
+```
+
+</div>
+
+<ul>
+  <li>mergeで普通のデータとenterのデータを合流
+⇒ いっぺんに処理可</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+
+<span class="kd">const</span> <span class="nx">circleEnter</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+<span class="nx">circleEnter</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">circle</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="/d3js/Part01/img/circle05.png" alt="bg contain" /></p>
+<h2 id="いい感じ">いい感じ</h2>
+
+<h2 id="case-3-データが少ない">Case 3: データが少ない</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;svg&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+  <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+</code></pre></div></div>
+
+<ul>
+  <li>データに
+    <ul>
+      <li>結ばれたDOMたち: さっきと同じように</li>
+      <li>結ばれなかったDOMたち: <strong>消し去る</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">svgWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+
+<span class="nx">circle</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+
+<span class="nx">circle</span><span class="p">.</span><span class="nx">exit</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+</code></pre></div></div>
+
+<div class="two-column">
+
+- 結ばれたDOM:
+  circle
+- 結ばれぬDOM:
+  circle.exit()
+- remove()で削除
+
+```js
+circle.attr('cx', d =&gt; d.x)
+  .attr('cy', d =&gt; d.y)
+  .attr('r', d =&gt; d.r);
+
+circle.exit().remove();
+```
+
+</div>
+
+<p><img src="/d3js/Part01/img/circle06.png" alt="bg contain" />
+Make sure a circle tag removed.</p>
+
+<h2 id="ん">ん?</h2>
+
+<h2 id="タグが足りないとき">タグが足りないとき</h2>
+
+<ul>
+  <li>結ばれたデータ:
+<strong>circle</strong></li>
+  <li>結ばれぬデータ:
+circle.enter()</li>
+</ul>
+
+<h2 id="データが足りない時">データが足りない時</h2>
+
+<ul>
+  <li>結ばれたDOM:
+<strong>circle</strong></li>
+  <li>結ばれぬDOM:
+circle.exit()</li>
+</ul>
+
+<h2 id="circleはdomなの">circleはDOMなの?</h2>
+<h2 id="circleはデータなの">circleはデータなの?</h2>
+
+<h1 id="-neither"><!-- fit --> Neither.</h1>
+
+<h2 id="込み入った話">込み入った話</h2>
+
+<ul>
+  <li>d3.select → <em>selection</em> を返す</li>
+  <li>d3.selectAll → <em>selections</em> を返す</li>
+  <li>私たちは <em>selection(s)</em> を介してDOMを操作している
+    <ul>
+      <li>DOMに子要素を追加</li>
+      <li>DOMの属性，スタイルを変更</li>
+      <li><strong>DOMとデータを糊付けする</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="selectionsdataの行く末"><em>selection(s)</em>.dataの行く末</h3>
+
+<ul>
+  <li>データとDOMが結ばれた: <em>update selections</em>
+    <ul>
+      <li><em>selections</em> でアクセス</li>
+    </ul>
+  </li>
+  <li>DOM足りないんだけど?: <em>enter selections</em>
+    <ul>
+      <li><em>selections.enter()</em> でアクセス</li>
+    </ul>
+  </li>
+  <li>データ足りないんだけど?: <em>exit selections</em>
+    <ul>
+      <li><em>selections.exit()</em> でアクセス</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="where-is-data">Where is data?</h3>
+
+<ul>
+  <li>DOMの中の__data__というプロパティに入っている
+    <ul>
+      <li>selectionに入っているわけではない!</li>
+    </ul>
+  </li>
+  <li>ブラウザのDevelopper Toolで
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>を実行して__data__を探そう</p>
+  </li>
+</ul>
+
+<h3 id="inherit">Inherit</h3>
+
+<ul>
+  <li>DOMにデータが結ばれた
+⇒ その子孫DOMにも引き継がれる
+タイミング: select(All)，appendなどの呼び出し時</li>
+</ul>
+
+<p>これが後々良い性質だと分かる</p>
+
+      </div>
+    </div>
+    <script>
+      const highlights = document.getElementsByClassName('highlighter-rouge');
+      const h = highlights[0];
+      for (const h of highlights) {
+        const langName = h.className
+          .split(' ')[0]
+          .split('-')[1];
+        const div = h.getElementsByTagName('div')[0];
+        const p = document.createElement('span');
+        const text = document.createTextNode(langName);
+        p.appendChild(text);
+        p.className = 'lang-name';
+        div.appendChild(p);
+      }
+    </script>
+  </body>
+</html>
+
