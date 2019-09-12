@@ -14,7 +14,8 @@ D3とは、**Data Driven Document**の略です。**Data Driven**とは「デー
 
 ## Index
 
-1. [Understanding Concept](./Part01) - Circle Alignment.
+1. [Understanding Concept](./Part01) - Circle Alignment.  
+   スライド: [1](./Part01/d3js_Part01_01.html), [2](./Part01/d3js_Part01_02.html), [3](./Part01/d3js_Part01_03.html)
 2. A Little Complex Example - Maze Solver.
 3. Line Chart - Function Visualizer.
 4. Pie Chart - Queue Visualizer.

@@ -4,6 +4,27 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/assets/css/style.css">
     <title>D3js Part1</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  displayAlign: "left",
+  displayIndent: "2em",
+  TeX: {
+    equationNumbers: { autoNumber: "AMS" },
+  },
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+</script>
+<script
+   type="text/javascript"
+   charset="utf-8"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
   </head>
   <body>
 
@@ -23,13 +44,14 @@
     <div class="wrapper">
       
       <div class="sidebar">
-          <div>
+          <aside>
   <h3> D3js Part1 </h3>
   <img src="img/circle_alignment.png">
   <ul>
     <li><a href="#case-01-タグ用意">Case01 - タグ用意</a></li>
     <li><a href="#case-02-タグ少ない">Case02 - タグ少ない</a></li>
     <li><a href="#case-03-データ少ない">Case03 - データ少ない</a></li>
+    <li><a href="#込み入った話">CaseXX - 込み入った話</a></li>
     <li><a href="#case-04-関数化">Case04 - 関数化</a></li>
     <li><a href="#case-05-テキストを入れる">Case05 - テキストを入れる</a></li>
     <li><a href="#case-06-animation">Case06 - Animation</a></li>
@@ -44,12 +66,14 @@
     <li><a href="#case-09-click">Case09 - Click</a></li>
     <li><a href="#case-10-input-area">Case10 - Input Area</a></li>
   </ul>
-</div>
+</aside>
 
       </div>
       
       <div class="main">
         <h1 id="d3js-part1---understanding-concept">D3js Part1 - Understanding Concept</h1>
+
+<p>本チュートリアルでは、「配列に入った数値データを円として可視化する」というケースを想定して、D3.jsの基本を学んでいきます。</p>
 
 <h2 id="お約束">お約束</h2>
 
@@ -118,6 +142,9 @@
 <p>index.htmlを開くと、次のように表示されます。</p>
 
 <p><img src="/d3js/Part01/img/circle02.png" alt="" /></p>
+
+<p>画面右側はDevelopper Toolでの出力です。Developperツールは、Google ChromeならF12、Safariならcommand + option + iキーで開くことができます。
+circleタグにcx、cy、r属性が追加されていることがわかります。</p>
 
 <h3 id="説明">説明</h3>
 
@@ -397,7 +424,7 @@ formatDataという関数でひとくくりにしてまとめることによっ�
     <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
     <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
     <span class="nt">&lt;circle&gt;&lt;/circle&gt;</span>
-  <span class="nt">&lt;g&gt;</span>
+  <span class="nt">&lt;/g&gt;</span>
 <span class="nt">&lt;/svg&gt;</span>
 ...
 </code></pre></div></div>
@@ -438,7 +465,7 @@ formatDataという関数でひとくくりにしてまとめることによっ�
 <p>何やらcircleEnterというものが追加されました。これが「結ばれなかったデータたち」です。</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">circle</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
 </code></pre></div></div>
-<p>というもので、「結ばれなかったデータたち」にアクセスしています。
+<p>というもので、「結ばれなかったデータたち」にアクセスしています(厳密には「結ばれなかったデータ」という表現は誤りなのですが、これについての訂正はCase03の後で行います)。
 さらに、</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">circleEnter</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
@@ -519,7 +546,8 @@ formatDataという関数でひとくくりにしてまとめることによっ�
 <p>データに結ばれなかったDOMは</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">circle</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
 </code></pre></div></div>
-<p>で得られます。removeメソッドを使うとこれを削除することができます。</p>
+<p>で得られます(厳密には「結ばれなかったDOM」という表現は誤りなのですが、これについての訂正はCase03の後で行います)。
+removeメソッドを使うとこれを削除することができます。</p>
 
 <p><img src="/d3js/Part01/img/circle06.png" alt="bg contain" /></p>
 
@@ -538,19 +566,44 @@ formatDataという関数でひとくくりにしてまとめることによっ�
 <h2 id="selections-オブジェクト"><em>selection(s)</em> オブジェクト</h2>
 
 <p>例えば、</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">);</span>
 </code></pre></div></div>
 <p>が返す値は、<em>selection</em>と呼ばれるオブジェクトです。この<em>selection</em>を介して、私たちはDOMの属性を操作したり、
 DOMに子要素を追加/削除したり、データとDOMを結びつけたりしています。</p>
 
-<p>また、</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+<p>selectで指定する引数は、cssのセレクタと同じ文法です。なので、例えば以下のように書けば、
+contentをクラスとして持つDOMの<em>selection</em>を返します。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'.content'</span><span class="p">)</span>
 </code></pre></div></div>
-<p>が返す値は<em>selections</em>オブジェクトで、これは<em>selection</em>の配列みたいなものです。</p>
 
-<h3 id="selectionsdataの行く末"><em>selection(s)</em>.dataの行く末</h3>
+<p>さらに、「svgを選択して、さらにその下のcircleを選択したい」という場合は、次のように書きます。</p>
 
-<p>こんな感じで分類されます。</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+
+<span class="c1">// 次のように変数に一度格納することをよくやります</span>
+<span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>また、selectは一つの<em>selection</em>を返しましたが、selectAllは<em>selections</em>を返します。これは<em>selection</em>を複数集めた、配列に似たオブジェクトです。</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="selectionsdataの行く末"><em>selections</em>.dataの行く末</h3>
+
+<p>すでにCase01から見ていきましたが、データとDOMを結びつけるためには、<em>selections</em>.dataメソッドを用います。
+ただし、結びつける対象のDOMが必要なので、先にselectAllで選択しておきます。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>データとDOMが結びつくわけですが、Case01〜Case03で見た通り、タグが足りなかったりデータが足りなかったりするケースが存在します。
+それに応じて、enterメソッドやexitメソッドでそれぞれの<em>selection</em>にアクセスするわけです。
+enterやexitでアクセスされる<em>selections</em>には名前がついており、それぞれ<em>enter selections</em>、<em>exit selections</em>などと呼ばれます。
+以上をまとめると、こんな感じで分類されます。</p>
 
 <ul>
   <li>データとDOMが結ばれた: <em>update selections</em>
@@ -582,62 +635,175 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 </code></pre></div></div>
 <p>において、circle.exit()が<em>exit selections</em>を表しています。</p>
 
+<h3 id="selectiondatum"><em>selection</em>.datum</h3>
+
+<p>結ぶデータとDOMが1ペアしかないことが確実なら、datumというメソッドを利用します。
+selectAllほど使用頻度は多くありません。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 例1: 1つのcircleを選択して1つの値を結びつける</span>
+<span class="c1">// ただしcircleが必ず存在している必要がある</span>
+<span class="c1">// 半径を結びつけた値に設定する</span>
+<span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">datum</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">);</span>
+
+<span class="c1">// 例2: appendでcircleを追加して1つの値を結びつける</span>
+<span class="c1">// 半径を結びつけた値に設定する</span>
+<span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">datum</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">);</span>
+</code></pre></div></div>
+
 <h3 id="データはどこ">データはどこ?</h3>
 
-<ul>
-  <li>DOMの中の__data__というプロパティに入っている
-    <ul>
-      <li>selectionに入っているわけではない!</li>
-    </ul>
-  </li>
-  <li>ブラウザのDevelopper Toolで
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
-</code></pre></div>    </div>
-    <p>を実行して__data__を探そう</p>
-  </li>
-</ul>
+<p><em>selections.data</em>メソッドで結びついたデータはどんな形で保管されているのでしょうか。
+実は、<strong>DOMの中の__data__というプロパティ</strong>に入っています。<em>selections</em>に入っているわけではありません。</p>
 
-<h3 id="inherit">Inherit</h3>
+<p>ブラウザのDevelopper Toolで</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>を実行して__data__を探してみましょう。</p>
 
-<ul>
-  <li>DOMにデータが結ばれた
-⇒ その子孫DOMにも引き継がれる
-タイミング: select(All)，appendなどの呼び出し時</li>
-</ul>
+<p>これによって出力されたものが、<em>selections</em>オブジェクトの中身です。
+_groups、NodeListと辿るとcircleがいくつか見られます。これがcircleのDOMです。</p>
 
-<p>これが後々良い性質だと分かる</p>
+<p><img src="./img/where_is_dom01.png" width="400px" /></p>
+
+<p>0番目のcircleをクリックすると、DOMが持っている大量のプロパティが見られます。
+下の方を見てみると、__data__が発見できます。</p>
+
+<p><img src="./img/where_is_dom03.png" width="400px" /></p>
+
+<p>しかしこれに直接アクセスすることは決してありません。「データを可視化する」という目的において、DOMに結ばれたデータにわざわざアクセス
+することはほとんどないと思います。万が一入っているデータにアクセスしたい場合は、__data__に直接アクセスするのではなく、
+<em>selection</em>.datum()もしくは<em>selections</em>.data()を引数なしで呼び出します。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="データは引き継がれる">データは引き継がれる</h3>
+
+<p>あるDOMにデータが結び付けられたとしましょう。すると、その子孫DOMにもデータが引き継がれます。
+引き継ぎのタイミングは、appendやselect/selectAllが呼び出された場合です。これは非常に良い性質です。
+例を示しましょう。以下は、「円の中心にテキストを出力する例」です。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">svgWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">)`</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">datum</span><span class="p">({</span><span class="na">r</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">});</span>
+<span class="nx">g</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="s1">'#fff'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'stroke'</span><span class="p">,</span> <span class="s1">'#000'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+<span class="nx">g</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>実行結果はこんな感じです。文字が中央に寄っていないのが嫌ですが、これについてはCase05で解決します。</p>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px">
+<g transform="translate(100, 100)"><circle fill="#fff" stroke="#000" r="10"></circle><text>Hello</text></g>
+</svg>
+
+<p>gタグの中にcircleタグとtextタグを入れ込み、gに{r: 10, name: “Hello”}という値を結びつけています。
+その後appendを用いてcircleとtextを追加しています。この際に、gに結びつけた{r: 10, name: “Hello”}という
+値はcircleとtextにも引き継がれます。</p>
+
+<p>circleは{r: 10, name: “Hello”}を持っているから</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">g</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">...</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+</code></pre></div></div>
+<p>のようにして、rのを設定できるし、同様にして</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">g</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div></div>
+<p>のようにして、textタグのテキストを設定できるのです。</p>
+
+<p>補足: メソッド名から何となく想像がつくと思いますが、textメソッドを用いると、タグ内部のテキストを設定できます。</p>
+
+<h3 id="もっと詳しく知りたい方へ">もっと詳しく知りたい方へ</h3>
+
+<p>D3.js開発者が書いている <a href="https://bost.ocks.org/mike/selection/" target="_blank">How Selections Work</a>を読みましょう。</p>
 
 <h2 id="case-04-関数化">Case 04: 関数化</h2>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;svg&gt;</span>
+<p>今までcircleタグを書いていましたが、Case02、Case03で見たように、実際にデータ数が3個であるは限りません。
+なのでcircleタグを最初から書くのをやめてしまいましょう。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<span class="nt">&lt;svg&gt;</span>
 <span class="nt">&lt;/svg&gt;</span>
+...
 </code></pre></div></div>
+
+<p>次のような機能を追加したいと思います。</p>
 
 <ul>
   <li>update([4, 2, 3,…])と呼び出すと描画されるようにしたい</li>
-  <li>何度も呼び出しできるようにしたい
-⇒ update/enter/exit全てを考慮</li>
+  <li>何度も呼び出しできるようにしたい、つまり、update関数は何度も呼び出される可能性がある</li>
 </ul>
+
+<p>2つ目の要求を満たすためには、update/enter/exit全てを考慮しなければならないことがわかります。
+ということで書いてみると次のようになります。データを結びつけた後に、update/enter/exitの
+処理を行う、という操作を行っています。これはある種の書き方のパターンとして覚えても良いかもしれません。</p>
+
+<p>参考: <a href="https://bl.ocks.org/mbostock/3808218" target="_blank">General Update Pattern, I</a></p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">svgWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
 
 <span class="kd">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// データを結びつける</span>
   <span class="kd">const</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
 
+  <span class="c1">// データと結びついたDOMを更新(update selection)</span>
+  <span class="nx">circle</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+
+  <span class="c1">// 足りなかったcircleは追加(enter selection)</span>
   <span class="kd">const</span> <span class="nx">circleEnter</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
     <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+  <span class="nx">circleEnter</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+
+  <span class="c1">// 多すぎたcircleは削除(exit selection)</span>
+  <span class="nx">circle</span><span class="p">.</span><span class="nx">exit</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>もしenterとupdateで設定することが同じなら、
+Case02で紹介したmergeを使って、以下のように書く量を少し減らせます。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">svgWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// データを結びつける</span>
+  <span class="kd">const</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+
+  <span class="c1">// 足りなかったcircleは追加(enter selection)</span>
+  <span class="kd">const</span> <span class="nx">circleEnter</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+
+  <span class="c1">// update/enterをいっぺんに処理</span>
   <span class="nx">circleEnter</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">circle</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
 
+  <span class="c1">// 多すぎたcircleは削除(exit selection)</span>
   <span class="nx">circle</span><span class="p">.</span><span class="nx">exit</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h3 id="good">Good</h3>
+<p>Developper Toolのコンソール上で、update関数を次のように入力すると、それに応じた個数と半径の円が出力されます。</p>
 
 <p><img src="/d3js/Part01/img/circle07.png" alt="bg contain right:50% vertical" />
 <img src="/d3js/Part01/img/circle08.png" alt="bg contain" />
@@ -645,24 +811,26 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 
 <h2 id="case-05-テキストを入れる">Case 05: テキストを入れる</h2>
 
-<ul>
-  <li>円の中心に数字を描きたい</li>
-</ul>
+<p>今度は、円の中心にデータの値が描かれるようにしてみましょう。
+円とテキストを1つのグループとして扱いたいので、以下のようにgタグでくくってやります。</p>
 
 <p><img src="/d3js/Part01/img/circle10.svg" alt="bg contain right:40%" /></p>
 
-<ul>
-  <li>gタグで括るとtext，circleいっぺんに扱えて嬉しい</li>
-</ul>
+<p>それに応じてコード修正します。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">circleGroup</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
 
+  <span class="c1">// 足りなかった分gタグを追加</span>
   <span class="kd">const</span> <span class="nx">circleGroupEnter</span> <span class="o">=</span> <span class="nx">circleGroup</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
     <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">);</span>
+
+  <span class="c1">// それぞれのgタグについて、circleタグとtextタグを追加</span>
   <span class="nx">circleGroupEnter</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
   <span class="nx">circleGroupEnter</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'text'</span><span class="p">);</span>
+
+  <span class="c1">// update/exitをいっぺんに処理する</span>
   <span class="kd">const</span> <span class="nx">circleGroupMerge</span> <span class="o">=</span> <span class="nx">circleGroupEnter</span>
     <span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">circleGroup</span><span class="p">);</span>
   <span class="nx">circleGroupMerge</span>
@@ -680,79 +848,174 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 <span class="p">};</span>
 </code></pre></div></div>
 
+<p>これはsvgの知識ですが、次のような属性の設定を行うと、テキストが中央寄せになります。</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'text-anchor'</span><span class="p">,</span> <span class="s1">'middle'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'dominant-baseline'</span><span class="p">,</span> <span class="s1">'central'</span><span class="p">)</span>
+</code></pre></div></div>
+
 <p><img src="/d3js/Part01/img/circle11.png" alt="bg contain" /></p>
 
 <h2 id="case-06-animation">Case 06: Animation</h2>
 
-<p>出現や消滅をカッコよく動かしたい</p>
+<p>「配列の値を円として可視化する」という意味では、十分な可視化が達成されました。
+これ以降はもう少し見栄えに関する部分をいじっていきながら、d3.jsの機能に触れていきたいと思います。</p>
+
+<p>では早速、出現や消滅をカッコよく動かしてみましょう。</p>
 
 <h3 id="d3transition">d3.transition()</h3>
 
+<p>DOMの属性やスタイル変更をアニメーションするためには、d3.transition()、もしくは<em>selection(s)</em>.transition()を用います。</p>
+
+<p>例えば「円を(0,0)から(100, 120)」に移動させるといった場合、次のように書きます。
+transitionを呼び出した後に変化後の属性やスタイルを設定することでアニメーションが行われます。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1">// 変化前のx座標</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// 変化前のy座標</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">transition</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1">// 変化後のx座標</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="mi">120</span><span class="p">);</span> <span class="c1">// 変化後のy座標</span>
+</code></pre></div></div>
+
+<p>遅延時間やアニメーション時間を設定したい場合は、transitionに続けてdelayやdurationを設定します。
+また、複数のDOMを同期して動かしたい場合は、d3.transitionを変数として設定しておいて、
+<em>selection(s)</em>.transitionの引数にそれを指定します。</p>
+
+<p>例えば、</p>
 <ul>
-  <li>DOMの属性/スタイル変更が滑らかに行われる</li>
+  <li>2つの円を500ms待機後、1000msかけて同時に動かしたい</li>
+  <li>1つ目の円は(0,0)から(100,120)に移動</li>
+  <li>2つ目の円は(0,0)から(150, 200)に移動</li>
 </ul>
 
-<h4 id="13">1/3</h4>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">circle1</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> 
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">circle2</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> 
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 呼び出し500ms後，1000msかけて遷移</span>
 <span class="kd">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">transition</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">duration</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
-
-<span class="kd">const</span> <span class="nx">circleGroupMerge</span> <span class="o">=</span> <span class="nx">circleGroupEnter</span>
-  <span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">circleGroup</span><span class="p">)</span> 
-  <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
-<span class="nx">circleGroupMerge</span>
-  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
-<span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="s1">'#fff'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'stroke'</span><span class="p">,</span> <span class="s1">'#000'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
-<span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'text-anchor'</span><span class="p">,</span> <span class="s1">'middle'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'dominant-baseline'</span><span class="p">,</span> <span class="s1">'central'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">circleGroupExit</span> <span class="o">=</span> <span class="nx">circleGroup</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
-<span class="nx">circleGroupExit</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="nx">circleGroupExit</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+<span class="nx">circle1</span><span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> 
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="mi">120</span><span class="p">);</span>
+<span class="nx">circle2</span><span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> 
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
 </code></pre></div></div>
+
+<p>ちなみにアニメーションは位置だけでなくて色や形に対しても行われます。</p>
+
+<p>さて前置きはここまでにして、早速update関数を修正しましょう。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">circleGroup</span> <span class="o">=</span> <span class="nx">g</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">formatData</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+
+  <span class="c1">// 足りなかった分gタグを追加</span>
+  <span class="kd">const</span> <span class="nx">circleGroupEnter</span> <span class="o">=</span> <span class="nx">circleGroup</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">);</span>
+
+  <span class="c1">// それぞれのgタグについて、circleタグとtextタグを追加</span>
+  <span class="nx">circleGroupEnter</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">);</span>
+  <span class="nx">circleGroupEnter</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'text'</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">transition</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">duration</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+
+  <span class="c1">// updateとenterに関するアニメーション</span>
+  <span class="kd">const</span> <span class="nx">circleGroupMerge</span> <span class="o">=</span> <span class="nx">circleGroupEnter</span>
+    <span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">circleGroup</span><span class="p">)</span> 
+    <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+  <span class="nx">circleGroupMerge</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="s2">`translate(</span><span class="p">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+  <span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="s1">'#fff'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'stroke'</span><span class="p">,</span> <span class="s1">'#000'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">r</span><span class="p">);</span>
+  <span class="nx">circleGroupMerge</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'text-anchor'</span><span class="p">,</span> <span class="s1">'middle'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'dominant-baseline'</span><span class="p">,</span> <span class="s1">'central'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
+
+  <span class="c1">// exitについては、半径を0にしてから消滅するようなアニメーションをする</span>
+  <span class="kd">const</span> <span class="nx">circleGroupExit</span> <span class="o">=</span> <span class="nx">circleGroup</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+  <span class="nx">circleGroupExit</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="nx">circleGroupExit</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>実行結果は次のようになります。</p>
 
 <p><img src="/d3js/Part01/img/circle12.gif" alt="bg contain" /></p>
 
+<p>ちなみに今回はexitについて、「半径を0にしてから消滅」というアニメーションを行いましたが、
+そうではなくて「だんだんと透明になって消滅」というアニメーションを行いたい場合は次のように書きます。
+cssにopacityというスタイルがあるのでそれを利用します。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// exitについては、だんだんと透明になって消滅するようなアニメーションをする</span>
+  <span class="kd">const</span> <span class="nx">circleGroupExit</span> <span class="o">=</span> <span class="nx">circleGroup</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+  <span class="nx">circleGroupExit</span><span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'opacity'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="nx">circleGroupExit</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>補足: 名前からなんとなく想像はつくと思いますが、
+attrはタグの属性(attribute)を設定するメソッドで、styleはタグのcssスタイルを設定するメソッドです。</p>
+
 <h2 id="case-07-relative-radius">Case 07: Relative Radius</h2>
+
+<p>以下の図は、update([1, 30])を実行した結果です。半径を1は小さすぎだし、30は大きすぎな気がします。
+そこで、半径に下限/上限を設定してあげて、小さくなりすぎない/大きくなりすぎないようにしましょう。</p>
 
 <p><img src="/d3js/Part01/img/circle13.svg" alt="center" /></p>
 
-<ul>
-  <li>小さくなりすぎ/大きくなりすぎ
- ⇒ 半径の上限/下限を設定したい</li>
-</ul>
+<p>データを適切な半径へと拡大縮小する関数を考えましょう。
+現れるデータの最大値、最小値が分かっているとして、それを$x_m, x_M$とします。
+データを半径に変換する関数を作成するわけですが、半径の下限、上限をそれぞれ$y_m, y_M$とします。
+半径とデータの関係ですが、「データが大きいほど半径も大きい」とします。これを満たす関数で簡単なのは一次関数です。
+以上から、下図のような関数が考えられます。</p>
 
 <p><img src="/d3js/Part01/img/func.svg" alt="bg right:50% contain" /></p>
 
-<h3 id="どんな関数">どんな関数?</h3>
+<p>これは高校数学でお馴染みで、こんな直線の式になります。</p>
 
-<h4 id="高校数学">高校数学</h4>
+<p>\[
+y = \frac{y_M - y_m}{x_M - x_m}(x - x_m) + y_m
+\]</p>
 
-<script type="math/tex; mode=display">y = \frac{y_M - y_m}{x_M - x_m}(x - x_m) + y_m</script>
+<h3 id="関数を返す関数">関数を返す関数</h3>
 
-<h4 id="関数を返す関数">関数を返す関数</h4>
-
-<p>domainとrangeを設定すると
-いい感じの一次関数を返してくれる関数</p>
+<p>以上の軽い考察を基にして、
+domainとrangeを設定すると
+適切な一次関数を返してくれる関数を作ります。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scaleGenerator</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">ran</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">ran</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="nx">dom</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h4 id="動き">動き</h4>
+<h3 id="動き">動き</h3>
 
-<p><img src="/d3js/Part01/img/scalegen.png" alt="center" /></p>
+<p>[10, 20]の範囲を線形に拡大縮小して、[30,50]の範囲に直す関数、ともみられます。
+端点10、20はそれぞれ30、50に変換されます。</p>
 
-<h4 id="modified-formatdata">Modified formatData</h4>
+<p><img src="img/scalegen.png" width="400px" /></p>
+
+<h3 id="formatdataの修正">formatDataの修正</h3>
+
+<p>Case01で書いたformatDataを修正します。引数magの代わりに、関数rScaleを指定します。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">formatData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">rScale</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -767,7 +1030,12 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h4 id="modified-update">Modified update</h4>
+<h3 id="updateの修正">updateの修正</h3>
+
+<p>formatDataの修正に伴って、updateも修正します。
+とりあえず半径の範囲は[10,50]で固定しました。</p>
+
+<p>(d3.extentについては後で補足します)</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scaleGenerator</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">ran</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">ran</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="nx">dom</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="nx">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="nx">ran</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
@@ -780,11 +1048,11 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h3 id="成功">成功</h3>
-
 <p><img src="/d3js/Part01/img/circle14.svg" alt="center" /></p>
 
-<h3 id="実は車輪の再発明">実は車輪の再発明</h3>
+<h3 id="d3scalelinear">d3.scaleLinear</h3>
+
+<p>実は次のscaleGeneratorというのは<strong>車輪の再発明</strong>です。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Before</span>
 <span class="kd">const</span> <span class="nx">scaleGenerator</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">ran</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -793,9 +1061,10 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 <span class="kd">const</span> <span class="nx">rScale</span> <span class="o">=</span> <span class="nx">scaleGenerator</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">extent</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]);</span>
 </code></pre></div></div>
 
-<h3 id="d3scalelinear">d3.scaleLinear</h3>
+<p>d3.jsには同じ機能を持った関数scaleLinearがあります。使い方は下記のようにします。
+次からはこれを使いましょう。</p>
 
-<p>次からはこれを使いましょう</p>
+<p>scaleLinearには今回作ったscaleGeneratorより優れている点があるのですが、詳しくはCase08-3で説明します。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// After</span>
 <span class="kd">const</span> <span class="nx">rScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
@@ -803,26 +1072,21 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
   <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]);</span>
 </code></pre></div></div>
 
-<ul>
-  <li>scaleLinearは線形変換</li>
-  <li>scalePow/scaleLog/scaleSqrtなどもあります</li>
-</ul>
+<p>今回は一次関数を用いてデータを拡大縮小しました。他にも、scalePos/scaleLog/scaleSqrtなどを用いて、一次関数以外の変換も可能です。</p>
 
-<p><img src="/d3js/Part01/img/maxmin.png" alt="bg right:50% contain" /></p>
+<h3 id="補足-maxminextent">補足: max/min/extent</h3>
 
-<h4 id="補足-maxminextent">補足: max/min/extent</h4>
+<p>d3.jsには便利な関数max/min/extentが用意されています。max/minはそれぞれデータの最大値を返します。
+extentはデータの範囲を[最小値,最大値]の形式で返します。</p>
 
-<ul>
-  <li>
-    <p>d3.extent: データの範囲</p>
-  </li>
-  <li>
-    <p>要素がObject/Array
-⇒ アロー関数付ける</p>
-  </li>
-</ul>
+<p><img src="img/maxmin.png" width="400px" /></p>
 
-<p><img src="/d3js/Part01/img/maxmin2.png" alt="bg right:50% contain" /></p>
+<p>要素がObject/Arrayだった場合は、次のように第2引数に関数を書くことで、何に対しての最大値/最小なのかを指定できます。</p>
+
+<p><img src="img/maxmin2.png" width="400px" /></p>
+
+<p>他にも便利な配列操作系関数が用意されています。どんなものがあるかは<a href="https://github.com/d3/d3-array" target="_blank">d3/d3-array</a>
+を参考にしてください。</p>
 
 <h2 id="case-08-1-random-color">Case 08-1: Random Color</h2>
 
@@ -862,7 +1126,7 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 
 <p><img src="/d3js/Part01/img/schemeset1.png" alt="center" /></p>
 
-<h3 id="modified-update-1">Modified update</h3>
+<h3 id="modified-update">Modified update</h3>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// [0, d3.schemeSet1.length)の範囲の一様分布乱数を生成</span>
 <span class="kd">const</span> <span class="nx">rand</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">randomUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">schemeSet1</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
@@ -894,7 +1158,7 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
   <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="s1">'orangered'</span><span class="p">,</span> <span class="s1">'white'</span><span class="p">,</span> <span class="s1">'skyblue'</span><span class="p">]);</span>
 </code></pre></div></div>
 
-<h3 id="modified-update-2">Modified update</h3>
+<h3 id="modified-update-1">Modified update</h3>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">rmin</span><span class="p">,</span> <span class="nx">rmax</span><span class="p">]</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">extent</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">colorScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
@@ -956,7 +1220,7 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 ⇒ indexを持たせる</li>
 </ul>
 
-<h4 id="modified-formatdata-1">Modified formatData</h4>
+<h4 id="modified-formatdata">Modified formatData</h4>
 
 <p>idx追加</p>
 
@@ -976,7 +1240,7 @@ DOMに子要素を追加/削除したり、データとDOMを結びつけたり�
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h4 id="modified-update-3">Modified update()</h4>
+<h4 id="modified-update-2">Modified update()</h4>
 
 <p>transition付きにはonclickが設定できないので
 circleGroupMergeとtransitionを分離する

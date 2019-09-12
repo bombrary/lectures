@@ -1,12 +1,13 @@
 ---
 layout: default
 title: D3js Part1
+mathjax: true
 sidebarfile: d3js_01_sidebar.html
 ---
 
 # D3js Part1 - Understanding Concept
 
-
+本チュートリアルでは、「配列に入った数値データを円として可視化する」というケースを想定して、D3.jsの基本を学んでいきます。
 
 ## お約束
 
@@ -78,6 +79,9 @@ svg.selectAll('circle')
 index.htmlを開くと、次のように表示されます。
 
 ![](img/circle02.png)
+
+画面右側はDevelopper Toolでの出力です。Developperツールは、Google ChromeならF12、Safariならcommand + option + iキーで開くことができます。
+circleタグにcx、cy、r属性が追加されていることがわかります。
 
 ### 説明
 
@@ -378,7 +382,7 @@ htmlファイルについては何も変更はありません。
     <circle></circle>
     <circle></circle>
     <circle></circle>
-  <g>
+  </g>
 </svg>
 ...
 ```
@@ -420,7 +424,7 @@ circleEnter.attr('cx', d => d.x)
 ```js
 circle.enter()
 ```
-というもので、「結ばれなかったデータたち」にアクセスしています。
+というもので、「結ばれなかったデータたち」にアクセスしています(厳密には「結ばれなかったデータ」という表現は誤りなのですが、これについての訂正はCase03の後で行います)。
 さらに、
 ```js
 const circleEnter = circle.enter()
@@ -508,7 +512,8 @@ circle.exit().remove();
 ```js
 circle.exit()
 ```
-で得られます。removeメソッドを使うとこれを削除することができます。
+で得られます(厳密には「結ばれなかったDOM」という表現は誤りなのですが、これについての訂正はCase03の後で行います)。
+removeメソッドを使うとこれを削除することができます。
 
 ![bg contain](img/circle06.png)
 
@@ -526,20 +531,48 @@ circle.exit()
 
 例えば、
 ```js
-const svg = d3.select('svg')
+const svg = d3.select('svg');
 ```
 が返す値は、*selection*と呼ばれるオブジェクトです。この*selection*を介して、私たちはDOMの属性を操作したり、
 DOMに子要素を追加/削除したり、データとDOMを結びつけたりしています。
 
-また、
+selectで指定する引数は、cssのセレクタと同じ文法です。なので、例えば以下のように書けば、
+contentをクラスとして持つDOMの*selection*を返します。
+
+```js
+d3.select('.content')
+```
+
+さらに、「svgを選択して、さらにその下のcircleを選択したい」という場合は、次のように書きます。
+
+```js
+d3.select('svg')
+  .select('circle');
+
+// 次のように変数に一度格納することをよくやります
+const svg = d3.select('svg');
+const circle = svg.select('circle');
+```
+
+また、selectは一つの*selection*を返しましたが、selectAllは*selections*を返します。これは*selection*を複数集めた、配列に似たオブジェクトです。
+```js
+d3.selectAll('circle')
+```
+
+### *selections*.dataの行く末
+
+すでにCase01から見ていきましたが、データとDOMを結びつけるためには、*selections*.dataメソッドを用います。
+ただし、結びつける対象のDOMが必要なので、先にselectAllで選択しておきます。
+
 ```js
 svg.selectAll('circle')
+  .data([4, 2, 3]);
 ```
-が返す値は*selections*オブジェクトで、これは*selection*の配列みたいなものです。
 
-### *selection(s)*.dataの行く末
-
-こんな感じで分類されます。
+データとDOMが結びつくわけですが、Case01〜Case03で見た通り、タグが足りなかったりデータが足りなかったりするケースが存在します。
+それに応じて、enterメソッドやexitメソッドでそれぞれの*selection*にアクセスするわけです。
+enterやexitでアクセスされる*selections*には名前がついており、それぞれ*enter selections*、*exit selections*などと呼ばれます。
+以上をまとめると、こんな感じで分類されます。
 
 - データとDOMが結ばれた: *update selections*
   - *selections* でアクセス
@@ -563,62 +596,184 @@ circle.exit().remove()
 ```
 において、circle.exit()が*exit selections*を表しています。
 
+### *selection*.datum
+
+結ぶデータとDOMが1ペアしかないことが確実なら、datumというメソッドを利用します。
+selectAllほど使用頻度は多くありません。
+
+```js
+// 例1: 1つのcircleを選択して1つの値を結びつける
+// ただしcircleが必ず存在している必要がある
+// 半径を結びつけた値に設定する
+d3.select('circle')
+  .datum(4)
+  .attr('r', d => d);
+
+// 例2: appendでcircleを追加して1つの値を結びつける
+// 半径を結びつけた値に設定する
+d3.select('svg')
+  .append('circle')
+  .datum(4)
+  .attr('r', d => d);
+```
+
 ### データはどこ?
 
-- DOMの中の__data__というプロパティに入っている
-  - selectionに入っているわけではない!
+*selections.data*メソッドで結びついたデータはどんな形で保管されているのでしょうか。
+実は、**DOMの中の__data__というプロパティ**に入っています。*selections*に入っているわけではありません。
 
-- ブラウザのDevelopper Toolで
+ブラウザのDevelopper Toolで
 ```js
 d3.selectAll('circle')
 ```
-を実行して__data__を探そう
+を実行して__data__を探してみましょう。
+
+これによって出力されたものが、*selections*オブジェクトの中身です。
+_groups、NodeListと辿るとcircleがいくつか見られます。これがcircleのDOMです。
+
+<img src="./img/where_is_dom01.png" width="400px">
+
+0番目のcircleをクリックすると、DOMが持っている大量のプロパティが見られます。
+下の方を見てみると、__data__が発見できます。
+
+<img src="./img/where_is_dom03.png" width="400px">
+
+しかしこれに直接アクセスすることは決してありません。「データを可視化する」という目的において、DOMに結ばれたデータにわざわざアクセス
+することはほとんどないと思います。万が一入っているデータにアクセスしたい場合は、__data__に直接アクセスするのではなく、
+*selection*.datum()もしくは*selections*.data()を引数なしで呼び出します。
+
+```js
+d3.selectAll('circle')
+  .data()
+```
 
 
+### データは引き継がれる
 
-### Inherit
+あるDOMにデータが結び付けられたとしましょう。すると、その子孫DOMにもデータが引き継がれます。
+引き継ぎのタイミングは、appendやselect/selectAllが呼び出された場合です。これは非常に良い性質です。
+例を示しましょう。以下は、「円の中心にテキストを出力する例」です。
 
-- DOMにデータが結ばれた
-  &rArr; その子孫DOMにも引き継がれる
-  タイミング: select(All)，appendなどの呼び出し時
+```js
+const svg = d3.select('svg')
+const g = svg.append('g')
+  .attr('transform', `translate(${svgWidth/2}, ${svgHeight/2})`)
+  .datum({r: 10, name: "Hello"});
+g.append('circle')
+  .attr('fill', '#fff')
+  .attr('stroke', '#000')
+  .attr('r', d => d.r);
+g.append('text')
+  .text(d => d.name);
+```
 
-これが後々良い性質だと分かる
+実行結果はこんな感じです。文字が中央に寄っていないのが嫌ですが、これについてはCase05で解決します。
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px">
+<g transform="translate(100, 100)"><circle fill="#fff" stroke="#000" r="10"></circle><text>Hello</text></g>
+</svg>
+
+gタグの中にcircleタグとtextタグを入れ込み、gに{r: 10, name: "Hello"}という値を結びつけています。
+その後appendを用いてcircleとtextを追加しています。この際に、gに結びつけた{r: 10, name: "Hello"}という
+値はcircleとtextにも引き継がれます。
+
+circleは{r: 10, name: "Hello"}を持っているから
+```js
+g.append('circle')
+  ...
+  .attr('r', d => d.r);
+```
+のようにして、rのを設定できるし、同様にして
+```js
+g.append('text')
+  .text(d => d.name);
+```
+のようにして、textタグのテキストを設定できるのです。
+
+補足: メソッド名から何となく想像がつくと思いますが、textメソッドを用いると、タグ内部のテキストを設定できます。
+
+
+### もっと詳しく知りたい方へ
+
+D3.js開発者が書いている <a href="https://bost.ocks.org/mike/selection/" target="_blank">How Selections Work</a>を読みましょう。
 
 ## Case 04: 関数化
 
+今までcircleタグを書いていましたが、Case02、Case03で見たように、実際にデータ数が3個であるは限りません。
+なのでcircleタグを最初から書くのをやめてしまいましょう。
+
 ```html
+...
 <svg>
 </svg>
+...
 ```
 
+次のような機能を追加したいと思います。
+
 - update([4, 2, 3,...])と呼び出すと描画されるようにしたい
-- 何度も呼び出しできるようにしたい
-  &rArr; update/enter/exit全てを考慮
+- 何度も呼び出しできるようにしたい、つまり、update関数は何度も呼び出される可能性がある  
 
+2つ目の要求を満たすためには、update/enter/exit全てを考慮しなければならないことがわかります。
+ということで書いてみると次のようになります。データを結びつけた後に、update/enter/exitの
+処理を行う、という操作を行っています。これはある種の書き方のパターンとして覚えても良いかもしれません。
 
+参考: <a href="https://bl.ocks.org/mbostock/3808218" target="_blank">General Update Pattern, I</a>
 
 ```js
 const g = svg.append('g')
   .attr('transform', `translate(${svgWidth/2}, ${svgHeight/2})`);
 
 const update = (data) => {
+  // データを結びつける
   const circle = g.selectAll('circle')
     .data(formatData(data, 10, 5));
 
+  // データと結びついたDOMを更新(update selection)
+  circle.attr('cx', d => d.x)
+    .attr('cy', d => d.y)
+    .attr('r', d => d.r);
+
+  // 足りなかったcircleは追加(enter selection)
   const circleEnter = circle.enter()
     .append('circle');
+  circleEnter.attr('cx', d => d.x)
+    .attr('cy', d => d.y)
+    .attr('r', d => d.r);
+
+  // 多すぎたcircleは削除(exit selection)
+  circle.exit().remove();
+};
+```
+
+もしenterとupdateで設定することが同じなら、
+Case02で紹介したmergeを使って、以下のように書く量を少し減らせます。
+
+```js
+const g = svg.append('g')
+  .attr('transform', `translate(${svgWidth/2}, ${svgHeight/2})`);
+
+const update = (data) => {
+  // データを結びつける
+  const circle = g.selectAll('circle')
+    .data(formatData(data, 10, 5));
+
+  // 足りなかったcircleは追加(enter selection)
+  const circleEnter = circle.enter()
+    .append('circle');
+
+  // update/enterをいっぺんに処理
   circleEnter.merge(circle)
     .attr('cx', d => d.x)
     .attr('cy', d => d.y)
     .attr('r', d => d.r);
 
+  // 多すぎたcircleは削除(exit selection)
   circle.exit().remove();
 };
 ```
 
-
-
-### Good
+Developper Toolのコンソール上で、update関数を次のように入力すると、それに応じた個数と半径の円が出力されます。
 
 ![bg contain right:50% vertical](img/circle07.png)
 ![bg contain](img/circle08.png)
@@ -628,24 +783,27 @@ const update = (data) => {
 
 ## Case 05: テキストを入れる
 
-- 円の中心に数字を描きたい
-
-
+今度は、円の中心にデータの値が描かれるようにしてみましょう。
+円とテキストを1つのグループとして扱いたいので、以下のようにgタグでくくってやります。
 
 ![bg contain right:40%](img/circle10.svg)
 
-- gタグで括るとtext，circleいっぺんに扱えて嬉しい
-
+それに応じてコード修正します。
 
 ```js
 const update = (data) => {
   const circleGroup = g.selectAll('g')
     .data(formatData(data, 10, 5));
 
+  // 足りなかった分gタグを追加
   const circleGroupEnter = circleGroup.enter()
     .append('g');
+
+  // それぞれのgタグについて、circleタグとtextタグを追加
   circleGroupEnter.append('circle');
   circleGroupEnter.append('text');
+
+  // update/exitをいっぺんに処理する
   const circleGroupMerge = circleGroupEnter
     .merge(circleGroup);
   circleGroupMerge
@@ -663,85 +821,166 @@ const update = (data) => {
 };
 ```
 
-
+これはsvgの知識ですが、次のような属性の設定を行うと、テキストが中央寄せになります。
+```js
+  circleGroupMerge.select('text')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'central')
+```
 
 ![bg contain](img/circle11.png)
 
 
-
 ## Case 06: Animation
 
-出現や消滅をカッコよく動かしたい
+「配列の値を円として可視化する」という意味では、十分な可視化が達成されました。
+これ以降はもう少し見栄えに関する部分をいじっていきながら、d3.jsの機能に触れていきたいと思います。
 
-
+では早速、出現や消滅をカッコよく動かしてみましょう。
 
 ### d3.transition()
 
-- DOMの属性/スタイル変更が滑らかに行われる
+DOMの属性やスタイル変更をアニメーションするためには、d3.transition()、もしくは*selection(s)*.transition()を用います。
 
-#### 1/3
+例えば「円を(0,0)から(100, 120)」に移動させるといった場合、次のように書きます。
+transitionを呼び出した後に変化後の属性やスタイルを設定することでアニメーションが行われます。
 
 ```js
-// 呼び出し500ms後，1000msかけて遷移
+const svg = d3.select('svg');
+const circle = svg.append('circle')
+  .attr('r', 10)
+  .attr('cx', 0)  // 変化前のx座標
+  .attr('cy', 0); // 変化前のy座標
+circle.transition()
+  .attr('cx', 100)  // 変化後のx座標
+  .attr('cy', 120); // 変化後のy座標
+```
+
+遅延時間やアニメーション時間を設定したい場合は、transitionに続けてdelayやdurationを設定します。
+また、複数のDOMを同期して動かしたい場合は、d3.transitionを変数として設定しておいて、
+*selection(s)*.transitionの引数にそれを指定します。
+
+例えば、
+- 2つの円を500ms待機後、1000msかけて同時に動かしたい
+- 1つ目の円は(0,0)から(100,120)に移動
+- 2つ目の円は(0,0)から(150, 200)に移動
+
+```js
+const svg = d3.select('svg');
+const circle1 = svg.append('circle')
+  .attr('r', 10)
+  .attr('cx', 0) 
+  .attr('cy', 0);
+const circle2 = svg.append('circle')
+  .attr('r', 10)
+  .attr('cx', 0) 
+  .attr('cy', 0);
+
 const t = d3.transition()
   .delay(500)
   .duration(1000);
-
-const circleGroupMerge = circleGroupEnter
-  .merge(circleGroup) 
-  .transition(t);
-circleGroupMerge
-  .attr('transform', d => `translate(${d.x}, ${d.y})`);
-circleGroupMerge.select('circle')
-  .attr('fill', '#fff')
-  .attr('stroke', '#000')
-  .attr('r', d => d.r);
-circleGroupMerge.select('text')
-  .attr('text-anchor', 'middle')
-  .attr('dominant-baseline', 'central')
-  .text(d => d.val);
-const circleGroupExit = circleGroup.exit()
-  .transition(t);
-circleGroupExit.select('circle')
-  .attr('r', 0);
-circleGroupExit.remove();
+circle1.transition(t)
+  .attr('cx', 100) 
+  .attr('cy', 120);
+circle2.transition(t)
+  .attr('cx', 150) 
+  .attr('cy', 200);
 ```
 
+ちなみにアニメーションは位置だけでなくて色や形に対しても行われます。
 
+さて前置きはここまでにして、早速update関数を修正しましょう。
+
+```js
+const update = (data) => {
+  const circleGroup = g.selectAll('g')
+    .data(formatData(data, 10, 5));
+
+  // 足りなかった分gタグを追加
+  const circleGroupEnter = circleGroup.enter()
+    .append('g');
+
+  // それぞれのgタグについて、circleタグとtextタグを追加
+  circleGroupEnter.append('circle');
+  circleGroupEnter.append('text');
+
+  const t = d3.transition()
+    .delay(500)
+    .duration(1000);
+
+  // updateとenterに関するアニメーション
+  const circleGroupMerge = circleGroupEnter
+    .merge(circleGroup) 
+    .transition(t);
+  circleGroupMerge
+    .attr('transform', d => `translate(${d.x}, ${d.y})`);
+  circleGroupMerge.select('circle')
+    .attr('fill', '#fff')
+    .attr('stroke', '#000')
+    .attr('r', d => d.r);
+  circleGroupMerge.select('text')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'central')
+    .text(d => d.val);
+
+  // exitについては、半径を0にしてから消滅するようなアニメーションをする
+  const circleGroupExit = circleGroup.exit()
+    .transition(t);
+  circleGroupExit.select('circle')
+    .attr('r', 0);
+  circleGroupExit.remove();
+};
+```
+
+実行結果は次のようになります。
 
 ![bg contain](img/circle12.gif)
 
+ちなみに今回はexitについて、「半径を0にしてから消滅」というアニメーションを行いましたが、
+そうではなくて「だんだんと透明になって消滅」というアニメーションを行いたい場合は次のように書きます。
+cssにopacityというスタイルがあるのでそれを利用します。
+
+```js
+  // exitについては、だんだんと透明になって消滅するようなアニメーションをする
+  const circleGroupExit = circleGroup.exit()
+    .transition(t);
+  circleGroupExit.style('opacity', 0);
+  circleGroupExit.remove();
+```
+
+補足: 名前からなんとなく想像はつくと思いますが、
+attrはタグの属性(attribute)を設定するメソッドで、styleはタグのcssスタイルを設定するメソッドです。
 
 
 ## Case 07: Relative Radius
 
+以下の図は、update([1, 30])を実行した結果です。半径を1は小さすぎだし、30は大きすぎな気がします。
+そこで、半径に下限/上限を設定してあげて、小さくなりすぎない/大きくなりすぎないようにしましょう。
+
 ![center](img/circle13.svg)
 
-- 小さくなりすぎ/大きくなりすぎ
- &rArr; 半径の上限/下限を設定したい
-
+データを適切な半径へと拡大縮小する関数を考えましょう。
+現れるデータの最大値、最小値が分かっているとして、それを$x_m, x_M$とします。
+データを半径に変換する関数を作成するわけですが、半径の下限、上限をそれぞれ$y_m, y_M$とします。
+半径とデータの関係ですが、「データが大きいほど半径も大きい」とします。これを満たす関数で簡単なのは一次関数です。
+以上から、下図のような関数が考えられます。
 
 
 ![bg right:50% contain](img/func.svg)
 
-### どんな関数?
 
+これは高校数学でお馴染みで、こんな直線の式になります。
 
-
-
-#### 高校数学
-
-$$
+\\[
 y = \frac{y_M - y_m}{x_M - x_m}(x - x_m) + y_m
-$$
+\\]
 
 
+### 関数を返す関数
 
-
-#### 関数を返す関数
-
+以上の軽い考察を基にして、
 domainとrangeを設定すると
-いい感じの一次関数を返してくれる関数
+適切な一次関数を返してくれる関数を作ります。
 
 ```js
 const scaleGenerator = (dom, ran) => {
@@ -749,15 +988,17 @@ const scaleGenerator = (dom, ran) => {
 };
 ```
 
+### 動き
+
+[10, 20]の範囲を線形に拡大縮小して、[30,50]の範囲に直す関数、ともみられます。
+端点10、20はそれぞれ30、50に変換されます。
+
+<img src="img/scalegen.png" width="400px">
 
 
-#### 動き
+### formatDataの修正
 
-![center](img/scalegen.png)
-
-
-
-#### Modified formatData
+Case01で書いたformatDataを修正します。引数magの代わりに、関数rScaleを指定します。
 
 ```js
 const formatData = (data, space, rScale) => {
@@ -775,7 +1016,12 @@ const formatData = (data, space, rScale) => {
 
 
 
-#### Modified update
+### updateの修正
+
+formatDataの修正に伴って、updateも修正します。
+とりあえず半径の範囲は[10,50]で固定しました。
+
+(d3.extentについては後で補足します)
 
 ```js
 const scaleGenerator = (dom, ran) => {
@@ -790,14 +1036,12 @@ const update = (data) => {
 ```
 
 
-
-### 成功
-
 ![center](img/circle14.svg)
 
 
+### d3.scaleLinear
 
-### 実は車輪の再発明
+実は次のscaleGeneratorというのは**車輪の再発明**です。
 
 ```js
 // Before
@@ -807,11 +1051,10 @@ const scaleGenerator = (dom, ran) => {
 const rScale = scaleGenerator(d3.extent(data), [10, 50]);
 ```
 
+d3.jsには同じ機能を持った関数scaleLinearがあります。使い方は下記のようにします。
+次からはこれを使いましょう。
 
-
-### d3.scaleLinear
-
-次からはこれを使いましょう
+scaleLinearには今回作ったscaleGeneratorより優れている点があるのですが、詳しくはCase08-3で説明します。
 
 ```js
 // After
@@ -820,25 +1063,21 @@ const rScale = d3.scaleLinear()
   .range([10, 50]);
 ```
 
-- scaleLinearは線形変換
-- scalePow/scaleLog/scaleSqrtなどもあります
+今回は一次関数を用いてデータを拡大縮小しました。他にも、scalePos/scaleLog/scaleSqrtなどを用いて、一次関数以外の変換も可能です。
 
+### 補足: max/min/extent
 
+d3.jsには便利な関数max/min/extentが用意されています。max/minはそれぞれデータの最大値を返します。
+extentはデータの範囲を[最小値,最大値]の形式で返します。
 
-![bg right:50% contain](img/maxmin.png)
+<img src="img/maxmin.png" width="400px">
 
-#### 補足: max/min/extent
+要素がObject/Arrayだった場合は、次のように第2引数に関数を書くことで、何に対しての最大値/最小なのかを指定できます。
 
-- d3.extent: データの範囲
+<img src="img/maxmin2.png" width="400px">
 
-
-
-
-- 要素がObject/Array
-  &rArr; アロー関数付ける
-
-![bg right:50% contain](img/maxmin2.png)
-
+他にも便利な配列操作系関数が用意されています。どんなものがあるかは<a href="https://github.com/d3/d3-array" target="_blank">d3/d3-array</a>
+を参考にしてください。
 
 
 ## Case 08-1: Random Color

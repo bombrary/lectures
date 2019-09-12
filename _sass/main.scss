@@ -1,6 +1,7 @@
 html {
   font: 14px 'Quicksand', "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", 'メイリオ' , Meiryo , Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   //font: 14px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
 }
 
 
@@ -30,6 +31,9 @@ header {
   width: 70%;
   box-sizing: border-box;
   margin: 0 auto;
+  h1 {
+    color: #000;
+  }
 }
 .sidebar {
   width: 20%;
@@ -75,6 +79,30 @@ pre {
 @media print, screen and (max-width: 720px) {
   pre, code {
     word-wrap:normal;
+  }
+}
+
+
+aside {
+  h3 {
+    color: #000;
+  }
+  ul {
+    list-style-type: none;
+    li {
+      margin-top: 10px;
+    }
+    li:first-child{
+      margin-top: 0px;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1.1em;
+    }
+    p {
+      font-size: 1.1em;
+    }
   }
 }
 
