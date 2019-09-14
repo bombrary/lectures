@@ -15,9 +15,9 @@
       <section class="sidebar">
           {% include {{ page.sidebarfile }} %}
       </section>
-      <section class="main has-sidebar">
+      <article class="main has-sidebar">
         {{ content }}
-      </section>
+      </article>
       {% else %}
       <article class="main">
         {{ content }}
