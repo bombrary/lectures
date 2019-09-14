@@ -15,8 +15,24 @@ sidebarfile: d3js_01_sidebar.html
 </header>
 
 <script>
-$('aside').clone(true)
-  .appendTo('#nav-content');
+$(() => {
+  const aside = $('aside').clone(true);
+  aside.appendTo('#nav-content');
+
+  console.log(aside.find('a[href^="#"]'));
+
+  var windowWidth = $(window).width();
+  var headerHight = 100; // ヘッダーの高さを入れる
+  aside.find('a[href^="#"]').click(function() {
+    $('#nav-input').prop('checked', false);
+    var speed = 1000;
+    var href= $(this).attr("href");
+    var target = $(href == "#" || href == "" ? 'html' : href);
+    var position = target.offset().top-headerHight;
+    $('body,html').animate({scrollTop:position}, speed, 'swing');
+    return false;
+  });
+});
 </script>
 
 # D3js Part1 - Understanding Concept
