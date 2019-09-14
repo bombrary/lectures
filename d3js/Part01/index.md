@@ -110,7 +110,7 @@ index.htmlを開くと、次のように表示されます。
 
 ![](img/circle02.png)
 
-画面右側はDevelopper Toolでの出力です。Developperツールは、Google ChromeならF12、Safariならcommand + option + iキーで開くことができます。
+画面右側はDevelopper Toolでの出力です。Google Chromeだと、WindowsならF12、Macならcommand + option + iキーで開くことができます。
 circleタグにcx、cy、r属性が追加されていることがわかります。
 
 ### 説明
