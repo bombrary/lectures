@@ -5,6 +5,20 @@ mathjax: true
 sidebarfile: d3js_01_sidebar.html
 ---
 
+<header>
+  <div id="nav-drawer">
+  <input id="nav-input" type="checkbox" class="nav-unshown">
+  <label id="nav-open" for="nav-input"><span></span></label>
+  <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+  <div id="nav-content"></div>
+  </div>
+</header>
+
+<script>
+$('aside').clone(true)
+  .appendTo('#nav-content');
+</script>
+
 # D3js Part1 - Understanding Concept
 
 本チュートリアルでは、「配列に入った数値データを円として可視化する」というケースを想定して、D3.jsの基本を学んでいきます。
@@ -325,9 +339,11 @@ const data = [4, 2, 10];
 const mag = 3;
 const x = [];
 let now = 0;
-for (let i = 0; i < data.length - 1; i++) {
+for (let i = 0; i < data.length; i++) {
   x.push(now);
-  now += data[i]*mag + space + data[i + 1]*mag;
+  if (i < data.length - 1) {
+    now += data[i]*mag + space + data[i + 1]*mag;
+  }
 }
 
 svg.select('g')
@@ -1008,6 +1024,7 @@ const formatData = (data, space, rScale) => {
     if (i < data.length - 1) {
       now += rScale(data[i]) + space + rScale(data[i + 1]); 
     }
+    return t;
   }
   ret.forEach(d => { d.x -= now/2; });
   return ret;
@@ -1079,83 +1096,137 @@ extentはデータの範囲を[最小値,最大値]の形式で返します。
 他にも便利な配列操作系関数が用意されています。どんなものがあるかは<a href="https://github.com/d3/d3-array" target="_blank">d3/d3-array</a>
 を参考にしてください。
 
+## Case 08: Color
+
+今度は色をつけてみましょう。以下の3つのケースについて説明していきます。
+1. 色をランダムにする
+2. 初めから用意せれた色を用いる
+3. データの大きさに応じた色にする
 
 ## Case 08-1: Random Color
 
-- 色を完全ランダムにしたい
-
-
+色をランダムにしましょう。fill属性などにおける色指定ではrgbを指定できるので、
+rbgにおける3つの値それぞれにおいて0から255までの整数値についての乱数を作成することを考えます。
 
 ### d3.randomUniform
 
-一様分布を生成する関数を作成する関数
-範囲は右半開区間
+一様分布を生成する関数を作成する関数にd3.randomUniformというものがあります。
+範囲は右半開区間で指定して、例えば[10, 20)の範囲の乱数を生成する関数は次のように書けます。
 
 ```js
-// [0, 256)の範囲の一様分布乱数を生成
-const rand = d3.randomUniform(0, 256);
-circleGroupMerge.select('circle')
-  .attr('fill', () => `rgb(${rand()}, ${rand()}, ${rand()})`)
-  .attr('stroke', '#000')
-  .attr('r', d => d.r);
+const rand = d3.randomUniform(0, 20);
+```
+
+実際に乱数を生成するときはrand()を呼び出します。
+
+<img src="img/rand.png" width="400px">
+
+randonUniformで生成される乱数は実数値です。今回はrgbが整数値である必要があるので、整数値に丸めなければいけません。
+そこで、randomUniformをラッピングして、乱数生成器randomIntを作成します。
+
+```js
+const randomInt = (m, M) => {
+  const randUniform = d3.randomUniform(m, M);
+  return () => Math.floor(randUniform());
+};
 ```
 
 
+```js
+const update = (date) => {
+  ...
+  const randomInt = (m, M) => {
+    const randUniform = d3.randomUniform(m, M);
+    return () => Math.floor(randUniform());
+  };
+
+  const rand = randomInt(0, 256);
+  circleGroupMerge.select('circle')
+    .attr('fill', () => `rgb(${rand()}, ${rand()}, ${rand()})`)
+    .attr('stroke', '#000')
+    .attr('r', d => d.r);
+  ...
+}
+```
+
+実は、randomIntは車輪の再発明です。
+d3-randomのscriptファイルを読み込めば、これと同等の機能を持つ関数d3.randomIntが利用できます。
+また、今回一様分布乱数を利用しましたが、他にも正規分布や二項分布の乱数も用意されています。
+詳しくは<a href="https://github.com/d3/d3-random">d3-random</a>のページを参照してください。
 
 ### 若干汚い(ことがある)
 
-![center](img/circle15.svg)
+実行してみると、汚い色が現れることがよくあります。
 
-- rgbランダムだと仕方ない
-  &rArr; hsvで考えるといいかも
+![](img/circle15.svg)
 
-
-
-## Case 08-2: Built-in Color
-
-- 用意された色を使う
-
-https://github.com/d3/d3-scale-chromatic
-
-
-
-![center](img/schemeset1.png)
-
-
-
-### Modified update
+rgb値それぞれについて乱数を設定すると、どうしても汚い色が現れます。
+hslで考えれば色の鮮やかさを固定できるので、hslを利用して色を設定してみましょう。
 
 ```js
-// [0, d3.schemeSet1.length)の範囲の一様分布乱数を生成
-const rand = d3.randomUniform(0, d3.schemeSet1.length);
-circleGroupMerge.select('circle')
-  .attr('fill', () => d3.schemeSet1[Math.floor(rand())])
-  .attr('stroke', '#000')
-  .attr('r', d => d.r);
+const update = (data) => {
+  ...
+  const rand = d3.randomUniform(0, 2 * Math.PI);
+  circleGroupMerge.select('circle')
+    .attr('fill', () => `hsl(${rand()}rad, 100%, 50%)`)
+    .attr('stroke', '#000')
+    .attr('r', d => rScale(d.val));
+  ...
+};
 ```
 
-Math.floorしないと小数が出てしまうので注意
+![](img/circle_hsl.svg)
 
 
+## Case 08-2: Color Scheme
 
-それなりに良い
-色数が少ないので被る
+あらかじめ用意された色セットを使ってみましょう。どんなものがあるかは
+<a href="https://github.com/d3/d3-scale-chromatic" target="_blank">d3-scale-chromatic</a>
+を参考にしてください。
+さて、その中の1つであるd3.schemeSet1を見てみると、どうやら色の配列のようです。
+
+<img src="img/schemeSet1.png" width="400px">
+
+この色セットから色をランダムに選ぶようにしてみましょう。
+
+```js
+const update = (date) => {
+  ...
+  const randomInt = (m, M) => {
+    const randUniform = d3.randomUniform(m, M);
+    return () => Math.floor(randUniform());
+  };
+
+  const rand = randomInt(0, d3.schemeSet1.length);
+  circleGroupMerge.select('circle')
+    .attr('fill', () => d3.schemeSet1[rand()])
+    .attr('stroke', '#000')
+    .attr('r', d => d.r);
+  ...
+};
+```
 
 ![center](img/circle16.svg)
+
+グラデーションのColor Schemeもあります。
+詳しくは<a href="https://github.com/d3/d3-scale-chromatic" target="_blank">d3-scale-chromatic</a>
+を参考にしてください。
 
 
 
 ## Case 08-3: Linear Color Scale
 
-値: 小 &hArr; 中 &hArr; 大
-色: 水 &hArr; 白 &hArr; 橙
-に対応させよう
+値に応じて色が決まるようにしましょう。具体的には、
 
+- 値: 小 &hArr; 中 &hArr; 大
+- 色: 水 &hArr; 白 &hArr; 橙
 
+のように対応させることを考えます。
 
 ### d3.scaleLinear再び
 
-domain，rangeに中間の値を設定できる
+驚くべきことに、値と色を対応させる目的でscaleLinearが使えます。
+さらに、domain/rangeに中間の値を設定することができます。
 
 ```js
 const colorScale = d3.scaleLinear()
@@ -1163,19 +1234,23 @@ const colorScale = d3.scaleLinear()
   .range(['orangered', 'white', 'skyblue']);
 ```
 
+<img src="img/colorscale.png" width="400px">
 
-
-### Modified update
+これを利用してupdate関数を修正します。
 
 ```js
-const [rmin, rmax] = d3.extent(data);
-const colorScale = d3.scaleLinear()
-  .domain([rmin, (rmin + rmax)/2, rmax])
-  .range(['orangered', 'white', 'skyblue']);
-circleGroupMerge.select('circle')
-  .attr('fill', d => colorScale(d.val))
-  .attr('stroke', '#000')
-  .attr('r', d => d.r);
+const update = (data) => {
+  ...
+  const [rmin, rmax] = d3.extent(data);
+  const colorScale = d3.scaleLinear()
+    .domain([rmin, (rmin + rmax)/2, rmax])
+    .range(['orangered', 'white', 'skyblue']);
+  circleGroupMerge.select('circle')
+    .attr('fill', d => colorScale(d.val))
+    .attr('stroke', '#000')
+    .attr('r', d => d.r);
+  ...
+};
 ```
 
 
@@ -1185,63 +1260,52 @@ circleGroupMerge.select('circle')
 
 ## Case 09: Click
 
-- クリックされたボールは1増加させたい
+今度は、「クリックされたボールは1増加させる」という処理を考えてみましょう。
+ただここでは、1増加させたらそれに同期して元データも1増加させることを考えます。
 
+### 2つの方法
 
+これを実現するには、2つの方法がありそうです。ここでは、以下のように名前をつけたいと思います。
 
-### Two Kinds of Method
-
-1. クリック
-   &rArr; 該当データを探して1+して再bind
-2. クリック
-   &rArr; DOMに結ばれたデータの値を直接1+してattr再設定
-
-何れにしても実装は少しめんどい
-
-
+1. Rebind - データを再度結びつけ直す
+2. Update Directly - DOMに結ばれたデータの値を直接変更
 
 ### Common Comcept: *selection*.on
 
+どちらの方法にしても、*selection*.onメソッドを用います。第一引数にイベント名を指定し、第二引数にイベント発生時の処理を書きます。
+例えば、「circleがクリックされたらアラートを出す」という処理は以下のように書けます。
+
 ```js
-circleGroupMerge.on('click', (d, i) => {
-  /* d: クリックされた要素のデータ */
-})
+const svg = d3.select('svg');
+const circle = svg.append('circle')
+  .datum("Hello")
+  .attr('cx', 10)
+  .attr('cy', 10)
+  .attr('r', 10)
+  .on('click', d => {
+    alert(d);
+  });
 ```
 
 
+### 1st Method: Rebind
 
-
-#### 1st Method
-
+結びついたデータが元のデータ配列の何番目なのかを知りたいので、dataに自分の番号を持たせましょう。
+その番号を通じて、データの値を変更します。
+「番号は次のコールバック関数のiを用いれば良いじゃないか」と思われるかもしれません。
 ```js
-circleGroupMerge.on('click', (d, i) => {
-  data[idx]++ // idx: dがdata配列で何番目か
-  /* 更新処理 */
-})
+...
+.on('click', (d, i) => { ... });
 ```
-
-#### 2st Method
-
-```js
-circleGroupMerge.on('click', (d, i) => {
-  d++; // dを直接書き換える
-  /* 更新処理 */
-})
-```
-
-
-
-### 1st Method
-
-- bindされたデータが元のデータ配列の
-  何番目なのかを知りたい
-  &rArr; indexを持たせる
-
-
-
-#### Modified formatData
-
-idx追加
+今回のケースではこれでも正しく動きますが、一般に元データの順番と結びつけられたデータの順番が一緒とは限りません。
+dataメソッドにキーを指定していしてデータを結びつける方法があるからです。
+これについては
+<a href="https://github.com/d3/d3-selection/blob/v1.4.0/README.md#selection_data" target="_blank">
+How Selections WorkのThe Key to Enligntenment</a>
+や
+<a href="https://bl.ocks.org/mbostock/3808221" target="_blank">Genera Update Pattern, II</a>
+<a href="https://github.com/d3/d3-selection/blob/v1.4.0/README.md#selection_data" target="_blank">selection.data</a>
+に解説を委ねるとして、とにかく番号をdataにもたせます。formatDataを以下のように修正しましょう。
 
 ```js
 const formatData = (data, space, rScale) => {
@@ -1260,55 +1324,44 @@ const formatData = (data, space, rScale) => {
 };
 ```
 
-
-
-#### Modified update()
-
+次に、update関数の修正をします。
 transition付きにはonclickが設定できないので
-circleGroupMergeとtransitionを分離する
-それに伴う変更もする
+circleGroupMergeとtransitionを、新たにcircleGroupTransitionとして分離します。
 
 ```js
-const circleGroupMerge = circleGroupEnter
-  .merge(circleGroup);
-const circleGroupTrans = circleGroupMerge.transition(t);
-circleGroupTrans
-  .attr('transform', d => `translate(${d.x}, ${d.y})`);
+const update = (data) => {
+  ...
+  const circleGroupMerge = circleGroupEnter
+    .merge(circleGroup);
+  const circleGroupTrans = circleGroupMerge.transition(t);
+  circleGroupTrans
+    .attr('transform', d => `translate(${d.x}, ${d.y})`);
 
-const [rmin, rmax] = d3.extent(data, d => d.val);
-const colorScale = d3.scaleLinear()
-  .domain([rmin, (rmin + rmax)/2, rmax])
-  .range(['orangered', 'white', 'skyblue']);
-circleGroupTrans.select('circle')
-  .attr('fill', d => colorScale(d.val))
-  .attr('stroke', '#000')
-  .attr('r', d => rScale(d.val));
-circleGroupTrans.select('text')
-  .attr('text-anchor', 'middle')
-  .attr('dominant-baseline', 'central')
-  .text(d => d.val);
+  const [rmin, rmax] = d3.extent(data, d => d.val);
+  const colorScale = d3.scaleLinear()
+    .domain([rmin, (rmin + rmax)/2, rmax])
+    .range(['orangered', 'white', 'skyblue']);
+  circleGroupTrans.select('circle')
+    .attr('fill', d => colorScale(d.val))
+    .attr('stroke', '#000')
+    .attr('r', d => d.r);
+  circleGroupTrans.select('text')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'central')
+    .text(d => d.val);
+
+  // クリックされた場合、dataを変更してupdate関数を呼び出す
+  circleGroupMerge.on('click', d => {
+    data[d.idx]++;
+    update(data);
+  });
+  ...
+};
 ```
 
+### 2nd Method: Update Directly
 
-
-#### Added *selection*.on in update()
-
-```js
-circleGroupMerge.on('click', d => {
-  data[d.idx]++;
-  update(data);
-});
-```
-
-
-
-### 2nd Method
-
-- forceSimulationは内部的にこれをやってる(と思う)
-
-
-
-これだとうまくいかない
+1st Mathodと同じように、次のように書いてもうまくいきません。
 
 ```js
 circleGroupMerge.on('click', d => {
@@ -1317,25 +1370,21 @@ circleGroupMerge.on('click', d => {
 });
 ```
 
-- DOMのデータは1+
-- dataは無変更
+確かにDOMに結びつけられたデータは1加えられるのですが、dataそのものは無変更です。
+結局、update(data)によって、変更したデータは無かったことになってしまいます。
 
-&rArr; update(data)で変更が無かったことに
-
-
+そうすると、
 
 - **データを追加/削除する処理**
 - **circleの状態を変更する処理**
 
-を分けたくなってくる
-
-
-
-### あまり良くない解決策(&#8757;冗長)
+を分けたくなってきます。
+次にように、コールバック関数の中で属性の変更をすることができなくもないのですが、
+少し冗長です。
 
 ```js
 circleGroupMerge.on('click', d => {
-  d++;
+  d.val++;
   circleGroupMerge
     .attr('transform', d => `translate(${d.x}, ${d.y})`);
   circleGroupMerge.select('circle')
@@ -1353,26 +1402,21 @@ circleGroupMerge.on('click', d => {
 });
 ```
 
-
-
-
-#### これは設計を見直さなければならない予感...
-
-
+そこで、大胆にがらっとコードを書き換えることを考えます。
 
 #### 機能分離
 
-- formatData: データを有らまほしき形に変換する
-- calcPosition: 円の中心位置を決定する
-- adjustCirclesByData: データの追加/削除を担う
-- decorateCircles: データのattr/style変更を担う
-- update: primitiveデータ用のインターフェース
+次のように関数を設計します。
 
-今までのコードを大幅に変更します
-
-
+- formatData: データに位置や半径の情報を付加する
+- calcCircleInfo: 位置や半径の情報を更新する
+- adjustCirclesByData: データに応じてDOMの個数を調整する
+- decorateCircles: データのattr/style変更をする
+- update: update(普通の配列)としてアクセスするための関数
 
 #### formatData
+
+位置や半径の実際の値についてはcalcCircleInfoで決定するとして、とりあえずテンプレだけ作って返す関数です。
 
 ```js
 const formatData = (data) => {
@@ -1381,7 +1425,8 @@ const formatData = (data) => {
     ret.push({
       val: data[i],
       x: 0,
-      y: 0
+      y: 0,
+      r: 0
     });
   }
   return ret;
@@ -1390,13 +1435,16 @@ const formatData = (data) => {
 
 
 
-#### calcPosition
+#### calcCircleInfo
+
+位置や半径を更新します。
 
 ```js
-const calcPosition = (data, space, rScale) => {
+const calcCircleInfo = (data, space, rScale) => {
   let now = 0;
   data.forEach((d, i) => {
     d.x = now;
+    d.r = rScale(d.val);
     if (i < data.length - 1) {
       now += rScale(data[i].val) + space + rScale(data[i+1].val);
     }
@@ -1406,18 +1454,16 @@ const calcPosition = (data, space, rScale) => {
 };
 ```
 
-
-
 #### adjustCirclesByData
 
-クリックした時，該当データを直接書き換え
+とりあえずDOMの個数の追加/削除だけを行い、位置、色、半径などの設定はdecorateCirclesに処理を投げます。
+
 ```js
 const adjustCirclesByData = (data) => {
-  const circleGroup = g.selectAll('g.circle')
+  const circleGroup = g.selectAll('g')
     .data(data);
   const circleGroupEnter = circleGroup.enter()
     .append('g')
-    .classed('circle', true);
   circleGroupEnter.append('circle');
   circleGroupEnter.append('text');
 
@@ -1440,11 +1486,9 @@ const adjustCirclesByData = (data) => {
 };
 ```
 
+#### decorateCircles
 
-
-#### decorateCircles 1/2
-
-*selection* を引数にとるちょっと奇妙な関数
+*selection* を引数にとる少し奇妙な関数です。*selection*に対応するDOMの属性を変更します。
 
 ```js
 const decorateCircles = (circleGroup) => {
@@ -1452,7 +1496,7 @@ const decorateCircles = (circleGroup) => {
   const rScale = d3.scaleLinear()
     .domain(d3.extent(data, d => d.val))
     .range([10, 50]);
-  calcPosition(data, 10, rScale);
+  calcCircleInfo(data, 10, rScale);
   const [rmin, rmax] = d3.extent(data, d => d.val);
   const colorScale = d3.scaleLinear()
     .domain([rmin, (rmin + rmax)/2, rmax])
@@ -1467,11 +1511,7 @@ const decorateCircles = (circleGroup) => {
   circleGroupTrans.select('circle')
     .attr('fill', d => colorScale(d.val))
     .attr('stroke', '#000')
-    .attr('r', d => rScale(d.val));
-  circleGroupTrans.select('text')
-    .attr('text-anchor', 'middle')
-    .attr('dominant-baseline', 'central')
-    .text(d => d.val);
+    .attr('r', d => d.r);
   circleGroupTrans.select('text')
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'central')
@@ -1479,12 +1519,10 @@ const decorateCircles = (circleGroup) => {
 };
 ```
 
-
-
 #### update
 
 formatDataでデータを適当な形に変換したものに対して
-adjustCirclesByDataを適用する
+adjustCirclesByDataを適用します。
 
 ```js
 const update = (data) => {
@@ -1492,61 +1530,62 @@ const update = (data) => {
 };
 ```
 
-
+これでなんとかうまくいきます。
 
 ![bg contain](img/circle18.gif)
 
 
+### 注意
+
+このように、データを可視化して、インタラクティブに触れることができるようになりました。
+ただし、D3.jsはデータ可視化のためのライブラリなので、「データを書き換える」ということは本来の使い方でないことを心に留めておきましょう。
 
 
-### Caution
+### Interactive Process
 
-- D3.jsはデータ可視化のためのライブラリ
-- 今回の例みたいに
-  「インタラクティブにデータを書き換える」
-  ことは本来の使い方ではないことを心に留める
+*selection*.onを用いたインタラクティブ処理の応用例としては、次の二つの処理に分かれると思います。
 
-
-
-### Other Applications
-
-1. データ書き換え以外のインタラクティブ要素
+1. データ書き換え以外のインタラクティブ要素  
    ex) マウスを乗せると座標が表示される
 2. **データの動きを見たい**
 
+今後のチュートリアルで扱うのは主に2です。
+例えば、「迷路を探索する様子を見たい」という要求に応えるようにするためには、
+マップとその探索情報を少しずつ進めながら可視化する必要があります。
 
+<img src="img/maze.gif" width="400px">
 
-![bg contain](img/otherapplication.png)
+これは、紹介した2つの方法どちらでも実現することが可能です。
+2つの特徴を以下に挙げます。
 
-
-
-#### 1st Method
+#### 1st Method: Rebind
 
 - 実装楽
 - 用意すべきデータが2stに比べ多い
 
-
-
-#### 2nd Method
+#### 2nd Method: Update Directly
 
 - 差分だけ更新
   &rArr; 用意すべきデータが1stに比べ少ない
 - データの持たせ方が難しい時がある
 
 
-
-
 ## Case 10: Input Area
 
-![center w:900px](img/layout.png)
-- 入力エリアをちゃんと作ろう
-- 練習として複数行入力に対応できるようにする
+下図のように、入力エリアを作ってみましょう。
+入力形式は自由に決めて良いですが、ここでは以下のような制約とします。
+- スペース区切りで数字が入力される
+- 複数行入力も受け付ける
 
+![center w:900px](img/layout.png)
 
 
 ### index.html
 
+divでくくって、その中にメニューとメインコンテンツを配置するようなレイアウトにします。
+
 ```html
+...
 <div class="main-container">
   <div class="menu">
   </div>
@@ -1555,11 +1594,14 @@ const update = (data) => {
     </svg>
   </div>
 </div>
+...
 ```
 
 
 
 ### style.css
+
+flexレイアウトを用いることで、横並びのレイアウトにします。
 
 ```css
 .main-container {
@@ -1575,15 +1617,13 @@ svg {
 }
 ```
 
+### script.js
 
-
-### Added script.js
-
-- textarea.property('value')でテキストエリアの内容を取得
-- d3.merge([1], [2, 3], [4, 5]) &rarr; [1, 2, 3, 4, 5]
-- Nubmer(d)でdを数値に変換
+以下のように追加します。
 
 ```js
+...
+
 const menu = d3.select('.menu');
 const textarea = menu.append('textarea')
   .style('height', `${svgHeight - 30}px`);
@@ -1602,18 +1642,46 @@ genButton.on('click', () => {
 });
 ```
 
+なにやら見慣れないメソッドがありますが、以下の点に注目してください。
+
+- textarea.property('value')でテキストエリアの内容を取得
+- d3.merge([1], [2, 3], [4, 5]) &rarr; [1, 2, 3, 4, 5]
+- Nubmer(d)でdを数値に変換
+
+### Case 11: Random Numbers
+
+入力エリアでいちいち入力するのが面倒かと思うかもしれません。
+ランダムに数列を生成してくれる機能を作りましょう。
+
+今回は、「0から9までの乱数を7個生成する」ことにします。
+script.jsに以下の文を追加します。
+
+```js
+const randButton = menu.append('input')
+  .attr('height', '30px')
+  .attr('type', 'button')
+  .attr('value', 'random');
+
+randButton.on('click', () => {
+  const randomInt = (m, M) => {
+    const randomUniform = d3.randomUniform(m, M);
+    return () => Math.floor(randomUniform());
+  }
+  const rand = randomInt(0, 10);
+  const data = [...Array(7)].map(() => rand());
+  update(data);
+});
+```
+
+<img src="img/circle_random.gif">
 
 
 ## まとめ
-
-
 
 ### Case 1&#126;3: *selection*の基本概念を理解
 
 - update/enter/exitを感じよ
 - *selection*，DOM，データの絆を感じよ
-
-
 
 ### Case 4: 関数化
 ### Case 5&#126;8: 装飾
@@ -1622,8 +1690,6 @@ genButton.on('click', () => {
 7. 半径のスケール調整
 8. 色
 
-
-
 ### Case 9: インタラクティブ
 ### Case 10: 入力エリア作り
-
+### Case 11: 乱数ボタン作り

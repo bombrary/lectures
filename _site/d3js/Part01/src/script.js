@@ -34,11 +34,10 @@ const update = (data) => {
 };
 
 const adjustCirclesByData = (data) => {
-  const circleGroup = g.selectAll('g.circle')
+  const circleGroup = g.selectAll('g')
     .data(data);
   const circleGroupEnter = circleGroup.enter()
     .append('g')
-    .classed('circle', true);
   circleGroupEnter.append('circle');
   circleGroupEnter.append('text');
 
@@ -76,6 +75,18 @@ const decorateCircles = (circleGroup) => {
     .duration(1000);
   circleGroupTrans
     .attr('transform', d => `translate(${d.x}, ${d.y})`);
+
+  const randomInt = (m, M) => {
+    const randUniform = d3.randomUniform(m, M);
+    return () => Math.floor(randUniform());
+  };
+
+  /*const rand = randomInt(0, d3.schemeSet1.length);
+  circleGroupTrans.select('circle')
+    .attr('fill', () => d3.schemeSet1[rand()])
+    .attr('stroke', '#000')
+    .attr('r', d => rScale(d.val));*/
+
   circleGroupTrans.select('circle')
     .attr('fill', d => colorScale(d.val))
     .attr('stroke', '#000')
