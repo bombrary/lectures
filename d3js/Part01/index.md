@@ -1314,7 +1314,7 @@ const circle = svg.append('circle')
 .on('click', (d, i) => { ... });
 ```
 今回のケースではこれでも正しく動きますが、一般に元データの順番と結びつけられたデータの順番が一緒とは限りません。
-dataメソッドにキーを指定していしてデータを結びつける方法があるからです。
+dataメソッドにキーを指定してデータを結びつける方法があるからです。
 これについては
 <a href="https://github.com/d3/d3-selection/blob/v1.4.0/README.md#selection_data" target="_blank">
 How Selections WorkのThe Key to Enligntenment</a>
