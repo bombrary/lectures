@@ -1,4 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="200">
-      <g transform="translate(300, 100)">
-      <g transform="translate(-82.5, 0)"><circle fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" r="5"></circle><text text-anchor="middle" dominant-baseline="central">1</text></g><g transform="translate(82.5, 0)"><circle fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" r="150"></circle><text text-anchor="middle" dominant-baseline="central">30</text></g></g>
-    </svg>
