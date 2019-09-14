@@ -29,7 +29,7 @@ main {
   align-items: flex-start;
   margin: 0 50px;
 }
-@media screen and (min-width: 720px) {
+@media screen and (min-width:720px) {
   main {
     margin: 0;
   }
@@ -40,7 +40,7 @@ section.main {
   margin: 0 auto;
   z-index: 0;
 }
-@media screen and (min-width: 720px) {
+@media screen and (min-width:720px) {
   section.main {
     margin: 100px auto;
     width: 1000px;
@@ -52,7 +52,7 @@ section.sidebar {
   background-color: #fff;
   z-index: 99;
 }
-@media screen and (min-width: 720px) {
+@media screen and (min-width:720px) {
   section .main {
     padding: 100px 30px;
   }
@@ -70,7 +70,7 @@ section.sidebar {
   }
 }
 
-@media print, screen and (min-width: 720px) {
+@media print, screen and (min-width:720px) {
   pre, code {
     word-wrap:normal;
   }
@@ -82,7 +82,7 @@ aside {
     margin-left: 20px;
   }
 }
-@media screen and (min-width: 720px) {
+@media screen and (min-width:720px) {
   h3 {
     margin-left: 0;
   }
@@ -112,7 +112,7 @@ header {
   z-index: 99;
   display: block;
 }
-@media screen and (min-width: 720px) {
+@media screen and (min-width:720px) {
   header {
     display: none;
   }
