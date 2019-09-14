@@ -5,4 +5,4 @@ title: Hello, World
 
 # Hello
 
-- [Link](./d3js/)
+- [Link](d3js/)
