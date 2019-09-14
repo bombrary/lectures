@@ -26,7 +26,7 @@ img {
 main {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   margin: 0 50px;
 }
 @media screen and (min-width:720px) {
@@ -37,12 +37,11 @@ main {
 article {
   width: 100%;
   box-sizing: border-box;
-  margin: 0 100px;
+  margin: 0 auto;
   z-index: 0;
 }
 @media screen and (min-width:720px) {
   article {
-    margin: 100px 100px;
     width: 1000px;
   }
 }
@@ -53,9 +52,6 @@ section.sidebar {
   z-index: 99;
 }
 @media screen and (min-width:720px) {
-  section .main {
-    padding: 100px 30px;
-  }
   section.sidebar {
     width: 350px;
     height: 100%;
