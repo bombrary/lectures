@@ -32,18 +32,16 @@ main {
 @media screen and (min-width:720px) {
   main {
     margin: 0;
+    align-items: flex-start;
   }
 }
+
+
 article {
-  width: 100%;
+  width: 1000px;
+  padding: 0 50px;
   box-sizing: border-box;
-  margin: 0 auto;
   z-index: 0;
-}
-@media screen and (min-width:720px) {
-  article {
-    width: 1000px;
-  }
 }
 
 section.sidebar {
@@ -61,7 +59,7 @@ section.sidebar {
     padding: 50px 30px;
     display: block;
   }
-  section.has-sidebar {
+  article.has-sidebar {
     margin-left: 350px;
   }
 }
