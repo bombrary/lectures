@@ -1,9 +1,13 @@
 ---
 layout: default
-title: Hello, World
+title: bombraryの資料置き場
 ---
 
-# Hello
+# 講習会資料
+
+僕が作ったMaximum講習会資料をここに置きます。
+
+## 夏の講習会(のはずだったもの)
 
 - [D3.js Tutorial](d3js/)
   - [最低限のHTML Tutorial](lec_html/)
