@@ -1201,7 +1201,7 @@ const update = (data) => {
 を参考にしてください。
 さて、その中の1つであるd3.schemeSet1を見てみると、どうやら色の配列のようです。
 
-<img src="img/schemeSet1.png" width="400px">
+<img src="img/schemeset1.png" width="400px">
 
 この色セットから色をランダムに選ぶようにしてみましょう。
 
