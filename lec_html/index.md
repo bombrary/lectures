@@ -138,16 +138,7 @@ html属性にはlangという属性が設定できます。langというのはla
 どんなタグがあるのかについては[HTML5リファレンス](http://www.htmq.com/html5/)を参照してみればよいと思います。
 このチュートリアルでは、そのうちよく使われるタグを紹介します。
 
-### ちゃんと紹介しないけど大事なタグ
-
-- a
-- img
-- h1,h2,...,h5
-- header,footer
-- article,section
-
 ### 例
-
 
 ```html
 <!DOCTYPE html>
@@ -158,6 +149,8 @@ html属性にはlangという属性が設定できます。langというのはla
   </head>
   <body>
     <h1>テーブル</h1>
+
+    <img src="img/fantasy_pixy2.png" width="200px">
 
     <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
     <table>
@@ -180,22 +173,26 @@ html属性にはlangという属性が設定できます。langというのはla
 
     <h2>感想などはこちらから</h2>
     <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
-    <textarea></textarea>
-    <form>
-      <p><input type="button" value="提出"></p>
-      <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
-    </form>
+      <form>
+        <textarea></textarea>
+        <p><input type="button" value="提出"></p>
+        <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
+      </form>
 
     <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
+    <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
   </body>
 </html>
 ```
 
 なんとも頭の悪い内容のWebページですが、サンプルなので気にしないでください。
 index.htmlを開くと、以下のようなWebページが表示されます。
+ただし、画像だけは正しく表示されないと思います。これについてはimgタグの項で説明します。
 
 <div style="border: 1px dotted #333; padding: 0 20px;">
   <h1>テーブル</h1>
+
+  <img src="img/fantasy_pixy2.png" width="200px">
 
   <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
   <table>
@@ -218,18 +215,50 @@ index.htmlを開くと、以下のようなWebページが表示されます。
 
   <h2>感想などはこちらから</h2>
   <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
-  <textarea></textarea>
     <form>
+      <textarea></textarea>
       <p><input type="button" value="提出"></p>
       <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
     </form>
 
   <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
+  <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
 </div>
 
 様々なタグが出てきましたね。それぞれ説明していきます。
 
+
+### h1/h2/.../h6
+
+見出し(heading)を表すタグ
+h1は大見出し、h2はそれより小さい見出し、というように、数字が増えるたびに見出しが小さくなります。
+
+### img
+
+画像を表すタグです。終了タグが要らないタグの一つです。
+
+src属性によって画像の場所を指定しています。width、height属性で画像の幅と高さを指定します。
+
+#### 画像を表示する
+
+[こちらの「いらすとや」](https://www.irasutoya.com/2013/05/blog-post.html)から、妖精の画像をダウンロードしましょう。
+画像を右クリックして、「画像を保存」「画像をダウンロード」のような文面のボタンを選択します。
+画像ファイル名はデフォルトで「fantasy_pixy2.png」になっていると思います。ダウンロードした画像ですが、
+index.htmlファイルと同じディレクトリにimgディレクトリを新たに作成し、その中に入れます。
+ディレクトリ構成は以下の通りになります。
+
+<img src="img/dir.png" width="400px">
+
+これで、imgディレクトリにfantasy_pixi2.pngが存在しているから、以下のようにsrc属性を指定すれば、画像がめでたく表示されます。
+
+```html
+<img src="img/fantasy_pixy2.png">
+```
+
+
+
 ### p
+
 段落(paragraph)を記述するタグ。段落なのでタグごとに改行されます。
 例えば以下のように入力したとします。
 
@@ -244,10 +273,6 @@ index.htmlを開くと、以下のようなWebページが表示されます。
   <p>Hello</p>
   <p>World</p>
 </div>
-
-### h1/h2/.../h6タグ
-
-見出し(heading)を表すタグ
 
 ### table
 
@@ -303,14 +328,14 @@ ulと同じく、liを入れ子にします。例えば、先ほどの例を以�
 
 何かの「範囲(span)」を表すタグです。
 spanそのものは「範囲」という意味しかありません。より詳しくは、ソースコードの書き手が意味を決めます。
-属性やcssを付加することで意味を持ちます。
+属性やCSSを付加することで意味を持ちます。
 
 ```html
 <span style="color: red;">Hello</span>,<span style="color: blue;">World</span>
 ```
 
-styleはcssスタイルを設定する属性です。cssの文法についてはcssチュートリアルの方で説明します。ひとまず、
-```css
+styleはCSSスタイルを設定する属性です。CSSの文法についてはCSSチュートリアルの方で説明します。ひとまず、
+```CSS
 color: red;
 ```
 という書くと、文字の色を指定できることを覚えておきましょう。次のような結果になります。
@@ -324,7 +349,7 @@ color: red;
 
 spanと同じく、「区切り(division)」を表すタグです。
 divそのものには「区切り」という意味しかありません。より詳しくは、ソースコードの書き手が決めます。
-属性やcssを付加することで意味を持ちます。
+属性やCSSを付加することで意味を持ちます。
 
 例えば、「ここは説明文を含む領域である」と意味を分けたいなら、次のように書きます。
 
@@ -341,7 +366,7 @@ divそのものには「区切り」という意味しかありません。よ�
 divタグやspanタグに、しばしば**class属性**を付けます。class属性には任意の文字列を設定できます。
 とりあえず今回は適当にdescriptionという名前にしました。
 
-classはcssでスタイルを変更する際に基本となる概念です。これについてはcssのチュートリアルで説明します。
+classはCSSでスタイルを変更する際に基本となる概念です。これについてはCSSのチュートリアルで説明します。
 
 ### spanとdivの違い
 
@@ -350,7 +375,7 @@ spanもdivもある範囲や領域を表すタグですが、これらの違い�
 結論から言うと、**spanはデフォルトでインライン要素**であり、**divはデフォルトでブロック要素**という違いがあります。
 
 
-インラインとブロックについてはcssのチュートリアルの方で説明しますが、とりあえず
+インラインとブロックについてはCSSのチュートリアルの方で説明しますが、とりあえず
 - spanは文章中のある範囲に意味を付けるタグ
 - divは構造の塊に意味を付けるタグ
 
@@ -408,18 +433,24 @@ inputにid属性とlabelのfor属性を合わせると、labelをクリックし
   <label for="abc">Hello</label><input id="abc" type="checkbox">
 </div>
 
-今回id属性というものが出てきましたが、これはcssやJavaScriptで重要な概念です。
+今回id属性というものが出てきましたが、これはlabelだけに用いられる属性ではありません。
+CSSやJavaScriptで重要な概念です。
+
+### a
+
+anchorの略で、これはページへのリンクを表すタグです。href属性で飛び先のページを指定します。
+以下のように書くと、Linkという文字をクリックするとURLが「https://www.google.com」 のページに飛びます。
+「https://www.google.com」 はGoogleのページなので、Googleに飛びます。
+
+
+```html
+<a href="https://www.google.com">Link</a>
+```
 
 ## 注意
 
 文法エラーについては、外部ツールを使わない限りわかりません。
 もし文法エラーがあった場合はブラウザ側が適当に補ってくれますが、意図しない結果になりがちです。注意しましょう。
-
-## 扱わなかった重要なタグ
-
-- img: 画像を表示するタグ
-- article: 記事を表すタグ
-- section: セクションを表すタグ
 
 ## Developper Toolsを使おう
 
@@ -427,7 +458,89 @@ inputにid属性とlabelのfor属性を合わせると、labelをクリックし
 Chromeだったら、WindowsならF12、Macならcommand + option + iキーで起動できます。
 Elementsタブにて、ブラウザがhtmlファイルをどう解釈しているかを知ることができます。
 
+## そしてCSSへ
+
+例では以下のページを作成しました。
+
+<div style="border: 1px dotted #333; padding: 0 20px;">
+  <h1>テーブル</h1>
+
+  <img src="img/fantasy_pixy2.png" width="200px">
+
+  <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
+  <table>
+    <thead>
+      <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
+      <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
+      <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
+    </tbody>
+  </table>
+
+  <h2>特徴</h2>
+  <p>私が作ったテーブルには以下の特徴があります。</p>
+  <ul>
+    <li>商品名が書かれている</li>
+    <li>値段が結構高い</li>
+  </ul>
+
+  <h2>感想などはこちらから</h2>
+  <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
+    <form>
+      <textarea></textarea>
+      <p><input type="button" value="提出"></p>
+      <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
+    </form>
+
+  <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
+  <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
+</div>
+
+しかしあまりにもさっぱりしすぎではありませんか？色をつけたり、余白を並べたいかもしれません。
+それらの要望を解決するためにCSSがあります。CSSを使うと、例えば以下のようにWebページを装飾できます。
+
+<link rel="stylesheet" href="style.css">
+<div class="css-sample" style="border: 1px dotted #333; padding: 0 20px;">
+  <h1>テーブル</h1>
+
+  <img src="img/fantasy_pixy2.png" width="200px">
+
+  <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
+  <table>
+    <thead>
+      <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
+      <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
+      <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
+    </tbody>
+  </table>
+
+  <h2>特徴</h2>
+  <p>私が作ったテーブルには以下の特徴があります。</p>
+  <ul>
+    <li>商品名が書かれている</li>
+    <li>値段が結構高い</li>
+  </ul>
+
+  <h2>感想などはこちらから</h2>
+  <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
+    <form>
+      <textarea></textarea>
+      <p><input type="button" value="提出"></p>
+      <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
+    </form>
+
+  <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
+  <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
+</div>
+
+<a href="{{ "/lec_css/" | prepend: site.github.url }}">CSSチュートリアル</a>を行なって、CSSについて学びましょう。
 
 ## まとめ
 
-HTMLの基本的な文法を見ていきました。
+HTMLの基本的な文法を見ていきました。HTMLはタグの組み合わせで文書の構造を記述する言語です。
+タグとその組み合わせ方さえ覚えるだけで、難しいことはほとんど無かったと思います。
