@@ -69,7 +69,7 @@ HTMLチュートリアルの時と同じコードを用います。
   <body>
     <h1>テーブル</h1>
 
-    <img src="img/fantasy_pixy2.png" width="200px">
+    <p><img src="img/fantasy_pixy2.png" width="200px"></p>
 
     <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
     <table>
@@ -114,40 +114,7 @@ index.htmlファイルと同じディレクトリにimgディレクトリを新�
 
 結果は以下のようになります。
 
-<div class="output">
-  <h1>テーブル</h1>
-
-  <img src="img/fantasy_pixy2.png" width="200px">
-
-  <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
-  <table>
-    <thead>
-      <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
-      <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
-      <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
-    </tbody>
-  </table>
-
-  <h2>特徴</h2>
-  <p>私が作ったテーブルには以下の特徴があります。</p>
-  <ul>
-    <li>商品名が書かれている</li>
-    <li>値段が結構高い</li>
-  </ul>
-
-  <h2>感想などはこちらから</h2>
-  <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
-    <form>
-      <textarea></textarea>
-      <p><input type="button" value="提出"></p>
-      <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
-    </form>
-
-  <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
-  <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
+<div class="output outerfile">
 </div>
 
 ## Step01: 枠線
@@ -216,8 +183,8 @@ h1 {
 枠線を設定するプロパティです。
 必ず「線の太さ 線のスタイル 線の色」という順で指定します。
 線のスタイルとしてどんなものが指定できるのかについては
-[border - スタイルシートリファレンス](http://www.htmq.com/style/border.shtml)を参照してください。
-以下はsolidを指定しているので、実線が引かれます。
+<a href="http://www.htmq.com/style/border.shtml" target="_blank">border - スタイルシートリファレンス</a>
+を参照してください。以下はsolidを指定しているので、実線が引かれます。
 
 色設定については後で補足します。
 
@@ -280,10 +247,13 @@ p {
 <p style="border: 1px solid #00ff00;">Hello</p>
 </div>
 
-いい感じの色を探したいなら[Flat UI Colors](https://flatuicolors.com)をお勧めします。フラットデザインに適した色を集めたサイトです。
+いい感じの色を探したいなら
+<a href="https://flatuicolors.com" target="_blank">Flat UI Colors</a>
+をお勧めします。フラットデザインに適した色を集めたサイトです。
 
 ##### 色名で指定する方法  
-CSSであらかじめ用意された色名で指定する方法があります。どんなものがあるかは[color - MDN](https://developer.mozilla.org/ja/docs/Web/CSS/color_value)で確認できます。
+CSSであらかじめ用意された色名で指定する方法があります。どんなものがあるかは
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/color_value" target="_blank">color - MDN</a>で確認できます。
 
 ```html
 <p>Hello</p>
@@ -334,7 +304,7 @@ ul {
 
 これだけでいい感じの装飾になります。
 
-<div class="output css-sample02">
+<div class="output css-sample02 outerfile">
   <h1>テーブル</h1>
 
   <img src="img/fantasy_pixy2.png" width="200px">
@@ -567,7 +537,7 @@ ul li:nth-child(odd) {
 </div>
 
 
-## Step03: Padding
+## Step03: padding
 
 <div class="output">
 <h1 style="border-left:5px solid #1e88e5; border-bottom:2px dotted #1e88e5;">テーブル</h1>
@@ -610,7 +580,7 @@ padding: 5px 10px 5px 10px;
 
 単位としてpxを設定していますが、0の場合は単位は必要ありません。
 
-## Step04: Margin
+## Step04: margin
 
 <div class="output css-sample02">
 <ul >
@@ -752,40 +722,7 @@ li {
 }
 ```
 
-<div class="css-sample04-05 output">
-  <h1>テーブル</h1>
-
-  <img src="img/fantasy_pixy2.png" width="200px">
-
-  <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
-  <table>
-    <thead>
-      <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
-      <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
-      <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
-    </tbody>
-  </table>
-
-  <h2>特徴</h2>
-  <p>私が作ったテーブルには以下の特徴があります。</p>
-  <ul>
-    <li>商品名が書かれている</li>
-    <li>値段が結構高い</li>
-  </ul>
-
-  <h2>感想などはこちらから</h2>
-  <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
-    <form>
-      <textarea></textarea>
-      <p><input type="button" value="提出"></p>
-      <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
-    </form>
-
-  <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
-  <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
+<div class="css-sample04-05 output outerfile">
 </div>
 
 ## Step05: 要素の表示形式
@@ -793,7 +730,7 @@ li {
 以下の灰色領域が横に伸びてしまい、右側の空白が気になります。
 これをなんとか解決できないでしょうか。
 
-<div class="css-sample04-05 output">
+<div class="sub-sample04-05 output">
   <ul>
     <li>商品名が書かれている</li>
     <li>値段が結構高い</li>
@@ -838,7 +775,7 @@ inlineが指定された要素は、テキストの一部のように扱われ�
 - **ある要素があった場合、その横に配置される**
 - **widthやheightを指定することができず、自動で要素の大きさを変える**
 
-デフォルトでinlineである要素はaやspanです。
+デフォルトでinlineである要素はaやspanです。またテキストそのものもinline要素です。
 ```html
 <p>
   <span style="border: 1px solid red;">Hello</span>,
@@ -908,7 +845,8 @@ inlineとblockの特徴を混ぜたような表示形式です。
 次のような要求を叶えましょう。
 
 - 画像とテーブルを中央寄せしたい
-- テーブルの文章を寄せたい
+- テーブルの見出しを中央寄せにしたい
+- テーブルのコンテンツを右寄せにしたい
 
 style.cssに以下の文を付け足します。
 
@@ -928,48 +866,296 @@ td {
 }
 ```
 
-<div class="css-sample06 output">
-  <h1>テーブル</h1>
-
-  <img src="img/fantasy_pixy2.png" width="200px">
-
-  <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
-  <table>
-    <thead>
-      <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
-      <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
-      <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
-    </tbody>
-  </table>
-
-  <h2>特徴</h2>
-  <p>私が作ったテーブルには以下の特徴があります。</p>
-  <ul>
-    <li>商品名が書かれている</li>
-    <li>値段が結構高い</li>
-  </ul>
-
-  <h2>感想などはこちらから</h2>
-  <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
-    <form>
-      <textarea></textarea>
-      <p><input type="button" value="提出"></p>
-      <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
-    </form>
-
-  <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
-  <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
+<div class="css-sample06 output outerfile">
 </div>
 
 
 ### block要素を中央寄せする
 
-marginプロパティにautoをつけると、marginを自動計算してくれます。これによって、**コンテンツの中央寄せ**を実現できます。
+marginプロパティにautoをつけると、marginを自動計算してくれます。次のように書くと、「上下方向の余白は0、左右は適当に調整して」
+という意味になり、コンテンツの中央寄せを実現できます。
+ただし、**幅が固定されていないと要素が画面いっぱいに広がってしまうので注意しましょう**。
 
-style.cssに以下の文を付け足します。
+```html
+<p>Hello, World</p>
+```
+
+```css
+p {
+  width: 200px;
+  background-color: salmon;
+  margin: 0 auto;
+}
+```
+
+<div class="output">
+  <p style="width: 200px; background-color: salmon; margin: 0 auto;">Hello, World</p>
+</div>
+
+#### width/heightプロパティ
+
+ここで初めて出てきたプロパティなので紹介します。
+名前から分かる通り、要素の幅/高さを指定するプロパティです。
+タグの属性にもwidth/heightがありましたが、どちらから指定しても変わりません。
+ただし、属性とCSSの両方において、width/heightの設定を書いた場合、CSSの設定が優先されるようです
+(<a href="http://www.inqsite.net/weblog/737/" target="_blank">ソース</a>)。
+
+### テキスト/inline要素の寄せ
+
+**その要素の親要素にtext-alignを付けます。親要素はblock要素である必要があります。**
+
+```html
+<p>Hello, World</p>
+```
+
+```css
+p {
+  background-color: salmon;
+  text-align: center;
+}
+```
+
+<div class="output">
+  <p style="background-color: salmon; text-align: center;">Hello, World</p>
+</div>
+
+### img要素の中央寄せ
+
+img要素はデフォルトでinline要素です。それを包んでいるpタグに対してtext-alignを付与しても良いのですが、
+img要素を包んでいるpタグのみを選択するための仕組みが必要です。
+classやid属性をつけることでそれは実現できますが、方法として少し大げさです。
+そこで、img要素をblock要素に変えて、margin属性を付与することにします。
+
+```html
+<p><img src="img/fantasy_pixy2.png"></p>
+```
+
+```css
+img {
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+```
+
+<div class="output">
+<p><img style="display: block; margin: 0 auto; width: 200px;" src="img/fantasy_pixy2.png"></p>
+</div>
+
+[例のhtmlファイル](#例)ではwidth属性によって幅を指定していましたが、今回の例のようにcssから幅を変更することも可能です。
+
+## Step07: tableの色々なスタイル
+
+テーブルのセル同士に間隔が空いています。間隔を詰めたいです。
+
+<div class="css-sample06 output">
+<table>
+  <thead>
+    <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
+    <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
+    <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
+  </tbody>
+</table>
+</div>
+
+border-collapseプロパティを指定することで、テーブルの間隔が詰まります。
+
+```css
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+```
+
+<div class="css-sample07 output">
+<table>
+  <thead>
+    <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
+    <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
+    <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
+  </tbody>
+</table>
+</div>
+
+### border-collapseプロパティ
+
+隣接するセルのボーダーの境界ついてのプロパティです。
+次の2種類の値が設定できます。
+
+- collapse: 境界を重ねます。
+- separate: 境界を別々に持ちます。
+  境界同士の間隔はborder-spacingという別のプロパティを用いて設定します。
+
+### table-layoutプロパティ
+
+テーブル幅を固定したい場合がたまにあるので、ここで紹介しておきます。
+次の2種類の値が設定できます。
+
+- auto: テーブル列幅を、コンテンツに応じて自動調整します。
+- fixed: テーブル列幅を固定します。
+
+以下は、市松模様を出力するコードです。tdタグの中には何もコンテンツを入れていません。
+
+```html
+<table>
+  <tbody>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+```
+
+その代わりに、テーブル幅を固定にした後サイズを50pxの正方形にします。
+擬似クラスを用いて、黒マスと白マスを決定しています。
+
+```css
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  table-layout: fixed;
+}
+td {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+}
+tr:nth-child(odd) td:nth-child(odd) {
+  background-color: #000;
+}
+tr:nth-child(even) td:nth-child(even) {
+  background-color: #000;
+}
+```
+
+<div class="output css-sample07-02">
+<table>
+  <tbody>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+</div>
+
+## Step08: リストの様々なスタイル
+
+リストというのは同じ分類のものを並べる際にしばしば用いられるタグです。
+例えばサイドバーやナビゲーションバーの目次でも使われることがあります。
+そのようなケースでは、リストの黒点が邪魔になります。
+
+以下のケースでは別に消さなくても良い気がしますが、練習として消しましょう。
+
+<div class="css-sample06 output">
+<ul>
+  <li>商品名が書かれている</li>
+  <li>値段が結構高い</li>
+</ul>
+</div>  
+
+style.cssのulについて、list-style-typeというプロパティを追加します。
+
+```css
+ul {
+  display: inline-block;
+  list-style-type: none;
+  border: 1px solid #888;
+  background-color: #eee;
+  color: #000;
+  margin: 0 0 0 20px;
+  padding: 10px 20px;
+}
+```
+
+### list-style-typeプロパティ
+
+リストのマーカーを指定するプロパティです。数字やアルファベット、円形、四角形など様々なマーカーを指定できます。
+どんなものがあるかは
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/list-style-type" target="_blank">list-style-type - MDN</a>
+を参照してください。
+noneを指定すればマーカーが無くなります。
+
+<div class="css-sample08 output">
+<ul>
+  <li>商品名が書かれている</li>
+  <li>値段が結構高い</li>
+</ul>
+</div>
+
+## Step 09: ボタンの装飾
+
+ボタンを装飾しましょう。しかしボタンとチェックボックスの両方がinputタグという括りになってしまっているため、
+これらをどうにかして区別しなくてはなりません。class属性やid属性をつけなくてはならないのでしょうか?
+
+<div class="output">
+  <form>
+    <textarea></textarea>
+    <p><input type="button" value="提出"></p>
+    <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
+  </form>
+</div>
+
+いいえ、もっと単純な解決策があります。style.cssに以下の記述を追加しましょう。
+
+```css
+form input[type="button"] {
+  background-color: #2196f3; 
+  width: 50px;
+  height: 25px;
+  color: white;
+  border: none;
+}
+form input[type="button"]:hover {
+  color: #2196f3; 
+  background-color: white;
+}
+```
+
+ボタンの上にマウスを乗せると、色が変わります。
+
+<div class="css-sample09 output">
+  <form>
+    <textarea></textarea>
+    <p><input type="button" value="提出"></p>
+    <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
+  </form>
+</div>
+
+### 属性セレクタ
+
+属性を用いて要素を絞るためのセレクタです。属性セレクタにもいくつか種類がありますが、
+次のように書くと、「type属性がbuttonであるようなinput要素」と選択できます。
+
+```text
+input[type="button"] {
+  ...  
+}
+```
+
+### 擬似クラス (2)
+
+hoverはマウスに乗った要素を指定する擬似クラスです。
+マウス関係の擬似クラスは他にもあって、以下のようなものがあります。
+
+- link: 未訪問のリンク(a要素に使用)
+- visited: 訪問済のリンク(a要素に使用)
+- hover: マウスが乗った状態
+- active: クリックされたから離されるまでの状態
+
+## Step10: 文字の設定(完成)
+
+formのpタグの余白を調整して、文字の太さとかサイズとかを変えます。
+textareaが狭いので広げるようにプロパティを指定してあげましょう。
+
+完成したstyle.cssは以下のようになります。
 
 ```css
 @charset "utf-8";
@@ -979,38 +1165,18 @@ h1, h2 {
   border-bottom: 2px dotted #1E88E5;
   padding-left: 10px;
 }
-
-img {
-  display: block;
-  margin: 0 auto;
-}
-
-table {
-  border-collapse: collapse;
-  margin: 0 auto;
-}
-th, td{
+th, td {
   padding: 5px;
   font-size: 18px;
 }
-
-th {
-  text-align: center;
-}
-
-td {
-  text-align: right;
-}
-th {
+thead tr {
   background-color: #2196F3;
   color: white;
 }
-
-tr:nth-child(odd) {
+tbody tr:nth-child(odd) {
   background-color: #E3F2FD;
 }
-
-ul{
+ul {
   display: inline-block;
   list-style-type: none;
   border: 1px solid #888;
@@ -1020,24 +1186,25 @@ ul{
   padding: 10px 20px;
   font-weight: bold;
 }
-
 li {
   margin-top: 5px;
 }
-
-textarea {
-  resize: none;
-  width: 200px;
-  height: 200px;
+img {
+  display: block;
+  margin: 0 auto;
 }
-
-form p {
-  padding: 0;
-  margin: 0;
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
 }
-
+th {
+  text-align: center;
+}
+td {
+  text-align: right;
+}
 form input[type="button"] {
-  background-color: #2196F3; 
+  background-color: #2196f3; 
   width: 50px;
   height: 25px;
   color: white;
@@ -1046,78 +1213,51 @@ form input[type="button"] {
   font-size: 12px;
 }
 form input[type="button"]:hover {
-  color: #2196F3; 
+  color: #2196f3; 
   background-color: white;
 }
+form p {
+  padding: 0;
+  margin: 0;
+}
+
+textarea {
+  resize: none;
+  width: 300px;
+  height: 200px;
+}
 ```
-
-<div class="css-sample output">
-  <h1>テーブル</h1>
-
-  <img src="img/fantasy_pixy2.png" width="200px">
-
-  <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
-  <table>
-    <thead>
-      <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
-      <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
-      <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
-    </tbody>
-  </table>
-
-  <h2>特徴</h2>
-  <p>私が作ったテーブルには以下の特徴があります。</p>
-  <ul>
-    <li>商品名が書かれている</li>
-    <li>値段が結構高い</li>
-  </ul>
-
-  <h2>感想などはこちらから</h2>
-  <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
-    <form>
-      <textarea></textarea>
-      <p><input type="button" value="提出"></p>
-      <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
-    </form>
-
-  <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
-  <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
+<div class="css-sample output outerfile">
 </div>
 
+### font-sizeプロパティ
 
+文字サイズを指定します。
 
-## 紹介するスタイル
-- background-color, color
-- font-size
-- margin, padding
-- display:flex
+### font-weightプロパティ
 
-## やってみよう
-### ページの背景色変更
-#### タグ名を指定するセレクタ
-#### background-color
-#### カラーコード
-### フォントを大きくする
-#### font-size
-### ある特定の段落だけ文字色，背景色を変えたい
-#### クラス
-#### クラスセレクタ
-#### color
-### 余白がもうちょい欲しい
-#### padding
-### タグとの感覚を空けたい
-#### margin
-### 特定の段落の特定の文字の色を変えたい
-#### 子孫セレクタ
-スペースで区切るだけ
-### 枠で囲みたい，大きさ固定
-#### divタグの有用性
-#### widthとheight
+文字の太さを指定します。boldで太字になります。数値で太さを指定することもできるようです。
 
-## inlineとblock
+### font-familyプロパティ
+
+フォントを指定します。どんな値が指定できるかについては
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/font-family" target="_blank">font-family - MDN</a>
+を参照してください。最低限以下の値は覚えておきましょう。
+
+- serif: PCが標準で持っている明朝体
+- sans-serif: PCが標準で持っているゴシック体
+- フォント名で指定: 使っているPCにそのフォントが入っていない場合は無効になる
+
+また、カンマで区切って複数の値を設定できます。
+「フォントAAAを優先し、もしそれがなければフォントBBBを優先し、それでもなければ標準のゴシック体にする」
+という場合は以下のように書きます。
+
+```css
+font-family: "AAA", "BBB", sans-serif;
+```
+
+綺麗なWebサイトを作る上でフォント選びはかなり重要です。
+
 
 ## flex
 ### はじめに
@@ -1139,3 +1279,7 @@ display:flex
 #### align-items
 
 ## chromeのデバッガを使おう
+
+<script>
+$('.outerfile').load('sample.html');
+</script>

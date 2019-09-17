@@ -11,38 +11,18 @@ h2[id] {
   border-bottom: 2px dotted #1E88E5;
   padding-left: 10px;
 }
-
-.css-sample img {
-  display: block;
-  margin: 0 auto;
-}
-
-.css-sample table {
-  border-collapse: collapse;
-  margin: 0 auto;
-}
-.css-sample th, .css-sample td{
+.css-sample th, td {
   padding: 5px;
   font-size: 18px;
-}
-
-.css-sample th {
-  text-align: center;
-}
-
-.css-sample td {
-  text-align: right;
 }
 .css-sample thead tr {
   background-color: #2196F3;
   color: white;
 }
-
 .css-sample tbody tr:nth-child(odd) {
   background-color: #E3F2FD;
 }
-
-.css-sample ul{
+.css-sample ul {
   display: inline-block;
   list-style-type: none;
   border: 1px solid #888;
@@ -52,24 +32,25 @@ h2[id] {
   padding: 10px 20px;
   font-weight: bold;
 }
-
 .css-sample li {
   margin-top: 5px;
 }
-
-.css-sample textarea {
-  resize: none;
-  width: 200px;
-  height: 200px;
+.css-sample img {
+  display: block;
+  margin: 0 auto;
 }
-
-.css-sample form p {
-  padding: 0;
-  margin: 0;
+.css-sample table {
+  border-collapse: collapse;
+  margin: 0 auto;
 }
-
+.css-sample th {
+  text-align: center;
+}
+.css-sample td {
+  text-align: right;
+}
 .css-sample form input[type="button"] {
-  background-color: #2196F3; 
+  background-color: #2196f3; 
   width: 50px;
   height: 25px;
   color: white;
@@ -78,9 +59,20 @@ h2[id] {
   font-size: 12px;
 }
 .css-sample form input[type="button"]:hover {
-  color: #2196F3; 
+  color: #2196f3; 
   background-color: white;
 }
+.css-sample form p {
+  padding: 0;
+  margin: 0;
+}
+.css-sample textarea {
+  resize: none;
+  width: 300px;
+  height: 200px;
+}
+
+/* ============================= */
 
 .css-sample02 h1, .css-sample02 h2 {
   border-left: 5px solid #1E88E5;
@@ -116,6 +108,8 @@ h2[id] {
 .css-sample02-05 ul li:nth-child(odd) {
   color: orange;
 }
+
+/* ============================= */
 
 .css-sample04 ul {
   border: 1px solid #888;
@@ -174,6 +168,8 @@ h2[id] {
   margin-top: 5px;
 }
 
+/* ============================= */
+
 .css-sample05 ul {
   display: inline-block;
   border: 1px solid #888;
@@ -186,6 +182,7 @@ h2[id] {
   margin-top: 5px;
 }
 
+/* ============================= */
 
 .css-sample06 h1, .css-sample06 h2 {
   border-left: 5px solid #1E88E5;
@@ -232,6 +229,77 @@ h2[id] {
 .css-sample06 li {
   margin-top: 5px;
 }
+
+/* ============================= */
+
+.css-sample07 th, .css-sample07 td {
+  padding: 5px;
+}
+
+.css-sample07 table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+.css-sample07 th {
+  text-align: center;
+}
+.css-sample07 td {
+  text-align: right;
+}
+
+.css-sample07 thead tr {
+  background-color: #2196F3;
+  color: white;
+}
+
+.css-sample07 tbody tr:nth-child(odd) {
+  background-color: #E3F2FD;
+}
+
+.css-sample07-02 table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  table-layout: fixed;
+}
+.css-sample07-02 td {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+}
+.css-sample07-02 tr:nth-child(odd) td:nth-child(odd) {
+  background-color: #000;
+}
+.css-sample07-02 tr:nth-child(even) td:nth-child(even) {
+  background-color: #000;
+}
+
+/* ============================= */
+
+.css-sample08 ul {
+  display: inline-block;
+  list-style-type: none;
+  border: 1px solid #888;
+  background-color: #eee;
+  color: #000;
+  margin: 0 0 0 20px;
+  padding: 10px 20px;
+}
+
+/* ============================= */
+
+.css-sample09 form input[type="button"] {
+  background-color: #2196f3; 
+  width: 50px;
+  height: 25px;
+  color: white;
+  border: none;
+}
+.css-sample09 form input[type="button"]:hover {
+  color: #2196f3; 
+  background-color: white;
+}
+
+/* ============================= */
 
 .output {
   border: 1px solid #ccc;
