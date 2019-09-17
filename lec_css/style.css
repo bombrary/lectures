@@ -1,0 +1,253 @@
+@charset "utf-8";
+
+h2[id] {
+  margin-top: 100px;
+  border-top: 1px dotted #333;
+  padding-top: 20px;
+}
+
+.css-sample h1, .css-sample h2 {
+  border-left: 5px solid #1E88E5;
+  border-bottom: 2px dotted #1E88E5;
+  padding-left: 10px;
+}
+
+.css-sample img {
+  display: block;
+  margin: 0 auto;
+}
+
+.css-sample table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+.css-sample th, .css-sample td{
+  padding: 5px;
+  font-size: 18px;
+}
+
+.css-sample th {
+  text-align: center;
+}
+
+.css-sample td {
+  text-align: right;
+}
+.css-sample thead tr {
+  background-color: #2196F3;
+  color: white;
+}
+
+.css-sample tbody tr:nth-child(odd) {
+  background-color: #E3F2FD;
+}
+
+.css-sample ul{
+  display: inline-block;
+  list-style-type: none;
+  border: 1px solid #888;
+  background-color: #eee;
+  color: #000;
+  margin: 0 0 0 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.css-sample li {
+  margin-top: 5px;
+}
+
+.css-sample textarea {
+  resize: none;
+  width: 200px;
+  height: 200px;
+}
+
+.css-sample form p {
+  padding: 0;
+  margin: 0;
+}
+
+.css-sample form input[type="button"] {
+  background-color: #2196F3; 
+  width: 50px;
+  height: 25px;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 12px;
+}
+.css-sample form input[type="button"]:hover {
+  color: #2196F3; 
+  background-color: white;
+}
+
+.css-sample02 h1, .css-sample02 h2 {
+  border-left: 5px solid #1E88E5;
+  border-bottom: 2px dotted #1E88E5;
+}
+.css-sample02 thead tr {
+  background-color: #2196F3;
+  color: white;
+}
+.css-sample02 tbody tr:nth-child(odd) {
+  background-color: #E3F2FD;
+}
+.css-sample02 ul{
+  border: 1px solid #888;
+  background-color: #eee;
+  color: #000;
+}
+.css-sample02-02 li p{
+  border-bottom: 3px double #000;
+}
+
+.css-sample02-03 .fruit {
+  border: 1px solid salmon;
+}
+.css-sample02-03 .people {
+  border: 1px solid steelblue;
+}
+
+.css-sample02-04 ul li:first-child {
+  color: red;
+}
+
+.css-sample02-05 ul li:nth-child(odd) {
+  color: orange;
+}
+
+.css-sample04 ul {
+  border: 1px solid #888;
+  background-color: #eee;
+  color: #000;
+}
+.css-sample04 li {
+  margin: 5px 0;
+}
+
+.css-sample04-02 li {
+  border: 1px solid #333;
+  background-color: #ccc;
+}
+
+.css-sample04-03 li {
+  border: 1px solid #333;
+  background-color: #ccc;
+  padding: 10px 0;
+}
+
+.css-sample04-04 li {
+  border: 1px solid #333;
+  background-color: #ccc;
+  margin: 10px 0;
+}
+
+.css-sample04-05 h1, .css-sample04-05 h2 {
+  border-left: 5px solid #1E88E5;
+  border-bottom: 2px dotted #1E88E5;
+  padding-left: 10px;
+}
+
+.css-sample04-05 th, .css-sample04-05 td{
+  padding: 5px;
+}
+
+.css-sample04-05 thead tr {
+  background-color: #2196F3;
+  color: white;
+}
+
+.css-sample04-05 tbody tr:nth-child(odd) {
+  background-color: #E3F2FD;
+}
+
+.css-sample04-05 ul{
+  border: 1px solid #888;
+  background-color: #eee;
+  color: #000;
+  margin: 0 0 0 20px;
+  padding: 10px 20px;
+}
+
+.css-sample04-05 li {
+  margin-top: 5px;
+}
+
+.css-sample05 ul {
+  display: inline-block;
+  border: 1px solid #888;
+  background-color: #eee;
+  color: #000;
+  margin: 0 0 0 20px;
+  padding: 10px 20px;
+}
+.css-sample05 li {
+  margin-top: 5px;
+}
+
+
+.css-sample06 h1, .css-sample06 h2 {
+  border-left: 5px solid #1E88E5;
+  border-bottom: 2px dotted #1E88E5;
+  padding-left: 10px;
+}
+
+.css-sample06 th, .css-sample06 td {
+  padding: 5px;
+}
+
+.css-sample06 img {
+  display: block;
+  margin: 0 auto;
+}
+.css-sample06 table {
+  margin: 0 auto;
+}
+.css-sample06 th {
+  text-align: center;
+}
+.css-sample06 td {
+  text-align: right;
+}
+
+.css-sample06 thead tr {
+  background-color: #2196F3;
+  color: white;
+}
+
+.css-sample06 tbody tr:nth-child(odd) {
+  background-color: #E3F2FD;
+}
+
+.css-sample06 ul {
+  display: inline-block;
+  border: 1px solid #888;
+  background-color: #eee;
+  color: #000;
+  margin: 0 0 0 20px;
+  padding: 10px 20px;
+}
+
+.css-sample06 li {
+  margin-top: 5px;
+}
+
+.output {
+  border: 1px solid #ccc;
+  padding: 20px 20px 10px 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.output::before {
+  content: "ブラウザでの表示";
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 1px solid #888;
+  background-color: #888;
+  color: #fff;
+  padding: 0 10px;
+  border-radius: 0 0 0 5px;
+}

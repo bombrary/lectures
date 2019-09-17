@@ -1,6 +1,8 @@
 ---
 layout: default
 title: SVG Tutorial
+putsection: true
+genindex: true
 ---
 
 # SVG

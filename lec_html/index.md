@@ -1,6 +1,8 @@
 ---
 layout: default
 title: HTML Tutorial
+putsection: true
+genindex: true
 ---
 
 # HTMLとCSS
@@ -189,7 +191,7 @@ html属性にはlangという属性が設定できます。langというのはla
 index.htmlを開くと、以下のようなWebページが表示されます。
 ただし、画像だけは正しく表示されないと思います。これについてはimgタグの項で説明します。
 
-<div style="border: 1px dotted #333; padding: 0 20px;">
+<div class="output">
   <h1>テーブル</h1>
 
   <img src="img/fantasy_pixy2.png" width="200px">
@@ -317,7 +319,7 @@ ulと同じく、liを入れ子にします。例えば、先ほどの例を以�
 
 結果は以下のように出力されます。
 
-<div style="border: 1px dotted #333; padding: 0 20px;">
+<div class="output">
   <ol>
     <li>商品名が書かれている</li>
     <li>値段が結構高い</li>
@@ -340,7 +342,7 @@ color: red;
 ```
 という書くと、文字の色を指定できることを覚えておきましょう。次のような結果になります。
 
-<div style="border: 1px dotted #333; padding: 0 20px;">
+<div class="output">
 <span style="color: red;">Hello</span>,<span style="color: blue;">World</span>
 </div>
 
@@ -408,7 +410,7 @@ checkboxを指定するとチェックボックスになります。
 その他については[&lt;input&gt;-HTML5リファレンス](http://www.htmq.com/html5/input.shtml)を見ていただければ良いと思います。
 value属性にはボタンのラベルを指定しています。
 
-<div style="border: 1px dotted #333; padding: 5px 20px;">
+<div class="output">
 <input type="button" value="Hello">
 <input type="checkbox">
 </div>
@@ -429,7 +431,7 @@ inputにid属性とlabelのfor属性を合わせると、labelをクリックし
 
 すると、チェックボタンではなくHelloというラベルをクリックしても、チェックボタンが反応するようになります。
 
-<div style="border: 1px dotted #333; padding: 5px 20px;">
+<div class="output">
   <label for="abc">Hello</label><input id="abc" type="checkbox">
 </div>
 
@@ -447,6 +449,11 @@ anchorの略で、これはページへのリンクを表すタグです。href�
 <a href="https://www.google.com">Link</a>
 ```
 
+#### 補足: Hypertext
+
+hrefとは「hypertext reference」の略です。hypertextとは複数の文書を相互に繋げる仕組みのことを指します。
+aタグの場合は、別ベージの文書をhrefで繋げているわけですね。
+
 ## 注意
 
 文法エラーについては、外部ツールを使わない限りわかりません。
@@ -462,7 +469,7 @@ Elementsタブにて、ブラウザがhtmlファイルをどう解釈してい�
 
 例では以下のページを作成しました。
 
-<div style="border: 1px dotted #333; padding: 0 20px;">
+<div class="output">
   <h1>テーブル</h1>
 
   <img src="img/fantasy_pixy2.png" width="200px">
@@ -502,7 +509,7 @@ Elementsタブにて、ブラウザがhtmlファイルをどう解釈してい�
 それらの要望を解決するためにCSSがあります。CSSを使うと、例えば以下のようにWebページを装飾できます。
 
 <link rel="stylesheet" href="style.css">
-<div class="css-sample" style="border: 1px dotted #333; padding: 0 20px;">
+<div class="css-sample output">
   <h1>テーブル</h1>
 
   <img src="img/fantasy_pixy2.png" width="200px">

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: JavaScript Tutorial
+putsection: true
+genindex: true
 ---
 
 # Cと比較するJavaScript

@@ -123,6 +123,7 @@ header {
 }
 
 #nav-drawer {
+  padding-left: 40px;
   position: relative;
 }
 
@@ -143,6 +144,10 @@ ul.sidebar a{
   display: block;
   padding-top: 70px;
   margin-top: -70px;
+}
+
+#nav-content {
+  padding: 50px 0;
 }
 
 /* ========== ハンバーガーメニュー ========== */

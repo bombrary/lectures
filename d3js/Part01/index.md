@@ -5,36 +5,6 @@ mathjax: true
 sidebarfile: d3js_01_sidebar.html
 ---
 
-<header>
-  <div id="nav-drawer">
-  <input id="nav-input" type="checkbox" class="nav-unshown">
-  <label id="nav-open" for="nav-input"><span></span></label>
-  <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-  <div id="nav-content"></div>
-  </div>
-</header>
-
-<script>
-$(() => {
-  const aside = $('aside').clone(true);
-  aside.appendTo('#nav-content');
-
-  console.log(aside.find('a[href^="#"]'));
-
-  var windowWidth = $(window).width();
-  var headerHight = 100; // ヘッダーの高さを入れる
-  aside.find('a[href^="#"]').click(function() {
-    $('#nav-input').prop('checked', false);
-    var speed = 1000;
-    var href= $(this).attr("href");
-    var target = $(href == "#" || href == "" ? 'html' : href);
-    var position = target.offset().top-headerHight;
-    $('body,html').animate({scrollTop:position}, speed, 'swing');
-    return false;
-  });
-});
-</script>
-
 # D3js Part1 - Understanding Concept
 
 本チュートリアルでは、「配列に入った数値データを円として可視化する」というケースを想定して、D3.jsの基本を学んでいきます。
