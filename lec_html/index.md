@@ -463,6 +463,7 @@ aタグの場合は、別ベージの文書をhrefで繋げているわけです
 
 ページ内の様々な情報を収集するのに**Developper Tools**が便利です。
 Chromeだったら、WindowsならF12、Macならcommand + option + iキーで起動できます。
+Chrome以外のブラウザでも、名前は違えと同様の機能を持っているはずです。
 Elementsタブにて、ブラウザがhtmlファイルをどう解釈しているかを知ることができます。
 
 ## そしてCSSへ
