@@ -700,7 +700,7 @@ li {
 以下の灰色領域が横に伸びてしまい、右側の空白が気になります。
 これをなんとか解決できないでしょうか。
 
-<div class="sub-sample04-05 output">
+<div class="css-sample04-05 output">
   <ul>
     <li>商品名が書かれている</li>
     <li>値段が結構高い</li>
