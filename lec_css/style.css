@@ -11,7 +11,7 @@ h2[id] {
   border-bottom: 2px dotted #1E88E5;
   padding-left: 10px;
 }
-.css-sample th, td {
+.css-sample th, .css-sample td {
   padding: 5px;
   font-size: 18px;
 }
@@ -297,6 +297,122 @@ h2[id] {
 .css-sample09 form input[type="button"]:hover {
   color: #2196f3; 
   background-color: white;
+}
+
+/* ============================= */
+
+.css-sample-new .wrapper {
+  width: 800px;
+  border: 6px double #aaa;
+}
+.css-sample-new img{
+  width: 200px;
+}
+.css-sample-new .description p:first-child{
+  width: 200px;
+  border: 1px dotted #888;
+  padding: 10px;
+}
+.css-sample-new .alphabet p{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  font-size: 32px;
+  color: white;
+}
+.css-sample-new .description {
+  border: 2px dotted salmon;
+}
+.css-sample-new .alphabet {
+  margin-top: 10px;
+  border: 2px dotted skyblue;
+}
+
+/* ============================= */
+
+.css-sample11 .wrapper {
+  width: 800px;
+  border: 6px double #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.css-sample11 img{
+  width: 200px;
+}
+.css-sample11 .description p:first-child{
+  width: 200px;
+  border: 1px dotted #888;
+  padding: 10px;
+}
+.css-sample11 .alphabet p{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  font-size: 32px;
+  color: white;
+}
+.css-sample11 .description {
+  border: 2px dotted salmon;
+  display: flex;
+  flex-direction: row;
+}
+.css-sample11 .alphabet {
+  width: 600px;
+  margin-top: 10px;
+  border: 2px dotted skyblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* ============================= */
+
+.css-sample12 .wrapper {
+  width: 800px;
+  border: 6px double #aaa;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.css-sample12 img{
+  width: 200px;
+}
+.css-sample12 .description p:first-child{
+  width: 200px;
+  border: 1px dotted #888;
+  padding: 10px;
+}
+.css-sample12 .alphabet p{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  font-size: 32px;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+.css-sample12 .description {
+  order: 1;
+  border: 2px dotted salmon;
+  display: flex;
+  flex-direction: row;
+  margin-left: 100px;
+}
+.css-sample12 .alphabet {
+  order: 0;
+  width: 150px;
+  margin-top: 10px;
+  border: 2px dotted skyblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* ============================= */

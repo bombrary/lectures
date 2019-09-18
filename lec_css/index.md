@@ -114,7 +114,8 @@ index.htmlファイルと同じディレクトリにimgディレクトリを新�
 
 結果は以下のようになります。
 
-<div class="output outerfile">
+<div class="output">
+{% include sample.html %}
 </div>
 
 ## Step01: 枠線
@@ -304,40 +305,8 @@ ul {
 
 これだけでいい感じの装飾になります。
 
-<div class="output css-sample02 outerfile">
-  <h1>テーブル</h1>
-
-  <img src="img/fantasy_pixy2.png" width="200px">
-
-  <p>私はテーブルの妖精です。テーブルを作るのが仕事です。以下は私が作ったテーブルです。見納めください。</p>
-  <table>
-    <thead>
-      <tr><th>商品名</th><th>値段</th><th>産地</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>りんご</td><td>1000円</td><td>りんご王国</td></tr>
-      <tr><td>みかん</td><td>2300円</td><td>みかん王国</td></tr>
-      <tr><td>バナナ</td><td>13200円</td><td>南国</td></tr>
-    </tbody>
-  </table>
-
-  <h2>特徴</h2>
-  <p>私が作ったテーブルには以下の特徴があります。</p>
-  <ul>
-    <li>商品名が書かれている</li>
-    <li>値段が結構高い</li>
-  </ul>
-
-  <h2>感想などはこちらから</h2>
-  <p>気に入ってくれた人は以下のフォームに感想を記入してください。</p>
-    <form>
-      <textarea></textarea>
-      <p><input type="button" value="提出"></p>
-      <p><label for="fav_check">面白かった: </label><input id="fav_check" type="checkbox"></p>
-    </form>
-
-  <p>サンプルなので<span style="color: red;">クリック</span>しても何も起こりません。</p>
-  <p>Googleに飛びましょう、<a href="https://www.google.com">Let's Go!</a></p>
+<div class="output css-sample02">
+{% include sample.html %}
 </div>
 
 新しいプロパティとセレクタが出てきましたので、紹介します。
@@ -722,7 +691,8 @@ li {
 }
 ```
 
-<div class="css-sample04-05 output outerfile">
+<div class="css-sample04-05 output">
+{% include sample.html %}
 </div>
 
 ## Step05: 要素の表示形式
@@ -866,7 +836,8 @@ td {
 }
 ```
 
-<div class="css-sample06 output outerfile">
+<div class="css-sample06 output">
+{% include sample.html %}
 </div>
 
 
@@ -943,6 +914,8 @@ img {
 </div>
 
 [例のhtmlファイル](#例)ではwidth属性によって幅を指定していましたが、今回の例のようにcssから幅を変更することも可能です。
+
+中央寄せを実現する方法は他にもあります。例えばflexを利用する方法があります。flexについてはStep11で説明します。
 
 ## Step07: tableの色々なスタイル
 
@@ -1155,6 +1128,9 @@ hoverはマウスに乗った要素を指定する擬似クラスです。
 formのpタグの余白を調整して、文字の太さとかサイズとかを変えます。
 textareaが狭いので広げるようにプロパティを指定してあげましょう。
 
+ここでしか出てこないのでちゃんとは説明しませんが、textareaに指定した`resize:none`というプロパティで、
+textareaのサイズをユーザーが変えられないようにしています。
+
 完成したstyle.cssは以下のようになります。
 
 ```css
@@ -1227,7 +1203,8 @@ textarea {
   height: 200px;
 }
 ```
-<div class="css-sample output outerfile">
+<div class="css-sample output">
+{% include sample.html %}
 </div>
 
 ### font-sizeプロパティ
@@ -1258,28 +1235,234 @@ font-family: "AAA", "BBB", sans-serif;
 
 綺麗なWebサイトを作る上でフォント選びはかなり重要です。
 
+さて、「一つのページを装飾する」というケースを想定して、CSSを学んできました。ここで一区切りをつけたいと思います。
 
-## flex
-### はじめに
-物体を横に並べたい欲求
-昔はfloatを巧みに使っていた
-### flex
-新しいCSSから
-コンテンツを並べるのが柔軟になった
-```css
-display:flex
+しかしまだ説明し足りないことがあるので、チュートリアルは続きます。
+
+## 新たな例
+
+今までと同じようにindex.html、style.cssを用意して、画像も同じように用意します。
+index.htmlには以下のように書きます。
+
+```html
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Hello Page</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="description">
+        <p>私は妖精です。テーブルを作るのが趣味です。</p>
+        <p><img src="img/fantasy_pixy2.png"></p>
+      </div>
+      <div class="alphabet">
+        <p style="background-color: #F44336;">A</p>
+        <p style="background-color: #2196F3;">B</p>
+        <p style="background-color: #FFEB3B;">C</p>
+        <p style="background-color: #4CAF50;">D</p>
+        <p style="background-color: #9C27B0;">E</p>
+      </div>
+    </div>
+  </body>
+</html>
 ```
-#### display
-### 横並べにしたい
-#### flex-direction
-### 縦並べにしたい
-### 左右中央寄せにしたい
-#### justify-content
-### 上下中央寄せにしたい
-#### align-items
 
-## chromeのデバッガを使おう
+style.cssに、最低限のCSSを設定しておきます。
+line-heightについては説明していませんでしたが、これは行の高さを設定するプロパティです。文字を縦方向中央寄せするために用いています。
 
-<script>
-$('.outerfile').load('sample.html');
-</script>
+```css
+@charset "utf-8";
+
+.wrapper {
+  width: 800px;
+  border: 6px double #aaa;
+}
+img{
+  width: 200px;
+}
+.description p:first-child{
+  width: 200px;
+  border: 1px dotted #888;
+  padding: 10px;
+}
+.alphabet p{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  font-size: 32px;
+  color: white;
+}
+.description {
+  border: 2px dotted salmon;
+}
+.alphabet {
+  margin-top: 10px;
+  border: 2px dotted skyblue;
+}
+```
+
+<div class="css-sample-new output">
+{% include sample2.html %}
+</div>
+
+## Step11: 横に並べる
+
+次の要求を叶えましょう。
+
+- 「私は妖精です」の文章の横に、画像が配置されるようにしたいです
+- ABCDEを横に並べたいです。等間隔で並べられるようにしたいです
+
+style.cssの.descriptionと.alphabetを修正します。
+
+```css
+.wrapper {
+  width: 800px;
+  border: 6px double #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.description {
+  border: 2px dotted salmon;
+  display: flex;
+  flex-direction: row;
+}
+.alphabet {
+  margin-top: 10px;
+  border: 2px dotted skyblue;
+  display: flex;
+  flex-direction: row;
+}
+```
+
+<div class="css-sample11 output">
+{% include sample2.html %}
+</div>
+
+### display: flex
+
+display:flexは要素を並べるのに非常に有用なプロパティです。
+次のように指定すると、**その子要素の並び**を容易に操作できるようになります。
+
+```css
+display: flex;
+```
+
+display:flexが指定された親要素をflexコンテナ、その子要素をflexアイテムと呼びます。
+
+### flex-directionプロパティ
+
+flexアイテムの並び方向を制御します。以下の2つの値が指定できます。
+
+- row: 横並び
+- column: 縦並び
+
+### justify-contentプロパティ
+
+flexアイテムの水平方向の並び位置を制御します。どんな値が指定できるかは
+<a href="https://www.webcreatorbox.com/tech/css-flexbox-cheat-sheet#flexbox5" target="_blank">justify-content - Flexboxチートシート</a>
+で指定できます。**水平方向がどの方向なのかについては、flex-directionの値によって変わるので注意しましょう。**
+rowなら横方向、columnなら縦方向の並び位置を制御することになります。
+
+例では`space-between`というプロパティを指定しています。これはアイテムを均等に配置する設定です。
+
+### align-itemsプロパティ
+
+flexアイテムの垂直方向の並び位置を制御します。rowだったら縦並び、columnだったら横並びを制御します。
+<a href="https://www.webcreatorbox.com/tech/css-flexbox-cheat-sheet#flexbox6" target="_blank">align-items - Flexboxチートシート</a>
+で指定できます。**垂直方向がどの方向なのかについては、flex-directionの値によって変わるので注意しましょう。**
+rowなら縦方向、columnなら横方向の並び位置を制御することになります。
+
+例では`center`というプロパティを指定しています。これはアイテムを中央寄せにする設定です。
+
+flexについての詳しい話は
+<a href="https://www.webcreatorbox.com/tech/css-flexbox-cheat-sheet" target="_blank">Flexboxチートシート</a>
+が詳しいです。
+
+## Step12: サイドバーっぽくする
+
+ABCDEを左端に縦に並べてサイドバーっぽく表示しましょう。
+
+style.cssを以下のようにします。
+
+```css
+@charset "utf-8";
+
+.wrapper {
+  width: 800px;
+  border: 6px double #aaa;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+img{
+  width: 200px;
+}
+.description p:first-child{
+  width: 200px;
+  border: 1px dotted #888;
+  padding: 10px;
+}
+.alphabet p{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  font-size: 32px;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+.description {
+  order: 1;
+  border: 2px dotted salmon;
+  display: flex;
+  flex-direction: row;
+  margin-left: 100px;
+}
+.alphabet {
+  order: 0;
+  width: 150px;
+  margin-top: 10px;
+  border: 2px dotted skyblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+```
+
+<div class="output css-sample12">
+  {% include sample2.html %}
+</div>
+
+### orderプロパティ
+
+flexアイテムの並び順を制御するプロパティです。
+数字の小さいものほど最初に並べられるようになります。
+
+例では以下のようになっていることから、ABCDEの塊が最初に並べられることになります。
+
+```css
+.description {
+  order: 1;
+  ...
+}
+.alphabet {
+  order: 0;
+  ...
+}
+```
+
+## まとめ
+
+いかがだったでしょうか。CSSの基本はセレクタとプロパティだけで、あとはそれらを使いながら覚えていくだけです。
+
+これからはみなさんが実際にWebページを作りながら学んでいってください。
+「こんなことをやりたいんだけどなー」と思い、ググってみると案外情報は見つかります。
+そのようにたくさんググると、自然と知識は身についているものです。
+
+最後まで読んでいただき、ありがとうございました。
