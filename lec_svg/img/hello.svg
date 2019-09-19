@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="200px" height="200px" viewBox="0 0 200 200">
+  <defs>
+    <marker id="arr05" markerUnits="strokeWidth" markerWidth="10" markerHeight="10"
+             orient="auto" refX="3" refY="0.5" viewBox="0 0 1 1">
+    <path stroke="none" fill="#000" d="M0,0 L1,0.5 0,1" />
+    </marker>
+  </defs>
+  <g transform="translate(50, 30)">
+    <circle r="20" fill="#fff" stroke="#000" text-anchor="middle" dominant-baseline="central"/>
+    <text text-anchor="middle" dominant-baseline="central">Hello</text>
+  </g>
+  <g transform="translate(100, 100)">
+    <circle r="20" fill="#fff" stroke="#000" text-anchor="middle" dominant-baseline="central"/>
+    <text text-anchor="middle" dominant-baseline="central">World</text>
+  </g>
+  <path stroke="#000" stroke-width="1px" stroke-dasharray="0 20 36 10 0 20"
+        fill="none" d="M50,30 L100,100" marker-end="url(#arr05)"/>
+</svg>
+

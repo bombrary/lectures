@@ -1,0 +1,26 @@
+.output {
+  border: 1px solid #ccc;
+  padding: 20px 20px 10px 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.output::before {
+  content: "ブラウザでの表示";
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 1px solid #888;
+  background-color: #888;
+  color: #fff;
+  padding: 0 10px;
+  border-radius: 0 0 0 5px;
+}
+
+.output svg {
+  border: 1px solid #000;
+}
+
+.svg-detail-description svg {
+  border: 1px solid #000;
+}
