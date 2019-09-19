@@ -47,6 +47,7 @@ article {
   box-sizing: border-box;
   z-index: 0;
   margin: 0 auto;
+  margin-bottom: 200px;
 }
 @media screen and (min-width:720px) {
   article {
@@ -122,6 +123,22 @@ header {
   }
 }
 
+.note {
+  margin: 0;
+  margin-top: 20px;
+  border-left: 4px solid #ccc;
+  opacity: 0.8;
+  padding: 5px;
+}
+.note p {
+  margin: 10px;
+}
+.note h4 {
+  margin: 0 0 0 5px;
+}
+
+/* ========== ハンバーガーメニュー ========== */
+
 #nav-drawer {
   padding-left: 40px;
   position: relative;
@@ -150,7 +167,6 @@ ul.sidebar a{
   padding: 50px 0;
 }
 
-/* ========== ハンバーガーメニュー ========== */
 
 /*ハンバーガーアイコンをCSSだけで表現*/
 #nav-open span, #nav-open span:before, #nav-open span:after {
