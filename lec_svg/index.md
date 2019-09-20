@@ -353,7 +353,7 @@ HTMLでいうdivタグのように、
 
 テキストのx座標の基準位置を設定します。start/middle/endを指定できます。middleでテキストの中央が座標の基準になります。
 
-下図において、左がmiddle指定前、右が指定後になります。
+下図において、1つ目がmiddle指定前、2つ目が指定後になります。
 
 <div class="output">
   <svg width="200px" height="200px">
@@ -363,7 +363,7 @@ HTMLでいうdivタグのように、
     <text text-anchor="middle" x="25" y="50">50px</text>
     <text dominant-baseline="central" x="60" y="15">30px</text>
   </svg>
-  <svg style="margin-left: 50px" width="200px" height="200px">
+  <svg width="200px" height="200px">
     <text text-anchor="middle" x="50px" y="30px">Hello</text>
     <path stroke="#000" stroke-width="1px" fill="none" d="M0,30 L50,30" />
     <path stroke="#000" stroke-width="1px" fill="none" d="M50,0 L50,30" />
@@ -377,7 +377,7 @@ HTMLでいうdivタグのように、
 テキストのy座標の基準位置を設定します。色々指定できますが、とりあえずcentralだけ覚えておけば十分です。
 中央寄せにしてくれます。
 
-下図において、左がcentral指定前、右が指定後になります。
+下図において、1つ目がcentral指定前、2つ目が指定後になります。
 
 <div class="output">
   <svg width="200px" height="200px">
@@ -387,7 +387,7 @@ HTMLでいうdivタグのように、
     <text text-anchor="middle" x="25" y="50">50px</text>
     <text dominant-baseline="central" x="60" y="15">30px</text>
   </svg>
-  <svg style="margin-left: 50px" width="200px" height="200px">
+  <svg width="200px" height="200px">
     <text dominant-baseline="central" x="50px" y="30px">Hello</text>
     <path stroke="#000" stroke-width="1px" fill="none" d="M0,30 L50,30" />
     <path stroke="#000" stroke-width="1px" fill="none" d="M50,0 L50,30" />
