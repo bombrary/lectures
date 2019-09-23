@@ -12,6 +12,13 @@ genindex: true
 CSSを学びましょう。HTMLを学んでいる人が前提知識となるので、不安な方は[HTMLチュートリアル](/lec_html/)を読みましょう。
 CSSとHTMLについての説明、使い分けについてもそちらで説明しています。
 
+## 前提知識
+
+### ブラウザ対応問題
+
+CSSはブラウザごとに実装されています。それゆえ、CSSが仕様通りに実装されているかはブラウザによります。
+実装状況については<a href="https://caniuse.com" target="_blank">Can I use...</a>をみてください。
+
 ## CSSを含めたテンプレ
 
 まずはindex.htmlを作成し、以下の内容を書きます。
@@ -695,9 +702,9 @@ li {
 {% include sample.html %}
 </div>
 
-## Developper Toolsを使おう
+## DevToolsを使おう
 
-ページ内の様々な情報を収集するのに**Developper Tools**が便利です。
+ページ内の様々な情報を収集するのに**DevTools**が便利です。
 Chromeだったら、WindowsならF12、Macならcommand + option + iキーで起動できます。
 Chrome以外のブラウザでも、名前は違えと同様の機能を持っているはずです。
 
