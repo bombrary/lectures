@@ -15,7 +15,7 @@ D3とは、**Data Driven Document**の略です。**Data Driven**とは「デー
 ## Index
 
 1. [Understanding Concept](./Part01) - Circle Alignment.
-2. A Little Complex Example - Maze Solver.
+2. [A Little Complex Example](./Part02) - Maze Solver.
 3. Line Chart - Function Visualizer.
 4. Pie Chart - Queue Visualizer.
 5. Tree - Parsing to Syntax Tree.

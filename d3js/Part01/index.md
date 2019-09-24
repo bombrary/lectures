@@ -1664,6 +1664,8 @@ randButton.on('click', () => {
 
 ## まとめ
 
+以下のことをやっていきました。
+
 ### Case 1&#126;3: *selection*の基本概念を理解
 
 - update/enter/exitを感じよ
