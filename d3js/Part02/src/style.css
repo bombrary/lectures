@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  margin: 50px 0 0 50px;
+}
+
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+td {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.player {
+  display: flex;
+  flex-direction: row;
+}
+
+#play_btn {
+  width: 50%;
+}
+#stop_btn {
+  width: 50%;
+}
+
+textarea {
+  resize: none;
+  height: 200px;
+  font-family: "Courier New", Consolas, monospace;
+}

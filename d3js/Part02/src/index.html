@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Maze Solver</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="menu">
+        <textarea></textarea>
+        <input id="gen_btn" type="button" value="generate">
+        <div class="player">
+          <input id="play_btn" type="button" value="play" disabled>
+          <input id="stop_btn" type="button" value="stop" disabled>
+        </div>
+        <input id="step_btn" type="button" value="step" disabled>
+      </div>
+      <div class="main">
+        <table>
+          <tr><td>12</td></tr>
+        </table>
+      </div>
+    </div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="Queue.js"></script>
+    <script src="MazeHistories.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
