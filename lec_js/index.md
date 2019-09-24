@@ -41,8 +41,13 @@ ES6の6というのはESMAScriptのバージョンの一つで、2015に発行�
 ### ブラウザ対応問題
 
 JavaScriptはブラウザごとに実装されています。それゆえ、JavaScriptがちゃんとECMAScriptの内容通りに実装されているかは
-ブラウザによります。最も、ES6は多くのブラウザで多くの機能が実装されているようです。
+ブラウザによります。ES6は多くのブラウザで多くの機能が実装されているようです。
 <a href="https://kangax.github.io/compat-table/es6/" target="_blank">ECMAScript 6 compatibility table</a>
+
+### 本チュートリアルで想定するブラウザ
+
+ChromeとSafariは動作確認済みです。EdgeやFirefoxは多分動くと思います。
+しかし**Internet Explorer11ではいくつかのコードが動きません。**IE利用者は他のブラウザを使ってください。
 
 ## Hello, World(1)
 
@@ -980,14 +985,27 @@ for(let i=0; i<5; i++){
 let a = new Array(5).fill(0)
 ```
 
-2次元配列は次のように書きます。mapメソッドについては後で解説します。
+2次元配列の書き方は色々ありますが、以下の2通りがシンプルな気がします。
+文法についての詳細は省略しますが、map関数は後でまた出てきます。
 
-こっちは可読性が若干下がります。
-
+- Array.fromメソッドを用いる方法
 ```js
-let a = new Array(5).fill(undefined)
-  .map(() => new Array(5).fill(0));
+let a = Array.from(new Array(5), () => new Array(5).fill(0));
 ```
+- スプレッド構文を用いる方法
+```js
+let b = [...Array(5)].map(() => new Array(5).fill(0));
+```
+
+<div class="note">
+<h4>ブラウザ対応の話</h4>
+<p>Array.fromもスプレッド構文も<b>Internet Exploerer11ではサポートされていません</b>。この後文字列の項で紹介する
+テンプレートリテラルも、IEにはありません。このようにIEはES2015に対応していない便利機能がいくつかあるので、
+IEではなくEdge/Chrome/Safari/Firefoxなどのブラウザを使ってください。</p>
+<p>個人でJSプログラミングを楽しむ分には、わざわざ他ブラウザに対応するように書く必要なんてありません。
+しかし大人数が利用するようなWebサイトやWebアプリを作る場合、多くのブラウザに対応したコードを書かなければいけません。</p>
+<p>JSの最新記法や機能を、古いJSの書き方に直すツールにBabelがあります。</p>
+</div>
 
 <div class="note">
   <h4>2次元配列作成のNG例</h4>
