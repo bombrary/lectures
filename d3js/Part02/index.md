@@ -22,8 +22,7 @@ genindex: true
 
 ## テンプレ作成
 
-入力部分と出力部分を作ります。
-どんなものを作るかですが、
+入力部分と出力部分を作ります。次の機能を用意しましょう。
 
 - 操作メニューと出力部分に分かれている
 - 操作メニューには以下のものを用意する
@@ -32,8 +31,6 @@ genindex: true
   - アニメーション再生/停止ボタン
   - 1ステップずつアニメーションを進めるためのボタン
 - 出力部分には迷路の様子を表示し、迷路の1マスはテーブルセルで表現する
-
-としましょう。
 
 index.htmlを作成し、内容は以下のようにします。
 実際にテーブルセルがどんな風に表示されるのかを確かめるために、サンプルとして1マスのテーブルセルを定義しています。
@@ -430,6 +427,7 @@ d3.select('#gen_btn')
   });
 ```
 
+
 さてこれで実行してみましょう。generateボタンを押すと、スタート地点から各マスへの最短経路長が出力されます。
 素晴らしい。
 
@@ -540,6 +538,21 @@ d3.select('#gen_btn')
     const data = formatData(mp, queue, dist, pos);
     update(data);
   });
+```
+
+### formatDataの修正
+
+formatData関数のコメントアウトを外します。
+
+```js
+const formatData = (mp, queue, dist, pos) => {
+  ...
+  for (const p of queue.toArray()) {
+    const [i, j] = p;
+    ret[i][j].color = 'lightgreen';
+  }
+  return ret;
+}
 ```
 
 さてindex.htmlを開きなおし、generateボタンを押すと以下のようになります。
