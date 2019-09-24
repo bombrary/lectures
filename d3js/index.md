@@ -10,7 +10,7 @@ title: D3.js による Data Visualization
 
 D3とは、**Data Driven Document**の略です。**Data Driven**とは「データ駆動」という意味です。これはデータ中心でプログラミングすることを意味します。D3.jsでは、しばしばデータとDOMを結びつけ、データを用いてDOMの属性やスタイルを変えるということをします。このような使い方のおかげで、D3.jsはデータ可視化に向いています。
 
-以下のチュートリアルはD3.js v5を想定しています。
+以下のチュートリアルはD3.js v5を想定しています。また、JavaScriptはES6を想定しています。Internet Explorerだと動かないかもしれません。
 
 ## Index
 
