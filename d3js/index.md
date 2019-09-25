@@ -8,7 +8,7 @@ title: D3.js による Data Visualization
 ## What is D3.js ?
 
 
-D3とは、**Data Driven Document**の略です。**Data Driven**とは「データ駆動」という意味です。これはデータ中心でプログラミングすることを意味します。D3.jsでは、しばしばデータとDOMを結びつけ、データを用いてDOMの属性やスタイルを変えるということをします。このような使い方のおかげで、D3.jsはデータ可視化に向いています。
+D3.jsはデータ可視化のためのライブラリです。D3とは、**Data Driven Document**の略です。これはデータ中心でプログラミングすることを意味します。D3.jsでは、しばしばデータとDOMを結びつけ、データを用いてDOMの属性やスタイルを変えるということをします。
 
 以下のチュートリアルはD3.js v5を想定しています。ブラウザはChromeとSafariでは動作確認済みです。Edge、Firefoxでは多分動きます。
 
@@ -23,19 +23,23 @@ D3とは、**Data Driven Document**の略です。**Data Driven**とは「デー
 
 
 
-### Circle Alignment
+### [Circle Alignment](./Part01)
 
 「配列に入った数値データを円として可視化する」というケースを想定して、D3.jsの基本を学びましょう。
 
 ![center](img/circle_alignment.png)
 
 
-### Maze Solver
+### [Maze Solver](./Part02)
+
+迷路を探索する様子を可視化しましょう。データの形やその整形について学びます。
 
 ![center w:500px](img/maze.png)
 
 
-### Function Vizualizer
+### [Function Vizualizer](./Part03)
+
+折れ線グラフを描きましょう。軸や折れ線の描画方法だけでなく、ちょっとしたインタラクティブ要素も学びます。
 
 ![center w:700px](img/sinc.svg)
 
