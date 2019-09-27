@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.queue_button {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#enqueue_btn, #dequeue_btn {
+  width: 50%;
+}
+
+textarea {
+  resize: none;
+  height: 300px;
+}
+
+svg {
+  margin: 50px 20px;
+  border: 1px dotted #000;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}

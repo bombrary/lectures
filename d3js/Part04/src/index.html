@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Queue Vizualizer</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="menu">
+        <textarea></textarea>
+        <input id="load_btn" type="button" value="load">
+        <input id="clear_btn" type="button" value="clear">
+        <div class="queue_button">
+          <input id="enqueue_btn" type="button" value="enqueue">
+          <input id="dequeue_btn" type="button" value="dequeue">
+        </div>
+        <ul id="loaded_data">
+        </ul>
+      </div>
+      <div class="main">
+        <svg>
+        </svg>
+      </div>
+    </div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="Queue.js"></script>
+    <script src="Iterator.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
