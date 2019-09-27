@@ -772,7 +772,7 @@ class Queue {
     this.tail = null;
     this.head = null;
   }
-  enqueue(e) {
+  enqueue(datun) {
     const node = new ListNode(e);
     if (this.head == null) {
       this.head = node;

@@ -43,6 +43,8 @@ style.cssを作成し、内容を以下の通りにします。
 svg領域が見えるように、border属性を付与します。
 
 ```css
+@charset "utf-8";
+
 svg {
   margin: 50px 50px;
   border: 1px dotted #000;

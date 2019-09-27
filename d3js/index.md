@@ -17,7 +17,7 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 1. [Understanding Concept](./Part01) - Circle Alignment.
 2. [A Little Complex Example](./Part02) - Maze Solver.
 3. [Line Chart](./Part03) - Function Visualizer.
-4. Pie Chart - Queue Visualizer.
+4. [Pie Chart](./Part04) - Queue Visualizer.
 5. Tree - Parsing to Syntax Tree.
 6. Force Simulation - Union Find Tree.
 
