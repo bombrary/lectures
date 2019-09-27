@@ -895,7 +895,7 @@ How Selections WorkのThe Key to Enligntenment</a>
 
 ## 最終的なコード
 
-結構書きましたね。
+script.jsの内容は以下になります。結構書きましたね。
 
 ```js
 const [svgWidth, svgHeight] = [800, 600];
