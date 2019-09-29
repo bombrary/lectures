@@ -18,7 +18,7 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 2. [A Little Complex Example](./Part02) - Maze Solver.
 3. [Line Chart](./Part03) - Function Visualizer.
 4. [Pie Chart](./Part04) - Queue Visualizer.
-5. Tree - Parsing to Syntax Tree.
+5. [Tree](./Part05) - Parsing to Syntax Tree.
 6. Force Simulation - Union Find Tree.
 
 
@@ -45,7 +45,7 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 
 
 
-### Queue Visualizer
+### [Queue Visualizer](./Part04)
 
 リングバッファを用いたキューの可視化をしましょう。円グラフのための関数d3.pieと扇型を描くための関数d3.arcの使い方を学びます。後半で、dataメソッドの際にキーを指定することを学びます。
 
@@ -54,7 +54,7 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 
 
 
-### Parsing to Syntax Tree
+### [Parsing to Syntax Tree](./Part05)
 
 ![bg right:60% contain](img/parser.svg)
 
