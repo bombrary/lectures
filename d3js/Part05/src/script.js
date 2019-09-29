@@ -1,4 +1,4 @@
-const [svgWidth, svgHeight] = [800, 1000];
+let [svgWidth, svgHeight] = [600, 800];
 const svg = d3.select('svg')
   .attr('width', svgWidth)
   .attr('height', svgHeight);
@@ -77,11 +77,28 @@ const update = (data) => {
 };
 
 const p = new Parser();
-console.log(p.parse('(12/3)+4*(5+2)'));
-update(p.parse('(12/3)+4*(5+2)'));
+let input = '(1+(2+(3*4)+1))+4'
+let data = p.parse(input);
+update(data);
 
 d3.select('#gen_btn')
   .on('click', () => {
-    const input = d3.select('textarea').property('value');
-    update(p.parse(input));
+    input = d3.select('textarea').property('value');
+    data = p.parse(input);
+    update(data);
+  });
+
+const w_number = d3.select('#w_number')
+  .property('value', svgWidth);
+w_number.on('change', () => {
+    svgWidth = w_number.property('value');
+    svg.attr('width', svgWidth);
+    update(data);
+  });
+const h_number = d3.select('#h_number')
+  .property('value', svgHeight);
+h_number.on('change', () => {
+    svgHeight = h_number.property('value');
+    svg.attr('height', svgHeight);
+    update(data);
   });

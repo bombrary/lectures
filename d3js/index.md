@@ -3,6 +3,14 @@ layout: default
 title: D3.js による Data Visualization
 ---
 
+<style>
+img {
+  margin: 0 auto;
+  max-width: 800px;
+  max-height: 800px;
+}
+</style>
+
 # D3.js による Data Visualization
 
 ## What is D3.js ?
@@ -27,21 +35,21 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 
 「配列に入った数値データを円として可視化する」というケースを想定して、D3.jsの基本を学びましょう。
 
-![center](img/circle_alignment.png)
+<img src="img/circle_alignment.png">
 
 
 ### [Maze Solver](./Part02)
 
 迷路を探索する様子を可視化しましょう。データの形やその整形について学びます。
 
-![center w:500px](img/maze.png)
+<img src="img/maze.png">
 
 
 ### [Function Vizualizer](./Part03)
 
 折れ線グラフを描きましょう。軸や折れ線の描画方法だけでなく、ちょっとしたインタラクティブ要素も学びます。
 
-![center w:700px](img/sinc.svg)
+<img src="img/sinc.svg">
 
 
 
@@ -49,18 +57,15 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 
 リングバッファを用いたキューの可視化をしましょう。円グラフのための関数d3.pieと扇型を描くための関数d3.arcの使い方を学びます。後半で、dataメソッドの際にキーを指定することを学びます。
 
-![center](img/queue.svg)
-
-
-
+<img src="img/queue.svg">
 
 ### [Parsing to Syntax Tree](./Part05)
 
-![bg right:60% contain](img/parser.svg)
+構文木の可視化をしましょう。d3.hierarchyとd3.treeの使い方を学びます。
 
-
+<img src="img/parser.svg">
 
 
 ### Union Find Tree
 
-![center w:700px](img/unionfind.png)
+<img src="img/unionfind.png">

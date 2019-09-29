@@ -758,6 +758,82 @@ index.htmlにて、textareaに数式を入力してgenerateボタンを押すと
 
 <img src="img/tree03.gif" height="500px">
 
+## 狭すぎるとき
+
+あまりにも複雑な計算を展開しようとすると、ノード同士が詰まってしまうことがあります。
+
+<img src="img/tree04.png" height="500px">:
+
+これは、d3.treeがノードの大きさを計算できないためです。d3.treeは、ノードを点として計算しています。
+ノード同士が詰まる問題を解決するための最も手っ取り早い方法は「svgWidth/svgHeightを広げる」ことです。
+
+そこで、svgサイズを変更するための数値入力欄を、入力部分に追加しましょう。
+index.htmlのmenuクラスの要素を以下のようにします。新たにinputタグを追加し、type属性をnumberにします。
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    ...
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="menu">
+        <textarea></textarea>
+        <input id="gen_btn" type="button" value="generate">
+        <label for="w_number">w</label><input id="w_number" type="number">
+        <label for="w_number">h</label><input id="h_number" type="number">
+      </div>
+      <div class="main">
+        ...
+      </div>
+    </div>
+    ...
+  </body>
+</html>
+```
+
+続いて、script.jsのupdate関数の直後の記述を以下の通りにします。Parse後のデータが使い回せるように、data変数を新たに作成しています。またw_numberとh_numberを新たに作成し、数字が変更された場合にsvgWidth/svgHeightを変更するようにしています。
+numberが変化した時にはchangeというイベントが発生するので、その時の処理をonメソッドを用いて設定しています。
+
+```js
+const update = (data) => {
+  ...
+};
+
+const p = new Parser();
+let input = '(1+(2+(3*4)+1))+4'
+let data = p.parse(input);
+update(data);
+
+d3.select('#gen_btn')
+  .on('click', () => {
+    input = d3.select('textarea').property('value');
+    data = p.parse(input);
+    update(data);
+  });
+
+const w_number = d3.select('#w_number')
+  .property('value', svgWidth);
+w_number.on('change', () => {
+    svgWidth = w_number.property('value');
+    svg.attr('width', svgWidth);
+    update(data);
+  });
+const h_number = d3.select('#h_number')
+  .property('value', svgHeight);
+h_number.on('change', () => {
+    svgHeight = h_number.property('value');
+    svg.attr('height', svgHeight);
+    update(data);
+  });
+```
+
+ちゃんと反応しますね。
+
+<img src="img/tree05.gif">
+
+
 ## まとめ
 
 d3.hierarchyとd3.treeの使い方を学び、構文解析木の可視化を行いました。
