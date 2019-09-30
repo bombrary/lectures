@@ -448,8 +448,7 @@ HTMLでいうdivタグのように、
 
 ## Step07: 矢印
 
-無向グラフがあるなら有効グラフも描きたいですよね?
-描きましょう。
+無向グラフがあるなら有向グラフも描きたいですよね?描きましょう。
 
 ```html
 <!DOCTYPE html>
@@ -485,8 +484,8 @@ HTMLでいうdivタグのように、
   <svg width="200px" height="200px">
     <defs>
       <marker id="arr03" markerUnits="strokeWidth" markerWidth="10" markerHeight="10"
-              orient="auto" refX="2" refY="1" viewBox="0 0 2 2">
-      <path stroke="none" fill="#000" d="M0,0 L2,1 0,2" />
+              orient="auto" refX="1" refY="0.5" viewBox="0 0 1 1">
+      <path stroke="none" fill="#000" d="M0,0 L1,0.5 0,0.5" />
       </marker>
     </defs>
     <g transform="translate(50, 30)">
