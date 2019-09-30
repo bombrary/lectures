@@ -793,6 +793,13 @@ index.htmlのmenuクラスの要素を以下のようにします。新たにinp
 </html>
 ```
 
+svgWidth/svgHeightが変更できるように、これらをconstではなくletで宣言します。
+script.jsの先頭行を以下のように変更します。
+
+```js
+let [svgWidth, svgHeight] = [600, 800];
+```
+
 続いて、script.jsのupdate関数の直後の記述を以下の通りにします。Parse後のデータが使い回せるように、data変数を新たに作成しています。またw_numberとh_numberを新たに作成し、数字が変更された場合にsvgWidth/svgHeightを変更するようにしています。
 numberが変化した時にはchangeというイベントが発生するので、その時の処理をonメソッドを用いて設定しています。
 
