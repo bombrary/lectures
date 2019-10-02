@@ -27,7 +27,7 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 3. [Line Chart](./Part03) - Function Visualizer.
 4. [Pie Chart](./Part04) - Queue Visualizer.
 5. [Tree](./Part05) - Parsing to Syntax Tree.
-6. [Force Simulation](./Part06) - Union Find Tree.
+6. Force Simulation: [&sect;01](./Part06_01), [&sect;02](./Part06_02) - Union Find Tree.
 
 
 
@@ -59,13 +59,13 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 
 <img src="img/queue.svg">
 
-### [Parsing to Syntax Tree](./Part05)
+### [Parsing to Syntax Tree](./Part05) 
 
 構文木の可視化をしましょう。d3.hierarchyとd3.treeの使い方を学びます。
 
 <img src="img/parser.svg">
 
 
-### [Union Find Tree](./Part06)
+### Union Find Tree: [&sect;01](./Part06_01), [&sect;02](./Part06_02)
 
 <img src="img/unionfind.png">
