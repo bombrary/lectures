@@ -2,21 +2,26 @@ const [svgWidth, svgHeight] = [300, 300];
 const svg = d3.select('svg')
   .attr('width', svgWidth)
   .attr('height', svgHeight);
-svg.append('defs')
-  .append('marker')
+const setUpArrow = (selection, refX, refY) => {
+  selection.attr('markerUnits', 'strokeWidth')
+    .attr('markerWidth', 10)
+    .attr('markerHeight', 10)
+    .attr('orient', 'auto')
+    .attr('refX', refX)
+    .attr('refY', refY)
+    .attr('viewBox', '0 0 1 1')
+    .append('path')
+    .attr('stroke', 'none')
+    .attr('fill', '#000')
+    .attr('d', 'M0,0 L1,0.5 0,1');
+};
+const defs = svg.append('defs');
+defs.append('marker')
   .attr('id', 'arr')
-  .attr('markerUnits', 'strokeWidth')
-  .attr('markerWidth', 10)
-  .attr('markerHeight', 10)
-  .attr('orient', 'auto')
-  .attr('refX', 2.2)
-  .attr('refY', 0.5)
-  .attr('viewBox', '0 0 1 1')
-  .append('path')
-  .attr('stroke', 'none')
-  .attr('fill', '#000')
-  .attr('d', 'M0,0 L1,0.5 0,1');
-
+  .call(setUpArrow, 2.2, 0.5);
+defs.append('marker')
+  .attr('id', 'self_arr')
+  .call(setUpArrow, 0.6, 0.5);
 
 const linksGroup = svg.append('g');
 const nodesGroup = svg.append('g');
@@ -68,9 +73,8 @@ const ticked = () => {
   nodesGroup.selectAll('g')
     .attr('transform', d => `translate(${d.x}, ${d.y})`);
   linksGroup.selectAll('path')
-    .attr('d', d => {
-      return `M${d.source.x},${d.source.y} L${d.target.x},${d.target.y}`;
-    })
+    .filter(d => d.source.id !== d.target.id)
+    .attr('d', d =>`M${d.source.x},${d.source.y} L${d.target.x},${d.target.y}`)
     .attr('marker-end', 'url(#arr)')
     .attr('stroke-dasharray', d => {
       const R = 10;
@@ -80,7 +84,32 @@ const ticked = () => {
       const D = Math.sqrt((tx-sx)*(tx-sx) + (ty-sy)*(ty-sy));
       const DD = D - 2*R - W;
       return `0 ${R+3} ${DD-6} ${3+W+R}`;
-    });
+    })
+    .attr('transform', null);
+  linksGroup.selectAll('path')
+    .filter(d => d.source.id === d.target.id)
+    .attr('d', d => {
+      const {x, y} = d.source;
+      const [xs, xl, l1, l2] = [15, 45, 50, 20];
+      const points = [
+        [xs, -l2/(2*xl)*xs], [xl, -l2/2], [l1, 0],
+        [xl, l2/2], [xs, l2/(2*xl)*xs]
+      ];
+      const line = d3.line()
+        .curve(d3.curveBasis);
+      return line(points.map(d => [d[0]+x, d[1]+y]));
+    })
+    .attr('transform', d => {
+      if (d.source.id === d.target.id) {
+        const {x, y} = d.target;
+        const [dx, dy] = [x - svgWidth/2, y - svgHeight/2];
+        const theta = Math.atan2(dy, dx);
+        return `rotate(${180*theta/Math.PI} ${x} ${y})`;
+      } else {
+        return '';
+      }
+    })
+    .attr('marker-end', 'url(#self_arr)');
 };
 const simulation = d3.forceSimulation()
   .force('link', d3.forceLink().id(d => d.id).distance(70))
