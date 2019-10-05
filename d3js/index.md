@@ -9,6 +9,12 @@ img {
   max-width: 800px;
   max-height: 800px;
 }
+@media screen and (min-width:720px) {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>
 
 # D3.js による Data Visualization
@@ -28,7 +34,6 @@ D3.jsはデータ可視化のためのライブラリです。D3とは、**Data 
 4. [Pie Chart](./Part04) - Queue Visualizer.
 5. [Tree](./Part05) - Parsing to Syntax Tree.
 6. Force Simulation: [&sect;01](./Part06_01), [&sect;02](./Part06_02) - Union Find Tree.
-
 
 
 ### [Circle Alignment](./Part01)
