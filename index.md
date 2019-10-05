@@ -10,7 +10,7 @@ title: bombraryの資料置き場
 ## 夏の講習会(のはずだったもの)
 
 - [D3.js Tutorial](d3js/)
-  - [最低限のHTML Tutorial](lec_html/)
-  - [D3jsのためにしては説明しすぎなCSS Tutorial](lec_css/)
-  - [最低限のSVG Tutorial](lec_svg/)
-  - [Cと比較するJavaScript Tutorial](lec_js/)
+  - [最低限のHTML Tutorial](d3js_pre/lec_html/)
+  - [D3jsのためにしては説明しすぎなCSS Tutorial](d3js_pre/lec_css/)
+  - [最低限のSVG Tutorial](d3js_pre/lec_svg/)
+  - [Cと比較するJavaScript Tutorial](d3js_pre/lec_js/)
