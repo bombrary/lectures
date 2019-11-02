@@ -1,0 +1,23 @@
+.output {
+  background-color: black;
+  color: white;
+  font-family: monospace;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+tr {
+  background-color: #eee;
+}
+tr:nth-child(odd) {
+  background-color: #fff;
+}
+th,td {
+  padding: 5px 10px;
+}
+thead {
+  border: 1px solid #ccc;
+}
