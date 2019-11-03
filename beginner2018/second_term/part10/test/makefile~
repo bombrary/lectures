@@ -1,0 +1,4 @@
+gvizfib: gvizfib.cpp
+	g++ gvizfib.cpp C:\maximum\library\gvizlib\gvizlib.cpp -IC:\maximum\library\gvizlib
+gviz: gvizfib.cpp
+	g++ gvizfib.cpp C:\maximum\library\gvizlib\gvizlib.cpp -IC:\maximum\library\gvizlib

@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="707.80762"
+   height="330"
+   version="1.1"
+   id="svg9023"
+   sodipodi:docname="itv6.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata9029">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs9027" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1315"
+     id="namedview9025"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.59"
+     inkscape:cx="-158.15484"
+     inkscape:cy="180"
+     inkscape:window-x="-13"
+     inkscape:window-y="-13"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg9023" />
+  <g
+     class="axis"
+     transform="translate(-47.985352)"
+     font-size="10"
+     id="g8855"
+     style="font-size:10px;font-family:sans-serif;text-anchor:middle;fill:none">
+    <path
+       class="domain"
+       d="M 50.5,6 V 0.5 h 700 V 6"
+       id="path8661"
+       inkscape:connector-curvature="0"
+       style="stroke:currentColor" />
+    <g
+       class="tick"
+       transform="translate(50.5)"
+       id="g8667"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8663"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8665"
+         style="fill:currentColor">0</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(73.080645)"
+       id="g8673"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8669"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8671"
+         style="fill:currentColor">1</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(95.66129)"
+       id="g8679"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8675"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8677"
+         style="fill:currentColor">2</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(118.24194)"
+       id="g8685"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8681"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8683"
+         style="fill:currentColor">3</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(140.82258)"
+       id="g8691"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8687"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8689"
+         style="fill:currentColor">4</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(163.40323)"
+       id="g8697"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8693"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8695"
+         style="fill:currentColor">5</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(185.98387)"
+       id="g8703"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8699"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8701"
+         style="fill:currentColor">6</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(208.56452)"
+       id="g8709"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8705"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8707"
+         style="fill:currentColor">7</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(231.14516)"
+       id="g8715"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8711"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8713"
+         style="fill:currentColor">8</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(253.72581)"
+       id="g8721"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8717"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8719"
+         style="fill:currentColor">9</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(276.30645)"
+       id="g8727"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8723"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8725"
+         style="fill:currentColor">10</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(298.8871)"
+       id="g8733"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8729"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8731"
+         style="fill:currentColor">11</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(321.46774)"
+       id="g8739"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8735"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8737"
+         style="fill:currentColor">12</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(344.04839)"
+       id="g8745"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8741"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8743"
+         style="fill:currentColor">13</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(366.62903)"
+       id="g8751"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8747"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8749"
+         style="fill:currentColor">14</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(389.20968)"
+       id="g8757"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8753"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8755"
+         style="fill:currentColor">15</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(411.79032)"
+       id="g8763"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8759"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8761"
+         style="fill:currentColor">16</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(434.37097)"
+       id="g8769"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8765"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8767"
+         style="fill:currentColor">17</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(456.95161)"
+       id="g8775"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8771"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8773"
+         style="fill:currentColor">18</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(479.53226)"
+       id="g8781"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8777"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8779"
+         style="fill:currentColor">19</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(502.1129)"
+       id="g8787"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8783"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8785"
+         style="fill:currentColor">20</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(524.69355)"
+       id="g8793"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8789"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8791"
+         style="fill:currentColor">21</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(547.27419)"
+       id="g8799"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8795"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8797"
+         style="fill:currentColor">22</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(569.85484)"
+       id="g8805"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8801"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8803"
+         style="fill:currentColor">23</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(592.43548)"
+       id="g8811"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8807"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8809"
+         style="fill:currentColor">24</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(615.01613)"
+       id="g8817"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8813"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8815"
+         style="fill:currentColor">25</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(637.59677)"
+       id="g8823"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8819"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8821"
+         style="fill:currentColor">26</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(660.17742)"
+       id="g8829"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8825"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8827"
+         style="fill:currentColor">27</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(682.75806)"
+       id="g8835"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8831"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8833"
+         style="fill:currentColor">28</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(705.33871)"
+       id="g8841"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8837"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8839"
+         style="fill:currentColor">29</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(727.91935)"
+       id="g8847"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8843"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8845"
+         style="fill:currentColor">30</text>
+    </g>
+    <g
+       class="tick"
+       transform="translate(750.5)"
+       id="g8853"
+       style="opacity:1">
+      <line
+         y2="6"
+         id="line8849"
+         x1="0"
+         y1="0"
+         x2="0"
+         style="stroke:currentColor" />
+      <text
+         y="9"
+         dy="0.70999998em"
+         id="text8851"
+         style="fill:currentColor">31</text>
+    </g>
+  </g>
+  <g
+     class="intervals"
+     id="g9017"
+     transform="translate(-47.985352,-50)">
+    <g
+       transform="translate(0,80)"
+       id="g8863">
+      <path
+         d="m 95.16129,0 h 90.32258"
+         id="path8857"
+         inkscape:connector-curvature="0"
+         style="stroke:#ff0000;stroke-width:3" />
+      <circle
+         r="3"
+         cx="95.161293"
+         id="circle8859"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="185.48387"
+         id="circle8861"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,95)"
+       id="g8871">
+      <path
+         d="m 117.74194,0 h 67.74193"
+         id="path8865"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="117.74194"
+         id="circle8867"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="185.48387"
+         id="circle8869"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,110)"
+       id="g8879">
+      <path
+         d="m 253.22581,0 h 90.32258"
+         id="path8873"
+         inkscape:connector-curvature="0"
+         style="stroke:#ff0000;stroke-width:3" />
+      <circle
+         r="3"
+         cx="253.2258"
+         id="circle8875"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="343.5484"
+         id="circle8877"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,125)"
+       id="g8887">
+      <path
+         d="m 298.3871,0 h 67.74193"
+         id="path8881"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="298.38708"
+         id="circle8883"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="366.12903"
+         id="circle8885"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,140)"
+       id="g8895">
+      <path
+         d="m 208.06452,0 h 203.2258"
+         id="path8889"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="208.06451"
+         id="circle8891"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="411.29031"
+         id="circle8893"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,155)"
+       id="g8903">
+      <path
+         d="M 140.32258,0 H 479.03226"
+         id="path8897"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="140.32259"
+         id="circle8899"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="479.03226"
+         id="circle8901"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,170)"
+       id="g8911">
+      <path
+         d="M 366.12903,0 H 524.19355"
+         id="path8905"
+         inkscape:connector-curvature="0"
+         style="stroke:#ff0000;stroke-width:3" />
+      <circle
+         r="3"
+         cx="366.12903"
+         id="circle8907"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="524.19354"
+         id="circle8909"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,185)"
+       id="g8919">
+      <path
+         d="m 275.80645,0 h 248.3871"
+         id="path8913"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="275.80646"
+         id="circle8915"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="524.19354"
+         id="circle8917"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,200)"
+       id="g8927">
+      <path
+         d="M 388.70968,0 H 546.77419"
+         id="path8921"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="388.70969"
+         id="circle8923"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="546.77417"
+         id="circle8925"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,215)"
+       id="g8935">
+      <path
+         d="M 479.03226,0 H 591.93548"
+         id="path8929"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="479.03226"
+         id="circle8931"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="591.93549"
+         id="circle8933"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,230)"
+       id="g8943">
+      <path
+         d="M 275.80645,0 H 591.93548"
+         id="path8937"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="275.80646"
+         id="circle8939"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="591.93549"
+         id="circle8941"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,245)"
+       id="g8951">
+      <path
+         d="M 140.32258,0 H 614.51613"
+         id="path8945"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="140.32259"
+         id="circle8947"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="614.51611"
+         id="circle8949"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,260)"
+       id="g8959">
+      <path
+         d="M 456.45161,0 H 614.51613"
+         id="path8953"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="456.4516"
+         id="circle8955"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="614.51611"
+         id="circle8957"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,275)"
+       id="g8967">
+      <path
+         d="M 320.96774,0 H 614.51613"
+         id="path8961"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="320.96774"
+         id="circle8963"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="614.51611"
+         id="circle8965"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,290)"
+       id="g8975">
+      <path
+         d="M 456.45161,0 H 637.09677"
+         id="path8969"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="456.4516"
+         id="circle8971"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="637.0968"
+         id="circle8973"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,305)"
+       id="g8983">
+      <path
+         d="m 614.51613,0 h 45.16129"
+         id="path8977"
+         inkscape:connector-curvature="0"
+         style="stroke:#ff0000;stroke-width:3" />
+      <circle
+         r="3"
+         cx="614.51611"
+         id="circle8979"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="659.67743"
+         id="circle8981"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,320)"
+       id="g8991">
+      <path
+         d="M 162.90323,0 H 704.83871"
+         id="path8985"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="162.90323"
+         id="circle8987"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="704.83868"
+         id="circle8989"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,335)"
+       id="g8999">
+      <path
+         d="M 275.80645,0 H 704.83871"
+         id="path8993"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="275.80646"
+         id="circle8995"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="704.83868"
+         id="circle8997"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,350)"
+       id="g9007">
+      <path
+         d="M 546.77419,0 H 727.41935"
+         id="path9001"
+         inkscape:connector-curvature="0"
+         style="stroke:#808080;stroke-width:3" />
+      <circle
+         r="3"
+         cx="546.77417"
+         id="circle9003"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="727.41937"
+         id="circle9005"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+    <g
+       transform="translate(0,365)"
+       id="g9015">
+      <path
+         d="m 659.67742,0 h 67.74193"
+         id="path9009"
+         inkscape:connector-curvature="0"
+         style="stroke:#ff0000;stroke-width:3" />
+      <circle
+         r="3"
+         cx="659.67743"
+         id="circle9011"
+         cy="0"
+         style="fill:#000000;stroke:#000000" />
+      <circle
+         r="3"
+         cx="727.41937"
+         id="circle9013"
+         cy="0"
+         style="fill:#ffffff;stroke:#000000" />
+    </g>
+  </g>
+  <g
+     class="last-finished-division"
+     transform="translate(-47.985352)"
+     id="g9021">
+    <path
+       d="M 727.41935,0 V 330"
+       id="path9019"
+       inkscape:connector-curvature="0"
+       style="stroke:#000000;stroke-width:2;stroke-dasharray:5" />
+  </g>
+</svg>

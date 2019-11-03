@@ -1,0 +1,16 @@
+.two-column {
+  display: flex;
+  flex-direction: row;
+}
+
+.two-column div {
+  width: 50%;
+  padding: 10px;
+}
+.mycode {
+  font-size:1.5em;
+  font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+span.azuki {
+  color: #a71d5d;
+}

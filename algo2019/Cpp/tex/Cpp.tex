@@ -1,0 +1,58 @@
+\documentclass[dvipdfmx,12pt]{beamer}% dvipdfmxしたい
+\usepackage{bxdpx-beamer}% dvipdfmxなので必要
+\usepackage{pxjahyper}% 日本語で'しおり'したい
+\usepackage{minijs}% min10ヤダ
+\usefonttheme{professionalfonts}
+\renewcommand{\kanjifamilydefault}{\gtdefault}% 既定をゴシック体に
+\usepackage{listings}
+\lstset{
+  language={C++}, %プログラミング言語によって変える。
+  basicstyle={\ttfamily\tiny},
+  keywordstyle={\color{blue}},
+  commentstyle={\color{green}},
+  stringstyle=\color{red},
+  tabsize=2,
+  %% breaklines=true, %折り返し
+}
+
+% あとは欧文の場合と同じ
+\usetheme{default}
+\title{もっとC++}
+\author{山本 陸}
+
+
+\begin{document}
+\frame{\maketitle}
+
+\begin{frame}[fragile]{ブロック環境を意味のまとまりとして使う}
+  \begin{lstlisting}
+void showVec(vector<int> *v) {
+  for (int i = 0; i < v.size(); i++) {
+    cout << v[i] << endl;
+  }
+}
+int main()
+{
+  vector<int> v = {1, 2, 3, 4};
+  showVec(&v);
+  return 0;
+}
+Point operator+(const Point &a, const Point &b) {
+  return Point(a.x + b.x, a.y + b.y);
+}
+Point operator-(const Point &a, const Point &b) {
+  return Point(a.x - b.x, a.y - b.y);
+}
+
+int main()
+{
+  Point p1(1, 2), p2(3, 4);
+  Point p3(p1 + p2);
+  cout << p3.x << ' ' << p3.x << endl;
+  return 0;
+}
+  \end{lstlisting}
+\end{frame}
+
+\frame{\centering \Large Thank you for listening}
+\end{document}

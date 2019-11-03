@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include "gvizlib.h"
+
+using namespace std;
+
+DotGraph dg;
+int nextid;
+
+void myCreateNode(int id, string label)
+{
+  dg.createNode("n" + to_string(id), label, "white");
+}
+
+void myCreateEdge(int from, int to)
+{
+  dg.createDEdge("n" + to_string(from), "n" + to_string(to), "", "black");
+}
+
+int fib(int n, int id)
+{
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+  else {
+    myCreateNode(nextid, "fib(" + to_string(n - 1) + ")");
+    myCreateEdge(id, nextid);
+    int a = fib(n - 1, nextid++);
+    myCreateNode(nextid, "fib(" + to_string(n - 2) + ")");
+    myCreateEdge(id, nextid);
+    int b = fib(n - 2, nextid++);
+    return a + b;
+  }
+}
+
+
+int main()
+{
+  int n; cin >> n;
+  dg.setNodeSetting("shape=box, fontname=\"Meiryo\"");
+  myCreateNode(nextid++, "fib(" + to_string(12) + ")");
+  fib(n, 0);
+  dg.outToPng("test.png", "dot", true);
+  return 0;
+}

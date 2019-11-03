@@ -1,0 +1,8 @@
+.two-column {
+  display: flex;
+  flex-direction: row;
+}
+.cout {
+  background-color: black;
+  color: white;
+}

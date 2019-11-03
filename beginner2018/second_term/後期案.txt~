@@ -1,0 +1,60 @@
+・CとC++の違い
+struct宣言関係
+変数宣言関係
+int mainにvoidつけなくてもOK
+return 0いらない
+
+・リファレンスを読もう
+
+・cinとcout
+・getline
+・stringstream
+
+・データ構造
+vector, string, set, map, stack, queue, list, priority_queue
+pair, taple
+
+・for文で変数宣言
+・拡張for文
+・変数どこでも宣言
+
+・algorithm
+sort(+ greater) 文字列に対してもできる,
+reverse, lower_bound/upper_bound
+clear
+
+・vector
+begin, end, push_back, pop_back
+
+・イテレーター
+vectorの添え字とイテレーターの変換
+
+・string
+空文字列代入, 文字列反転, size
+
+・map
+ABC008が簡潔に書ける
+
+・計算量の話
+
+重複を除く
+全探索
+幅優先探索
+再帰
+深さ優先探索
+ダイクストラ法
+二分探索
+動的計画法
+エラトステネスの篩
+
+
+Part3:
+pairのソート
+文字列のソート
+ヒストグラム的管理
+
+Part4:
+ユークリッドの互除法
+累積和
+いもす法
+

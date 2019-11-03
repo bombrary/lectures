@@ -1,0 +1,31 @@
+.state-label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  font-family: 'Lato',"Helvetica Neue",arial,sans-serif;
+  text-align: center;
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+.tle {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+.ac {
+  background-color: #5cb85c;
+  color: #fff;
+}
+
+div.two-column {
+  display: flex;
+  flex-direction: row;
+}
+div.two-column div {
+  width: 50%;
+}
+div.two-column pre {
+  width: 50%;
+}

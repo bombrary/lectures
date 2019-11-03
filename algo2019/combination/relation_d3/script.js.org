@@ -1,0 +1,68 @@
+const width = 800, height = 500;
+const svg = d3.select('body')
+  .append('svg')
+  .attr('width', width)
+  .attr('height', height);
+
+let data = {
+  "name": "Exponentation by squaring",
+  "color": "salmon",
+  "children": [
+    { 
+      "name": "Power of Matrix" ,
+      "color": "steelblue"
+    },
+    { 
+      "name": "Modular Division",
+      "color": "salmon",
+      "children": [{ "name": "Combination", "color": "salmon"}]
+    },
+  ]
+};
+
+root = d3.hierarchy(data)
+
+let tree = d3.tree()
+  .size([width, height-160]);
+tree(root);
+
+let g = d3.select('svg')
+  .append('g')
+  .attr('transform', 'translate(0, 80)');
+let link = g.selectAll('.link')
+  .data(root.descendants().slice(1))
+  .enter()
+  .append('path')
+  .attr('class', 'link')
+  .attr('d', (d) => 
+    `M${d.x},${d.y} C${d.x},${d.y-100} ${d.parent.x},${d.parent.y+100} ${d.parent.x},${d.parent.y}`);
+let node = g.selectAll('.node')
+  .data(root.descendants())
+  .enter()
+  .append('g')
+  .attr('class', 'node')
+  .attr('transform', d => `translate(${d.x}, ${d.y})`);
+node.append('text')
+  .attr('font-size', '150%')
+  .attr('fill-opacity', 0)
+  .text(d => d.data.name)
+  .each(function(d) {
+    let bbox = this.getBBox();
+    d.data.width = bbox.width + 10;
+    d.data.height = bbox.height;
+  });
+node.append('rect')
+  .attr('x', d => -d.data.width/2)
+  .attr('y', d => -d.data.height)
+  .attr('width', d => d.data.width)
+  .attr('height', d => d.data.height)
+  .attr('fill', d => d.data.color);
+node.append('text')
+  .attr('font-size', '150%')
+  .attr('y', d => -d.data.height/2)
+  .text(d => d.data.name)
+  .each(function(d) {
+    let bbox = this.getBBox();
+    d.data.width = bbox.width;
+    d.data.height = bbox.height;
+  });

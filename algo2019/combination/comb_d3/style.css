@@ -1,0 +1,14 @@
+table {
+  table-layout: fixed;
+  width: 500px;
+}
+tr td {
+}
+td {
+  text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}

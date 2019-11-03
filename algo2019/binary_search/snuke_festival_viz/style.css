@@ -1,0 +1,6 @@
+.flex-container {
+  display: flex;
+}
+svg {
+  border: 1px solid #000;
+}
