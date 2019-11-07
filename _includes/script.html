@@ -1,0 +1,64 @@
+<script>
+  const highlights = document.getElementsByClassName('highlighter-rouge');
+  const h = highlights[0];
+  for (const h of highlights) {
+    const langName = h.className
+      .split(' ')[0]
+      .split('-')[1];
+    const div = h.getElementsByTagName('div')[0];
+    if (div === undefined) continue;
+    const p = document.createElement('span');
+    const text = document.createTextNode(langName);
+    p.appendChild(text);
+    p.className = 'lang-name';
+    div.appendChild(p);
+  }
+</script>
+
+{% if page.putsection %}
+<script>
+  $("main article").find("h2[id]").each((i, e) => {
+    $(e).nextUntil("h2[id]")
+      .addBack()
+      .wrapAll('<section class="content"></section>');
+  });
+</script>
+{% endif %}
+
+{% if page.genindex %}
+<script>
+  const title = $('title').text();
+  const section = $('<section class="sidebar"><aside></aside></section>')
+  const aside = section.find('aside');
+  aside.append(`<h3>${title}</h3>`);
+  const ul = $('<ul class="sidebar-ul"></ul>');
+  $("main article").find("h2[id]").each((i, e) => {
+    ul.append(`<li><a href="#${e.id}">${$(e).text()}</a></li>`);
+  });
+  aside.append(ul)
+  $("main").prepend(section);
+  $("main article").attr('class', 'main has-sidebar');
+</script>
+{% endif %}
+
+{% if page.sidebarfile or page.genindex %}
+<script>
+$(() => {
+  const aside = $('aside').clone(true);
+  aside.appendTo('#nav-content');
+
+  var windowWidth = $(window).width();
+  var headerHight = 100; // ヘッダーの高さを入れる
+  aside.find('a[href^="#"]').click(function() {
+    $('#nav-input').prop('checked', false);
+    var speed = 1000;
+    var href= $(this).attr("href");
+    var target = $(href == "#" || href == "" ? 'html' : href);
+    var position = target.offset().top-headerHight;
+    $('body,html').animate({scrollTop:position}, speed, 'swing');
+    return false;
+  });
+});
+</script>
+{% endif %}
+

@@ -109,19 +109,32 @@ ul.sidebar-ul {
 }
 
 header {
-  padding:30px 10px;
+  padding: 10px 10px;
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  background-color: white;
+  background-color: #424242;
+  border-bottom: 20px solid #757575;
   top: 0;
   z-index: 99;
-  display: block;
-}
-@media screen and (min-width:720px) {
-  header {
-    display: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .logo {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
   }
 }
+
+
+@media screen and (min-width:720px) {
+  header {
+    padding: 10px 10px;
+  }
+}
+
 
 .note {
   margin: 0;
@@ -140,8 +153,13 @@ header {
 /* ========== ハンバーガーメニュー ========== */
 
 #nav-drawer {
-  padding-left: 40px;
+  padding-right: 10px;
   position: relative;
+}
+@media screen and (min-width:720px) {
+  #nav-drawer {
+    display: none;
+  }
 }
 
 /*チェックボックス等は非表示に*/
@@ -174,7 +192,7 @@ ul.sidebar a{
   height: 3px;/*線の太さ*/
   width: 25px;/*長さ*/
   border-radius: 3px;
-  background: #555;
+  background: #888;
   display: block;
   content: '';
   cursor: pointer;
