@@ -200,6 +200,7 @@ h2[id] {
 }
 .css-sample06 table {
   margin: 0 auto;
+  width: auto;
 }
 .css-sample06 th {
   text-align: center;
@@ -238,6 +239,7 @@ h2[id] {
 
 .css-sample07 table {
   border-collapse: collapse;
+  width: auto;
   margin: 0 auto;
 }
 .css-sample07 th {
@@ -260,6 +262,7 @@ h2[id] {
   border-collapse: collapse;
   margin: 0 auto;
   table-layout: fixed;
+  width: auto;
 }
 .css-sample07-02 td {
   width: 50px;
