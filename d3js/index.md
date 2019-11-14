@@ -3,19 +3,6 @@ layout: default
 title: D3.js による Data Visualization
 ---
 
-<style>
-img {
-  margin: 0 auto;
-  max-width: 800px;
-  max-height: 800px;
-}
-@media screen and (min-width:720px) {
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-</style>
 
 # D3.js による Data Visualization
 
